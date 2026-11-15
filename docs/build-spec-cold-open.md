@@ -6,7 +6,7 @@ Merged design spec, as written before the build. It took Proposal 1 (printed-fig
 
 This is the design spec as it was merged from three proposals, before anything was built. It explains why the picture is laid out as it is. It is no longer the reference for what is on screen. Three things supersede it wherever they differ:
 
-1. **The changes listed below** (B1 to B23), made after the figures were built and after two rounds of review of the rendered film.
+1. **The changes listed below** (B1 to B24), made after the figures were built and after two rounds of review of the rendered film.
 2. **`docs/cue-sheet.md`** for every frame number. It is generated from the code and checked by a test. The frame numbers in sections 1, 5, 6 and 7 below are the design's, from before the narration was amended a second time, and are out of date.
 3. **The code**: `src/coldopen/shots.ts` for timing and sound, the figure files for geometry, `src/coldopen/strings.ts` for every string.
 
@@ -46,6 +46,8 @@ This is the design spec as it was merged from three proposals, before anything w
 **The narration**
 
 - **B22. The fourth and the first sentence are amended** (A6, A8), and the cue sheet is re-timed for them. Speech starts on frame 29. The design tag's first part now arrives on "triple-masked", at the start of the sentence, and the freeze on "2022" comes later in it.
+
+- **B24. Four strings follow the later amendments.** The tables below show earlier text for the first and fourth sentences (section 1.2; now A8 and A6), the note of row 2 (R23; now "Classroom behaviour. …") and the first limits sentence (L02; now "Limits: a summer programme, … 80% of children on 18 mg, the lowest dose titrated."). `src/coldopen/narration.ts` and `src/coldopen/strings.ts` hold the text on screen, and `docs/brief-cold-open.md` holds the reasons.
 
 **Dropped**
 

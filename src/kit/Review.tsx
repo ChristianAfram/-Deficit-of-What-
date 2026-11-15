@@ -30,6 +30,8 @@ export const Caption: React.FC<{children: string}> = ({children}) => {
         fontWeight: role.weight,
         fontSize: role.size,
         lineHeight: '40px',
+        // Two lines of about equal length, not a full line and a short one.
+        textWrap: 'balance',
       }}
     >
       {children}

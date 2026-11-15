@@ -233,8 +233,8 @@ summer programme": the data come from three summers of one programme, and
 "one" could be read as one summer. And the dose gained "the lowest dose
 titrated": a viewer who does not prescribe cannot tell that 18 mg is low, and
 this is the limit that speaks most in the medication's favour. The paper
-titrated each child among 18, 27 and 36 mg and gave the largest dose that
-clearly improved on the one below it. The word "titrated" is there so that the
+titrated each child among 18, 27 and 36 mg and gave the largest tolerable dose
+that clearly improved on the one below it. The word "titrated" is there so that the
 line cannot be read as the investigators having fixed a low dose.
 
 ### A4. The crossover diagram leaves a gap between the two blocks

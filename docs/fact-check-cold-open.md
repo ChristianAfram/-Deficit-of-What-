@@ -211,15 +211,16 @@ specialist review.
   exhibited clear improvement beyond the immediately lower dose".
 - **OROS-MPH, strictly.** The paper labels all active treatment OROS-MPH. Its
   supplement says about 11 of the 173 children stayed on another
-  methylphenidate product they were already taking, with doses converted. The
-  strings follow the paper's own label. A specialist who reads the supplement
-  will find this.
+  methylphenidate product they were already taking, with doses converted. So
+  "80% of children on 18 mg" includes children whose dose of another product
+  the authors converted to an 18 mg equivalent. The strings follow the paper's
+  own label and its own figure. A specialist who reads the supplement will
+  find this.
 - **For the description of any release that ships alone.** Children scored
   higher on tests taken while medicated (vocabulary +3.0 points of 100,
   p = .007), although the gain across the unit was the same. A clinician
   needs that beside "Learning did not follow." It is not in the cold open,
   and anything added on screen has to pass decision 6 first.
-
 - **"In 2022, a triple-masked crossover trial tested"** dated the testing to
   2022. The trial ran in the summers of 2014 to 2016, and 2022 is the year of
   publication. Two reviewers raised it independently. **Settled (A8):** "A

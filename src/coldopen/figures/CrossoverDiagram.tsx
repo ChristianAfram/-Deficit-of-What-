@@ -57,8 +57,17 @@ const SEQUENCE_BASELINE = [266, 362] as const;
  */
 const NODE = {x: 151, y: 306, radius: 22, stroke: 2, baseline: 314} as const;
 
-/** D12. The branches: a stem from the node to x 196, then one arm to each track, ending at x 220. */
-const BRANCH = {stemFrom: NODE.x + NODE.radius, elbow: 196, end: 220, tops: [258, 354], stroke: 2} as const;
+/**
+ * D12. The branches: a stem from the outer edge of the node's ring to x 196,
+ * then one arm to each track, ending at x 220.
+ */
+const BRANCH = {
+  stemFrom: NODE.x + NODE.radius + NODE.stroke / 2,
+  elbow: 196,
+  end: 220,
+  tops: [258, 354],
+  stroke: 2,
+} as const;
 
 /**
  * D13, D14. The key stands close under the blocks it explains, on one
