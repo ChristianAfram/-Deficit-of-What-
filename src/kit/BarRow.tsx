@@ -1,7 +1,7 @@
 import React from 'react';
 import {PALETTE} from './theme';
 import {Txt} from './Txt';
-import type {TypeRoleName} from './type';
+import type {TypeRole, TypeRoleName} from './type';
 
 export type BarRowGeometry = {
   /** Left edge of the label and of the note. */
@@ -34,7 +34,7 @@ type Props = {
    */
   amount: number | null;
   /** The role of the value: a number, or a result given in words. */
-  valueRole: TypeRoleName;
+  valueRole: TypeRoleName | TypeRole;
   /** Nudges the value right, in px, to align its ink where a glyph has side bearing. */
   valueInk?: number;
   colour?: string;

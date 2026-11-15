@@ -1,6 +1,7 @@
+import {existsSync} from 'node:fs';
 import {expect, it} from 'vitest';
 import {CAPTIONS} from '../src/coldopen/captions';
-import {DURATION, PAUSE, SPEECH, TITLE_START} from '../src/coldopen/cues';
+import {DURATION, PAUSE, SPEECH, TITLE_START, cueWords} from '../src/coldopen/cues';
 import {NARRATION, TOTAL_WORDS, wordCount} from '../src/coldopen/narration';
 import {FREEZE, SHOT, SOUND} from '../src/coldopen/shots';
 import {FPS} from '../src/kit/time';
@@ -90,6 +91,13 @@ const cueSheet = (): string => {
       ],
     ),
     '',
+    '## Words a cue is placed on',
+    '',
+    'When the voice is recorded, the start of each of these words is measured',
+    'and entered in `WORD_ONSETS` in `src/coldopen/cues.ts`, under exactly this key.',
+    '',
+    ...cueWords().map((word) => `- ${word}`),
+    '',
     '## Captions of the review build',
     '',
     table(
@@ -101,5 +109,7 @@ const cueSheet = (): string => {
 };
 
 it('docs/cue-sheet.md is the cue sheet the code produces', async () => {
+  // Without this, a deleted document would be written again and the test would pass.
+  expect(existsSync(new URL('../docs/cue-sheet.md', import.meta.url)), 'docs/cue-sheet.md is missing').toBe(true);
   await expect(cueSheet()).toMatchFileSnapshot('../docs/cue-sheet.md');
 });

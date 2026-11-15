@@ -69,7 +69,9 @@ export const CitationBand: React.FC<Props> = ({citation, citationShown, tag, pre
  * On every frame, in one place, never dimmed.
  */
 export const StandingNote: React.FC<{children: string}> = ({children}) => (
-  <Txt role="footer" x={LIVE.right} y={BASELINE.footer} anchor="end">
+  // The last letter carries about a pixel of empty space on its right. With
+  // this, the ink of the note ends on the right vertical.
+  <Txt role="footer" x={LIVE.right + 1} y={BASELINE.footer} anchor="end">
     {children}
   </Txt>
 );

@@ -10,9 +10,14 @@ import {Txt} from './Txt';
  */
 export type FigureKind = 'data' | 'schematic';
 
+/**
+ * The SCHEMATIC box is 126 by 28 so that 6 px dashes fit each side with
+ * whole-pixel gaps: thirteen dashes and 4 px gaps across, three dashes and
+ * 5 px gaps down. No dash then ends on a part of a pixel.
+ */
 const MARK = {
   data: {text: 'DATA', width: 69},
-  schematic: {text: 'SCHEMATIC', width: 129},
+  schematic: {text: 'SCHEMATIC', width: 126},
 } as const;
 
 const HEIGHT = 28;
@@ -63,8 +68,9 @@ export const FigureMark: React.FC<Props> = ({kind, x, y, opacity = 1}) => {
         />
       ) : (
         // Each side runs the full length of the box, so the sides overlap in
-        // the corners and no corner is left notched.
-        <g stroke={PALETTE.bone} strokeOpacity={BONE.b72} strokeWidth={STROKE}>
+        // the corners and no corner is left notched. The strength is set on
+        // the group, so a corner is no brighter than a dash.
+        <g stroke={PALETTE.bone} opacity={BONE.b72} strokeWidth={STROKE}>
           <DashedSide x1={x} y1={y + half} x2={x + width} y2={y + half} />
           <DashedSide x1={x} y1={y + HEIGHT - half} x2={x + width} y2={y + HEIGHT - half} />
           <DashedSide x1={x + half} y1={y} x2={x + half} y2={y + HEIGHT} />

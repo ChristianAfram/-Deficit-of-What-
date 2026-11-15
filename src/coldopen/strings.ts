@@ -1,8 +1,8 @@
 // Every string the cold open and the title put on screen, in one place.
 //
 // The values are the "On screen" lines of script version 3, with the
-// amendments the writer agreed to after the fact-check. Each amendment is
-// recorded in docs/brief-cold-open.md (A1 to A5) and marked here.
+// amendments that came out of the fact-check and the specialist review. Each
+// amendment is recorded in docs/brief-cold-open.md (A1 to A8) and marked here.
 
 import {GLYPH} from '../kit/theme';
 
@@ -37,7 +37,8 @@ export const RESULT_ROWS: readonly ResultRowText[] = [
   {
     label: 'RULE VIOLATIONS PER HOUR',
     value: `${minus}53%`,
-    note: `Classroom. Difference ${minus}2.02 per hour, 95% CI [${minus}2.18, ${minus}1.86]`,
+    // The paper's name for this measure is "classroom behavior".
+    note: `Classroom behaviour. Difference ${minus}2.02 per hour, 95% CI [${minus}2.18, ${minus}1.86]`,
   },
   {
     label: 'CURRICULUM CONTENT LEARNED',
@@ -46,11 +47,11 @@ export const RESULT_ROWS: readonly ResultRowText[] = [
   },
 ];
 
-/** The head of the plot: what the bars compare. It reuses the words of the design tag. */
+/** A7. The head of the plot: what the bars compare. It reuses the words of the design tag. */
 export const PLOT_HEAD = 'OROS-MPH RELATIVE TO PLACEBO';
 
 /**
- * The two directions of the plot, at its two ends. Both results favour
+ * A7. The two directions of the plot, at its two ends. Both results favour
  * methylphenidate, on opposite sides of zero: without these words, a bar to
  * the left of zero reads, by the convention of a forest plot, as "favours
  * placebo". They are the narration's own words: "more", "fewer".
@@ -62,7 +63,7 @@ export const RESULT_PERCENT: readonly (number | null)[] = [37, -53, null];
 
 /** A3: shown when the cold open ships as a film of its own. */
 export const LIMITS = [
-  'Limits: a summer programme, 3-week units, small groups with behaviour management, 80% of children on 18 mg, the lowest of three doses.',
+  'Limits: a summer programme, 3-week units, small groups with behaviour management, 80% of children on 18 mg, the lowest dose titrated.',
   'The authors call for replication in ordinary classrooms over a school year.',
 ] as const;
 

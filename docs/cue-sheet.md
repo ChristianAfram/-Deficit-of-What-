@@ -12,28 +12,28 @@ word's start is estimated from its place in its sentence.
 
 ## Pacing
 
-- 145 words, spoken in 63.67 s: 136.6 words a minute.
-- From the first word to the last, with the written pause: 70.33 s. The script's target is 66 to 72 s.
-- "Learning did not follow." starts at 0:45.58. The script's ledger has 0:45.
+- 146 words, spoken in 64.04 s: 136.8 words a minute.
+- From the first word to the last, with the written pause: 70.46 s. The script's target is 66 to 72 s.
+- "Learning did not follow." starts at 0:45.63. The script's ledger has 0:45.
 
 ## Narration
 
 | Id | Sentence | Words | Start | End | From | To |
 | --- | --- | --- | --- | --- | --- | --- |
-| s01 | In 2022, a triple-masked crossover trial tested an assumption that had rarely been tested directly. | 15 | 31 | 200 | 0:01.29 | 0:08.33 |
-| s02 | One hundred and seventy-three children with ADHD received extended-release methylphenidate for three weeks and placebo for three weeks, in randomised order, while being taught academic content in small groups. | 29 | 214 | 528 | 0:08.92 | 0:22.00 |
-| s03 | Under methylphenidate, the children completed thirty-seven percent more arithmetic problems per minute of seatwork, and committed fifty-three percent fewer rule violations per hour. | 23 | 542 | 808 | 0:22.58 | 0:33.67 |
-| s04 | The amount of content the children learned showed no detectable difference between conditions. | 13 | 824 | 961 | 0:34.33 | 0:40.04 |
-|  | *(pause, 2 seconds)* |  | 961 | 1009 | 0:40.04 | 0:42.04 |
-| s05 | The drug did what it is known to do. | 9 | 1009 | 1082 | 0:42.04 | 0:45.08 |
-| s06 | Learning did not follow. | 4 | 1094 | 1132 | 0:45.58 | 0:47.17 |
-| s07 | The expectation that it would follow rests on a model carried in the name of the diagnosis: a deficit. | 19 | 1144 | 1330 | 0:47.67 | 0:55.42 |
-| s08 | Three candidates recur, in clinical explanation and in public belief. | 10 | 1339 | 1449 | 0:55.79 | 1:00.38 |
-| s09 | A deficit of memory. | 4 | 1458 | 1502 | 1:00.75 | 1:02.58 |
-| s10 | A deficit of attention. | 4 | 1508 | 1552 | 1:02.83 | 1:04.67 |
-| s11 | A deficit of dopamine. | 4 | 1558 | 1602 | 1:04.92 | 1:06.75 |
-| s12 | Each makes predictions that can be checked. | 7 | 1610 | 1673 | 1:07.08 | 1:09.71 |
-| s13 | This film checks them. | 4 | 1679 | 1719 | 1:09.96 | 1:11.63 |
+| s01 | A triple-masked crossover trial, published in 2022, tested an assumption that had rarely been tested directly. | 16 | 29 | 207 | 0:01.21 | 0:08.63 |
+| s02 | One hundred and seventy-three children with ADHD received extended-release methylphenidate for three weeks and placebo for three weeks, in randomised order, while being taught academic content in small groups. | 29 | 219 | 533 | 0:09.13 | 0:22.21 |
+| s03 | Under methylphenidate, the children completed thirty-seven percent more arithmetic problems per minute of seatwork, and committed fifty-three percent fewer rule violations per hour. | 23 | 545 | 811 | 0:22.71 | 0:33.79 |
+| s04 | The amount of content the children learned showed no detectable difference between conditions. | 13 | 825 | 962 | 0:34.38 | 0:40.08 |
+|  | *(pause, 2 seconds)* |  | 962 | 1010 | 0:40.08 | 0:42.08 |
+| s05 | The drug did what it is known to do. | 9 | 1010 | 1083 | 0:42.08 | 0:45.13 |
+| s06 | Learning did not follow. | 4 | 1095 | 1133 | 0:45.63 | 0:47.21 |
+| s07 | The expectation that it would follow rests on a model carried in the name of the diagnosis: a deficit. | 19 | 1145 | 1331 | 0:47.71 | 0:55.46 |
+| s08 | Three candidates recur, in clinical explanation and in public belief. | 10 | 1340 | 1450 | 0:55.83 | 1:00.42 |
+| s09 | A deficit of memory. | 4 | 1459 | 1503 | 1:00.79 | 1:02.63 |
+| s10 | A deficit of attention. | 4 | 1509 | 1553 | 1:02.88 | 1:04.71 |
+| s11 | A deficit of dopamine. | 4 | 1559 | 1603 | 1:04.96 | 1:06.79 |
+| s12 | Each makes predictions that can be checked. | 7 | 1611 | 1674 | 1:07.13 | 1:09.75 |
+| s13 | This film checks them. | 4 | 1680 | 1720 | 1:10.00 | 1:11.67 |
 
 ## Freeze windows
 
@@ -41,13 +41,13 @@ While a number is being spoken, nothing on screen changes.
 
 | Spoken | From | To | Seconds |
 | --- | --- | --- | --- |
-| 2022 | 36 | 52 | 1.50 to 2.17 |
-| One hundred and seventy-three | 214 | 265 | 8.92 to 11.04 |
-| three weeks (first) | 357 | 381 | 14.88 to 15.88 |
-| three weeks (second) | 399 | 424 | 16.63 to 17.67 |
-| thirty-seven percent more | 610 | 654 | 25.42 to 27.25 |
-| fifty-three percent fewer | 733 | 777 | 30.54 to 32.38 |
-| Three (candidates) | 1339 | 1355 | 55.79 to 56.46 |
+| 2022 | 103 | 119 | 4.29 to 4.96 |
+| One hundred and seventy-three | 219 | 270 | 9.13 to 11.25 |
+| three weeks (first) | 362 | 386 | 15.08 to 16.08 |
+| three weeks (second) | 404 | 429 | 16.83 to 17.88 |
+| thirty-seven percent more | 613 | 657 | 25.54 to 27.38 |
+| fifty-three percent fewer | 736 | 780 | 30.67 to 32.50 |
+| Three (candidates) | 1340 | 1356 | 55.83 to 56.50 |
 
 ## Shots
 
@@ -55,46 +55,46 @@ A shot whose two frames are equal is a cut.
 
 | Shot | From | To | Seconds |
 | --- | --- | --- | --- |
-| citation | 7 | 25 | 0.29 to 1.04 |
-| tagDesign | 52 | 70 | 2.17 to 2.92 |
-| tagSample | 200 | 212 | 8.33 to 8.83 |
-| tagDrug | 327 | 345 | 13.63 to 14.38 |
-| schematicMark | 265 | 277 | 11.04 to 11.54 |
-| sequenceLabels | 277 | 295 | 11.54 to 12.29 |
-| blocksPeriod1 | 337 | 355 | 14.04 to 14.79 |
-| weeksPeriod1 | 345 | 355 | 14.38 to 14.79 |
-| legendMasked | 345 | 355 | 14.38 to 14.79 |
-| blocksPeriod2 | 381 | 399 | 15.88 to 16.63 |
-| weeksPeriod2 | 389 | 399 | 16.21 to 16.63 |
-| randomNode | 424 | 442 | 17.67 to 18.42 |
-| randomLetter | 430 | 442 | 17.92 to 18.42 |
-| randomBranches | 436 | 454 | 18.17 to 18.92 |
-| hatchClears | 454 | 472 | 18.92 to 19.67 |
-| conditionsShown | 472 | 490 | 19.67 to 20.42 |
-| dataMark | 530 | 542 | 22.08 to 22.58 |
-| zeroLine | 548 | 566 | 22.83 to 23.58 |
-| row1Label | 568 | 580 | 23.67 to 24.17 |
-| row1Bar | 580 | 604 | 24.17 to 25.17 |
-| row1Value | 610 | 610 | cut at 25.42 |
-| row2Label | 698 | 710 | 29.08 to 29.58 |
-| row2Bar | 707 | 731 | 29.46 to 30.46 |
-| row2Value | 733 | 733 | cut at 30.54 |
-| separator | 824 | 842 | 34.33 to 35.08 |
-| row3Label | 844 | 856 | 35.17 to 35.67 |
-| row3Value | 897 | 897 | cut at 37.38 |
-| limits | 1020 | 1044 | 42.50 to 43.50 |
-| figureRecedes | 1260 | 1315 | 52.50 to 54.79 |
-| deficit | 1315 | 1315 | cut at 54.79 |
-| tableTopRule | 1355 | 1379 | 56.46 to 57.46 |
-| tableHeaderRule | 1367 | 1391 | 56.96 to 57.96 |
-| tableRowRules | 1379 | 1403 | 57.46 to 58.46 |
-| tableBottomRule | 1391 | 1415 | 57.96 to 58.96 |
-| tableColumnRules | 1403 | 1427 | 58.46 to 59.46 |
-| rowMemory | 1475 | 1487 | 61.46 to 61.96 |
-| rowAttention | 1521 | 1533 | 63.38 to 63.88 |
-| rowDopamine | 1572 | 1584 | 65.50 to 66.00 |
-| headPrediction | 1614 | 1626 | 67.25 to 67.75 |
-| headResultStatus | 1649 | 1661 | 68.71 to 69.21 |
+| citation | 5 | 23 | 0.21 to 0.96 |
+| tagDesign | 32 | 50 | 1.33 to 2.08 |
+| tagSample | 207 | 219 | 8.63 to 9.13 |
+| tagDrug | 332 | 350 | 13.83 to 14.58 |
+| schematicMark | 270 | 282 | 11.25 to 11.75 |
+| sequenceLabels | 282 | 300 | 11.75 to 12.50 |
+| blocksPeriod1 | 342 | 360 | 14.25 to 15.00 |
+| weeksPeriod1 | 350 | 360 | 14.58 to 15.00 |
+| legendMasked | 350 | 360 | 14.58 to 15.00 |
+| blocksPeriod2 | 386 | 404 | 16.08 to 16.83 |
+| weeksPeriod2 | 394 | 404 | 16.42 to 16.83 |
+| randomNode | 429 | 447 | 17.88 to 18.63 |
+| randomLetter | 435 | 447 | 18.13 to 18.63 |
+| randomBranches | 441 | 459 | 18.38 to 19.13 |
+| hatchClears | 459 | 477 | 19.13 to 19.88 |
+| conditionsShown | 477 | 495 | 19.88 to 20.63 |
+| dataMark | 533 | 545 | 22.21 to 22.71 |
+| zeroLine | 551 | 569 | 22.96 to 23.71 |
+| row1Label | 571 | 583 | 23.79 to 24.29 |
+| row1Bar | 583 | 607 | 24.29 to 25.29 |
+| row1Value | 613 | 613 | cut at 25.54 |
+| row2Label | 701 | 713 | 29.21 to 29.71 |
+| row2Bar | 710 | 734 | 29.58 to 30.58 |
+| row2Value | 736 | 736 | cut at 30.67 |
+| separator | 825 | 843 | 34.38 to 35.13 |
+| row3Label | 845 | 857 | 35.21 to 35.71 |
+| row3Value | 898 | 898 | cut at 37.42 |
+| limits | 1021 | 1045 | 42.54 to 43.54 |
+| figureRecedes | 1261 | 1316 | 52.54 to 54.83 |
+| deficit | 1316 | 1316 | cut at 54.83 |
+| tableTopRule | 1356 | 1380 | 56.50 to 57.50 |
+| tableHeaderRule | 1368 | 1392 | 57.00 to 58.00 |
+| tableRowRules | 1380 | 1404 | 57.50 to 58.50 |
+| tableBottomRule | 1392 | 1416 | 58.00 to 59.00 |
+| tableColumnRules | 1404 | 1428 | 58.50 to 59.50 |
+| rowMemory | 1476 | 1488 | 61.50 to 62.00 |
+| rowAttention | 1522 | 1534 | 63.42 to 63.92 |
+| rowDopamine | 1573 | 1585 | 65.54 to 66.04 |
+| headPrediction | 1615 | 1627 | 67.29 to 67.79 |
+| headResultStatus | 1650 | 1662 | 68.75 to 69.25 |
 | deficitOut | 1728 | 1748 | 72.00 to 72.83 |
 | tableDims | 1728 | 1764 | 72.00 to 73.50 |
 | title | 1748 | 1772 | 72.83 to 73.83 |
@@ -105,28 +105,61 @@ A shot whose two frames are equal is a cut.
 | Sound | Frames |
 | --- | --- |
 | Room tone | 0 to 1847, looped |
-| Tick, one per row of data | 610, 733, 897 |
-| Low note | from 1673, fading out 1728 to 1776 |
+| Tick, one per row of data | 613, 736, 898 |
+| Low note | from 1674, fading out 1728 to 1776 |
 | Pulse | 1728, 1758, 1788, 1818 |
 | String line | from 1740 |
 | Fade, when the cold open ships alone | 1818 to 1847 |
+
+## Words a cue is placed on
+
+When the voice is recorded, the start of each of these words is measured
+and entered in `WORD_ONSETS` in `src/coldopen/cues.ts`, under exactly this key.
+
+- s01: 2022
+- s01: tested
+- s01: triple-masked
+- s02: One hundred
+- s02: and placebo
+- s02: children
+- s02: in randomised
+- s02: methylphenidate
+- s02: three weeks
+- s02: three weeks#2
+- s03: and committed
+- s03: arithmetic
+- s03: fifty-three
+- s03: rule
+- s03: seatwork
+- s03: thirty-seven
+- s04: content
+- s04: no detectable
+- s07: deficit
+- s07: in the name
+- s08: Three
+- s08: candidates
+- s09: memory
+- s10: attention
+- s11: dopamine
+- s12: checked
+- s12: predictions
 
 ## Captions of the review build
 
 | From | To | Caption |
 | --- | --- | --- |
-| 31 | 200 | In 2022, a triple-masked crossover trial tested an assumption that had rarely been tested directly. |
-| 214 | 424 | One hundred and seventy-three children with ADHD received extended-release methylphenidate for three weeks and placebo for three weeks, |
-| 424 | 528 | in randomised order, while being taught academic content in small groups. |
-| 542 | 712 | Under methylphenidate, the children completed thirty-seven percent more arithmetic problems per minute of seatwork, |
-| 712 | 808 | and committed fifty-three percent fewer rule violations per hour. |
-| 824 | 961 | The amount of content the children learned showed no detectable difference between conditions. |
-| 1009 | 1082 | The drug did what it is known to do. |
-| 1094 | 1132 | Learning did not follow. |
-| 1144 | 1330 | The expectation that it would follow rests on a model carried in the name of the diagnosis: a deficit. |
-| 1339 | 1449 | Three candidates recur, in clinical explanation and in public belief. |
-| 1458 | 1502 | A deficit of memory. |
-| 1508 | 1552 | A deficit of attention. |
-| 1558 | 1602 | A deficit of dopamine. |
-| 1610 | 1673 | Each makes predictions that can be checked. |
-| 1679 | 1719 | This film checks them. |
+| 29 | 207 | A triple-masked crossover trial, published in 2022, tested an assumption that had rarely been tested directly. |
+| 219 | 429 | One hundred and seventy-three children with ADHD received extended-release methylphenidate for three weeks and placebo for three weeks, |
+| 429 | 533 | in randomised order, while being taught academic content in small groups. |
+| 545 | 715 | Under methylphenidate, the children completed thirty-seven percent more arithmetic problems per minute of seatwork, |
+| 715 | 811 | and committed fifty-three percent fewer rule violations per hour. |
+| 825 | 962 | The amount of content the children learned showed no detectable difference between conditions. |
+| 1010 | 1083 | The drug did what it is known to do. |
+| 1095 | 1133 | Learning did not follow. |
+| 1145 | 1331 | The expectation that it would follow rests on a model carried in the name of the diagnosis: a deficit. |
+| 1340 | 1450 | Three candidates recur, in clinical explanation and in public belief. |
+| 1459 | 1503 | A deficit of memory. |
+| 1509 | 1553 | A deficit of attention. |
+| 1559 | 1603 | A deficit of dopamine. |
+| 1611 | 1674 | Each makes predictions that can be checked. |
+| 1680 | 1720 | This film checks them. |

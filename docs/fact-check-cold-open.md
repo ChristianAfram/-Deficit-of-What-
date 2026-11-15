@@ -189,7 +189,7 @@ When the picture was finished, the build itself was checked again against the
 sources by a reviewer who had not seen the first fact-check: every string in
 `src/coldopen/strings.ts` and every sentence in `src/coldopen/narration.ts`,
 character by character, against the paper's full text, its supplement, PubMed
-and Crossref. Everything matched. Five points came out of it and out of the
+and Crossref. Everything matched. Six points came out of it and out of the
 specialist review.
 
 - **"Did not differ"**, in the fourth sentence of the narration, was the
@@ -198,12 +198,13 @@ specialist review.
   interaction with no estimate, no interval and no equivalence test. The
   screen says NO DETECTABLE EFFECT at the same moment. **Settled (A6):** the
   voice now says "showed no detectable difference between conditions".
-- **"Classroom."** in the note of row 2 was not covered by the first check. It
-  holds. Method: "The number of rule violations committed by each child on
+- **"Classroom behaviour."** in the note of row 2 was not covered by the first
+  check. It first read "Classroom." alone. The claim holds, and the note now
+  uses the paper's name for the measure. Method: "The number of rule violations committed by each child on
   each day was calculated as a measure of classroom behavior in both morning
   and afternoon classrooms." The supplement's table calls the measure "Number
   of classroom rule violations per hour".
-- **"The lowest of three doses"** in the limits holds. Method: "Children
+- **"The lowest dose titrated"** in the limits holds. Method: "Children
   received a randomized schedule of placebo (1 day), 18 mg (3 days), 27 mg
   (3 days), and 36 mg (3 days) during the titration period", and the
   clinicians "selected the largest tolerable dose for each child that
@@ -219,9 +220,17 @@ specialist review.
   needs that beside "Learning did not follow." It is not in the cold open,
   and anything added on screen has to pass decision 6 first.
 
+- **"In 2022, a triple-masked crossover trial tested"** dated the testing to
+  2022. The trial ran in the summers of 2014 to 2016, and 2022 is the year of
+  publication. Two reviewers raised it independently. **Settled (A8):** "A
+  triple-masked crossover trial, published in 2022, tested an assumption that
+  had rarely been tested directly."
+
 Still open for the writer:
 
-- **"In 2022".** The trial ran in the summers of 2014 to 2016. 2022 is the year
-  of publication. The script dates every study this way, in every part.
+- **The same dating in later parts.** The script dates other studies by their
+  year of publication with a past-tense verb, for example "In 1978, Rapoport
+  and colleagues gave dextroamphetamine to fourteen boys". Each needs the same
+  look when its part is built.
 - **Upload title 2,** "Methylphenidate Raised Output by 37%".
 - **The typeset article** has still not been seen by anyone.

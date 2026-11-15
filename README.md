@@ -5,7 +5,7 @@ built as code. Three hypotheses about ADHD, each tested against its own
 predictions.
 
 This repository holds the first part: the **cold open and title, 0:00 to
-1:17**. It is also the trailer. It is built from script version 3 with seven
+1:17**. It is also the trailer. It is built from script version 3 with eight
 amendments, which came out of a fact-check against the paper and out of a
 specialist review of the finished picture.
 
@@ -26,12 +26,17 @@ The first render downloads the browser that Remotion renders with, once.
 Nothing else is fetched: the two typefaces are bundled, and the sound is
 synthesised by `scripts/make-audio.mjs`.
 
-To look at particular frames:
+To look at particular frames (quote the list: PowerShell reads a bare
+`610,733` as two arguments):
 
 ```
-node scripts/render-stills.mjs ColdOpen 610,733,897 out/check
+node scripts/render-stills.mjs ColdOpen "610,733,897" out/check
 node scripts/render-stills.mjs ColdOpenReview every=24
+node scripts/render-stills.mjs ColdOpen "1044" out/joined --standalone=false
 ```
+
+The last line shows the cold open as it sits in the joined film, without the
+limits note.
 
 ## The two builds
 
@@ -48,7 +53,7 @@ estimate of the narration.
 
 | File | What it is |
 | --- | --- |
-| `docs/brief-cold-open.md` | The script text for this part, word for word, and the seven amendments (A1 to A7) |
+| `docs/brief-cold-open.md` | The script text for this part, word for word, and the eight amendments (A1 to A8) |
 | `docs/fact-check-cold-open.md` | Every on-screen claim checked against the paper's full text, twice, and how each open decision was settled |
 | `docs/cue-sheet.md` | When every sentence is spoken and every mark appears, frame by frame. Generated from the code |
 | `docs/build-spec-cold-open.md` | The design: layout, type, colour, and the changes made after the build and the review |
@@ -72,11 +77,14 @@ Nothing in the picture is placed on a frame chosen by hand.
    of each sentence, and fill `WORD_ONSETS` with the measured start of each
    word that a cue names. Until a word has a measured start, its start is
    estimated from its place in its sentence.
+   `docs/cue-sheet.md` lists every word to measure, under the key to enter it
+   by. A key that no cue asks for fails a test.
 3. Run `npx vitest run -u`. The still rule and the order of the shots are
    checked against the new timing, and `docs/cue-sheet.md` is regenerated.
 
 The length of the film and the start of the title are fixed by the script. If
-the recorded voice runs longer than 1:12, they change in `cues.ts` too.
+the recorded voice runs longer than 1:12, they change in `cues.ts`, and in
+`tests/cues.test.ts`, which pins both.
 
 ## The still rule
 
@@ -88,7 +96,7 @@ and for the captions of the review build.
 
 ## What the tests hold in place
 
-- The narration is the script word for word, with exactly the two amended
+- The narration is the script word for word, with exactly the three amended
   sentences.
 - Every on-screen string uses real minus signs and en dashes, and matches the
   brief.

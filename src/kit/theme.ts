@@ -28,6 +28,4 @@ export const GLYPH = {
   minus: '−',
   enDash: '–',
   middot: '·',
-  nbsp: ' ',
-  thinSpace: ' ',
 } as const;

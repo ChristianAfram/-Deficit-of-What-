@@ -5,6 +5,7 @@ import {PALETTE} from '../src/kit/theme';
 
 // The brief as running text: quote marks of blockquotes and line breaks removed.
 const brief = readFileSync(new URL('../docs/brief-cold-open.md', import.meta.url), 'utf8')
+  .replace(/\r\n/g, '\n')
   .replace(/^>\s?/gm, '')
   .replace(/\s+/g, ' ');
 
@@ -61,7 +62,7 @@ describe('on-screen strings', () => {
   it('states the limits of the trial when the cold open ships alone (A3)', () => {
     const limits = strings.LIMITS.join(' ');
     expect(brief).toContain(limits);
-    expect(limits).toContain('80% of children on 18 mg, the lowest of three doses');
+    expect(limits).toContain('80% of children on 18 mg, the lowest dose titrated');
     // The paper calls for a replication. It does not announce one.
     expect(limits).toContain('call for replication');
     expect(limits).not.toMatch(/plan/i);

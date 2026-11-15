@@ -1,14 +1,19 @@
 // Renders still frames of a composition, for checking the picture against the
 // script without rendering the whole film. Bundles once, then renders each frame.
 //
-//   node scripts/render-stills.mjs                          ColdOpen, one frame every 2 s
-//   node scripts/render-stills.mjs ColdOpenReview every=24   one frame a second
-//   node scripts/render-stills.mjs ColdOpen 0,480,1728       these frames
-//   node scripts/render-stills.mjs ColdOpen 0,480 out/check  into another folder
+//   node scripts/render-stills.mjs                            ColdOpen, one frame every 2 s
+//   node scripts/render-stills.mjs ColdOpenReview every=24     one frame a second
+//   node scripts/render-stills.mjs ColdOpen "610,733,897"      these frames
+//   node scripts/render-stills.mjs ColdOpen "610,733" out/check  into another folder
 //
+// Quote a list of frames: PowerShell reads a bare 610,733 as two arguments.
 // A third argument sets the output folder (default: out/stills/<composition>).
-// Two options, which work the same in PowerShell, cmd and bash:
-//   --props={"standalone":false}        input props for the composition
+//
+// Options. None of them needs quoting in any shell:
+//   --standalone=false                  an input prop of the composition. Any
+//                                       --name=value other than --entry is
+//                                       passed as a prop: true, false and
+//                                       numbers are read as such
 //   --entry=src/preview/entry-rows.tsx  another entry point, for checking one
 //                                       figure on its own (its composition is
 //                                       called Preview)
@@ -22,10 +27,18 @@ import {renderStill, selectComposition} from '@remotion/renderer';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
-const option = (name) => args.find((arg) => arg.startsWith(`--${name}=`))?.slice(name.length + 3);
+const options = Object.fromEntries(
+  args
+    .filter((arg) => arg.startsWith('--') && arg.includes('='))
+    .map((arg) => [arg.slice(2, arg.indexOf('=')), arg.slice(arg.indexOf('=') + 1)]),
+);
 const [compositionId = 'ColdOpen', frameSpec = 'every=48', outArg] = args.filter((arg) => !arg.startsWith('--'));
-const inputProps = JSON.parse(option('props') ?? '{}');
-const entryPoint = resolve(root, option('entry') ?? join('src', 'index.ts'));
+
+const {entry, ...propOptions} = options;
+const read = (value) =>
+  value === 'true' ? true : value === 'false' ? false : value !== '' && !Number.isNaN(Number(value)) ? Number(value) : value;
+const inputProps = Object.fromEntries(Object.entries(propOptions).map(([name, value]) => [name, read(value)]));
+const entryPoint = resolve(root, entry ?? join('src', 'index.ts'));
 
 // The sound stems are build products. A composition that plays them needs them to exist.
 if (!existsSync(join(root, 'public', 'audio', 'room-tone.wav'))) {

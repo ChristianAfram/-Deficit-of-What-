@@ -22,7 +22,7 @@ export type Freeze = {phrase: string; f0: number; f1: number};
 const SETTLE = 6;
 
 export const FREEZE = {
-  year: {phrase: '2022', f0: atWord('s01', '2022'), f1: atWord('s01', 'a triple') + SETTLE},
+  year: {phrase: '2022', f0: atWord('s01', '2022'), f1: atWord('s01', 'tested') + SETTLE},
   sample: {
     phrase: 'One hundred and seventy-three',
     f0: atWord('s02', 'One hundred'),
@@ -42,7 +42,7 @@ const F = FREEZE;
 export const SHOT = {
   // Shot 1: the citation, alone, then its design tag on the words that name it.
   citation: ending(SPEECH.s01.start - 6, 18),
-  tagDesign: starting(F.year.f1, 18),
+  tagDesign: starting(atWord('s01', 'triple-masked'), 18),
   tagSample: starting(SPEECH.s01.end, 12),
   tagDrug: starting(atWord('s02', 'methylphenidate'), 18),
 
@@ -120,8 +120,8 @@ export const SHOT = {
   subtitle: starting(TITLE_START + 44, 18),
 } as const satisfies Record<string, Anim>;
 
-/** How far the table dims under the title. */
-export const TITLE_DIM = {table: 0.3} as const;
+/** How far the table dims under the title. Its grid still reads as a table. */
+export const TITLE_DIM = {table: 0.4} as const;
 
 // -------------------------------------------------------------------- sound
 

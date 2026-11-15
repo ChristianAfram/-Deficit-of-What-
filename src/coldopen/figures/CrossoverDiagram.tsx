@@ -50,11 +50,15 @@ const CHIP = {width: 96, top: 41} as const;
 const SEQUENCE_X = 232;
 const SEQUENCE_BASELINE = [266, 362] as const;
 
-/** D11. The randomisation node and the baseline of its letter. */
-const NODE = {x: 150, y: 306, radius: 22, stroke: 2, baseline: 314} as const;
+/**
+ * D11. The randomisation node and the baseline of its letter. Its centre is
+ * 23 px in from the left vertical, so the outer edge of its 2 px stroke
+ * stands on x 128 with every other left edge.
+ */
+const NODE = {x: 151, y: 306, radius: 22, stroke: 2, baseline: 314} as const;
 
 /** D12. The branches: a stem from the node to x 196, then one arm to each track, ending at x 220. */
-const BRANCH = {stemFrom: 172, elbow: 196, end: 220, tops: [258, 354], stroke: 2} as const;
+const BRANCH = {stemFrom: NODE.x + NODE.radius, elbow: 196, end: 220, tops: [258, 354], stroke: 2} as const;
 
 /**
  * D13, D14. The key stands close under the blocks it explains, on one
@@ -68,7 +72,7 @@ const LEGEND_BASELINE = 422;
 const LEGEND_MASKED = {x: 128, width: 56, height: 16, textX: 196} as const;
 
 /** D14. The RANDOMISED key: a small node, its letter and its word. */
-const LEGEND_RANDOMISED = {x: 140, y: 415, radius: 12, stroke: 2, textX: 164} as const;
+const LEGEND_RANDOMISED = {x: 141, y: 415, radius: 12, stroke: 2, textX: 165} as const;
 
 /**
  * D02 to D05. The outline is 2 px, graphite while masked and the condition's
@@ -341,7 +345,7 @@ const Branches: React.FC<{drawn: number}> = ({drawn}) => {
  * TRIPLE-MASKED.
  */
 const LegendMasked: React.FC<{shown: number}> = ({shown}) => {
-  const clipId = `masked-key${useId().replace(/:/g, '')}`;
+  const clipId = `masked-key${useId()}`;
   if (shown <= 0) return null;
   const {x, width, height, textX} = LEGEND_MASKED;
   const y = LEGEND_BASELINE - height;
@@ -401,7 +405,7 @@ const LegendRandomised: React.FC<{shown: number}> = ({shown}) => {
 /** The trial design as a crossover diagram (SCHEMATIC). */
 export const CrossoverDiagram: React.FC = () => {
   const frame = useCurrentFrame();
-  const hatchId = `hatch${useId().replace(/:/g, '')}`;
+  const hatchId = `hatch${useId()}`;
   const mark = progress(frame, SHOT.schematicMark, EASE.dissolve);
   // The mark arrives first, so nothing of the figure is drawn before it.
   if (mark <= 0) return null;

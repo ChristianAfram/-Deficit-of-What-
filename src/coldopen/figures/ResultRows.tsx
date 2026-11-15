@@ -48,9 +48,14 @@ const NOTE_BELOW_LABEL = 37;
 /** The separator that closes the plotted region: a graphite hairline across the live width. */
 const SEPARATOR_Y = 680;
 
-/** The limits: a graphite hairline, then two sentences. Their descenders end near y 845. */
-const LIMITS_RULE_Y = 776;
-const LIMITS_BASELINES = [808, 840] as const;
+/**
+ * The limits: a graphite hairline, then two sentences. The rule has the same
+ * air above it (to the note of row 3) as below it (to the capitals of the
+ * first sentence), and the descenders of the second sentence end near y 847,
+ * inside the content field.
+ */
+const LIMITS_RULE_Y = 778;
+const LIMITS_BASELINES = [812, 842] as const;
 
 /**
  * The percent sign of the text sans carries about 3 px of empty space on its

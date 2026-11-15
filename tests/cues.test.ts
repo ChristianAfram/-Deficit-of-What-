@@ -1,9 +1,14 @@
 import {describe, expect, it} from 'vitest';
-import {DURATION, PAUSE, SPEECH, TITLE_START, WORD_ONSETS, atWord, sentenceAt} from '../src/coldopen/cues';
+import '../src/coldopen/captions';
+import {DURATION, PAUSE, SPEECH, TITLE_START, WORD_ONSETS, atWord, cueWords, sentenceAt} from '../src/coldopen/cues';
+import '../src/coldopen/shots';
 import {NARRATION, TOTAL_WORDS} from '../src/coldopen/narration';
 import {FPS, at, sec} from '../src/kit/time';
 
 const ids = NARRATION.map((s) => s.id);
+
+/** The words the shot list and the captions place a cue on, before any test asks for one of its own. */
+const cueWordsOfTheFilm = cueWords();
 
 describe('cue sheet', () => {
   it('runs 77 seconds at 24 frames a second, with the title at 1:12', () => {
@@ -76,6 +81,19 @@ describe('cue sheet', () => {
       delete WORD_ONSETS.s03;
     }
     expect(atWord('s03', 'thirty-seven')).toBe(estimated);
+  });
+
+  it('accepts a measured word start only under a key that a cue asks for, and inside its sentence', () => {
+    // Read before any test asks for a word of its own: these are the words the shot list and the captions use.
+    for (const [id, words] of Object.entries(WORD_ONSETS)) {
+      for (const [key, frame] of Object.entries(words)) {
+        expect(cueWordsOfTheFilm, `WORD_ONSETS has "${id}: ${key}", which no cue asks for`).toContain(`${id}: ${key}`);
+        expect(frame).toBeGreaterThanOrEqual(SPEECH[id as keyof typeof SPEECH].start);
+        expect(frame).toBeLessThan(SPEECH[id as keyof typeof SPEECH].end);
+      }
+    }
+    expect(cueWordsOfTheFilm).toContain('s03: thirty-seven');
+    expect(cueWordsOfTheFilm).toContain('s02: three weeks#2');
   });
 
   it('knows which sentence is being spoken, and that none is in a gap, in the pause or under the title', () => {

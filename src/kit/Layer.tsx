@@ -16,7 +16,7 @@ type Props = {
  * figure while it draws". It was built and measured, and then taken out of
  * this part: a slow scale moves type in whole-pixel steps while the rules
  * beside it glide, and it takes a figure off the layout grid either before
- * the push or after it. See docs/build-spec-cold-open.md, I1.
+ * the push or after it. See docs/build-spec-cold-open.md, change B1.
  */
 export const Layer: React.FC<Props> = ({opacity = 1, children}) => {
   if (opacity <= 0) return null;

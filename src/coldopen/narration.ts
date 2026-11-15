@@ -1,6 +1,6 @@
 // The narration of the cold open: script version 3, word for word, with the
-// two amended sentences (s03 after the fact-check, s04 after the specialist
-// review). One entry per sentence. Do not edit a sentence here without
+// three amended sentences (s03 after the fact-check, s04 and s01 after the
+// specialist review). One entry per sentence. Do not edit a sentence here without
 // recording it in docs/brief-cold-open.md: tests/narration.test.ts compares
 // the two.
 
@@ -30,7 +30,8 @@ export const NARRATION: readonly Sentence[] = [
   {
     id: 's01',
     paragraph: 1,
-    text: 'In 2022, a triple-masked crossover trial tested an assumption that had rarely been tested directly.',
+    // Amended after the specialist review (brief, amendment A8).
+    text: 'A triple-masked crossover trial, published in 2022, tested an assumption that had rarely been tested directly.',
   },
   {
     id: 's02',

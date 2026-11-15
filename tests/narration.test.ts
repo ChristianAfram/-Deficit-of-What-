@@ -2,7 +2,8 @@ import {readFileSync} from 'node:fs';
 import {describe, expect, it} from 'vitest';
 import {NARRATION, TOTAL_WORDS, wordCount} from '../src/coldopen/narration';
 
-const brief = readFileSync(new URL('../docs/brief-cold-open.md', import.meta.url), 'utf8');
+// A Windows checkout may hold the brief with CRLF line endings.
+const brief = readFileSync(new URL('../docs/brief-cold-open.md', import.meta.url), 'utf8').replace(/\r\n/g, '\n');
 
 const unquote = (block: string): string =>
   block
@@ -38,9 +39,13 @@ const amendments = (): {name: string; was: string; now: string}[] =>
     });
 
 describe('narration', () => {
-  it('is the script, word for word, with exactly the two agreed amendments', () => {
+  it('is the script, word for word, with exactly the three amended sentences', () => {
     const changes = amendments();
-    expect(changes.map((c) => c.name)).toEqual(['A1. Narration, third sentence', 'A6. Narration, fourth sentence']);
+    expect(changes.map((c) => c.name)).toEqual([
+      'A1. Narration, third sentence',
+      'A6. Narration, fourth sentence',
+      'A8. Narration, first sentence',
+    ]);
     let expected = scriptNarration();
     for (const {was, now} of changes) {
       expect(expected).toContain(was);
@@ -56,8 +61,8 @@ describe('narration', () => {
     expect(NARRATION.map((s) => s.paragraph)).toEqual([1, 1, 2, 3, 4, 4, 5, 5, 5, 5, 5, 5, 6]);
   });
 
-  it('counts 145 words: 140 in the script, plus 4 and 1 from the two amended sentences', () => {
-    expect(TOTAL_WORDS).toBe(145);
+  it('counts 146 words: 140 in the script, plus 4, 1 and 1 from the three amended sentences', () => {
+    expect(TOTAL_WORDS).toBe(146);
     expect(wordCount('Learning did not follow.')).toBe(4);
   });
 
@@ -65,6 +70,12 @@ describe('narration', () => {
     for (const {text} of NARRATION) {
       expect(text).not.toMatch(/\b(you|your|we|our|us)\b/i);
     }
+  });
+
+  it('dates the trial by its publication, not by a year it did not run in', () => {
+    const s01 = NARRATION.find((s) => s.id === 's01')!.text;
+    expect(s01).toContain('published in 2022');
+    expect(s01).not.toMatch(/^In 2022/);
   });
 
   it('says of the null what the screen says of it', () => {

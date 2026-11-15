@@ -28,20 +28,20 @@ export type Span = {start: number; end: number};
  * rushed.
  */
 export const SPEECH: Record<SentenceId, Span> = {
-  s01: {start: 31, end: 200},
-  s02: {start: 214, end: 528},
-  s03: {start: 542, end: 808},
-  s04: {start: 824, end: 961},
+  s01: {start: 29, end: 207},
+  s02: {start: 219, end: 533},
+  s03: {start: 545, end: 811},
+  s04: {start: 825, end: 962},
   // (pause, 2 seconds)
-  s05: {start: 1009, end: 1082},
-  s06: {start: 1094, end: 1132},
-  s07: {start: 1144, end: 1330},
-  s08: {start: 1339, end: 1449},
-  s09: {start: 1458, end: 1502},
-  s10: {start: 1508, end: 1552},
-  s11: {start: 1558, end: 1602},
-  s12: {start: 1610, end: 1673},
-  s13: {start: 1679, end: 1719},
+  s05: {start: 1010, end: 1083},
+  s06: {start: 1095, end: 1133},
+  s07: {start: 1145, end: 1331},
+  s08: {start: 1340, end: 1450},
+  s09: {start: 1459, end: 1503},
+  s10: {start: 1509, end: 1553},
+  s11: {start: 1559, end: 1603},
+  s12: {start: 1611, end: 1674},
+  s13: {start: 1680, end: 1720},
 };
 
 /** The written pause: "(pause, 2 seconds)", the first of the film's five silences. */
@@ -51,7 +51,8 @@ export const PAUSE: Span = {start: SPEECH.s04.end, end: SPEECH.s05.start};
  * Measured word starts, in frames, from the recorded voice. Empty until the
  * voice exists. A key is the word exactly as a cue names it, with "#2" added
  * for a second occurrence: {s03: {'thirty-seven': 610, 'fifty-three': 741}}.
- * Where a word is missing here, its start is estimated.
+ * docs/cue-sheet.md lists every key a cue asks for, and a test rejects a key
+ * that no cue asks for. Where a word is missing here, its start is estimated.
  */
 export const WORD_ONSETS: Partial<Record<SentenceId, Record<string, number>>> = {};
 
@@ -60,6 +61,17 @@ const textOf = (id: SentenceId): string => {
   if (!sentence) throw new Error(`No sentence ${id}`);
   return sentence.text;
 };
+
+/** The key of a word in WORD_ONSETS: the word, with "#2" added for a second occurrence. */
+const onsetKey = (word: string, occurrence: number): string => (occurrence === 1 ? word : `${word}#${occurrence}`);
+
+const requested = new Set<string>();
+
+/**
+ * Every word a cue is placed on, as "s03: thirty-seven". These are the words
+ * whose starts have to be measured when the voice is recorded.
+ */
+export const cueWords = (): string[] => [...requested].sort();
 
 /**
  * The frame at which a word of a sentence starts to be spoken. `occurrence`
@@ -74,7 +86,9 @@ export const atWord = (id: SentenceId, word: string, occurrence = 1): number => 
     index = text.indexOf(word, index + 1);
     if (index < 0) throw new Error(`"${word}" (occurrence ${occurrence}) is not in ${id}: "${text}"`);
   }
-  const measured = WORD_ONSETS[id]?.[occurrence === 1 ? word : `${word}#${occurrence}`];
+  const key = onsetKey(word, occurrence);
+  requested.add(`${id}: ${key}`);
+  const measured = WORD_ONSETS[id]?.[key];
   if (measured !== undefined) return measured;
   const {start, end} = SPEECH[id];
   return Math.round(start + (index / text.length) * (end - start));
