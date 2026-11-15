@@ -8,6 +8,19 @@ Every timing has been re-derived for amendment A1.
 
 The repository already holds the kit that this spec uses unchanged: `src/kit/theme.ts` (palette, glyphs), `src/kit/time.ts` (`EASE`, `ramp`, `timecode`), `src/coldopen/strings.ts` (every on-screen string, A1–A4 applied), `src/coldopen/narration.ts` (narration with A1) and `src/coldopen/cues.ts` (`SPEECH`, `atWord`). The only data change this spec asks for in `cues.ts` is the `SPEECH` table in §1.2.
 
+## Changes made at integration
+
+These were decided after the figures were built and looked at as rendered frames. **Each one overrides the sections below wherever they differ.** The code is the reference: `src/coldopen/shots.ts` for timing and camera, the figure files for geometry.
+
+- **I1. A camera push ends at scale 1.** Sections 2.1 and 6 have the pushes run from 1.000 up to 1.030 (figure) and 1.020 (table) and then hold there. In the build they run from 1/1.03 and 1/1.02 **up to 1.000** and hold at rest. During every hold the figure therefore sits exactly on the coordinates of section 2.2, at the size it was drawn for, and its hairlines are one pixel wide. The trial figure is pushed about the top left corner of the content field, (128, 168), so its left edge never leaves the left edge of the citation. The table is pushed about (960, 500). Frames and easing are unchanged.
+- **I2. The citation and its design tag leave with the trial figure.** They dissolve out over frames 1254–1298 with layer D and do not return. Sections 4 (K13), 5 (5.3) and 9 (R3) keep the band on screen, dimmed, under DEFICIT, the table and the title. That put the film's own word and the film's own table under the trial's citation, as if the trial had said them. The script's rule is "the citation of the study under discussion", and from the word DEFICIT on, no study is under discussion. No number is on screen after the band leaves. "Not medical advice" stays on every frame.
+- **I3. The title is raised.** H01 baseline 350 (spec 368), so its capitals sit on y 260, the cap line of the word DEFICIT it replaces. H02 baseline 406 (spec 424), which leaves 43 px between the subtitle and the top rule of the dimmed table.
+- **I4. The second bar lands two frames earlier.** Row 2's bar is complete on frame 736 (spec 738), so it has fully landed before "fifty-three" is spoken on 738.
+- **I5. The percent values are aligned by ink.** "+37%" and "−53%" are set 3 px to the right of x 944, because the percent sign carries 3 px of empty space on its right. Their ink then ends where NO DETECTABLE EFFECT ends.
+- **I6. Camera layers are clipped at y 156–860,** not at the content field (168–852), so no edge of a mark or descender of a note can be cut during a push.
+- **I7. The sound fades over the last 30 frames** when the cold open ships alone (spec: 11).
+- **I8. No verification gate** (see section 8.4).
+
 ## 0. Conventions
 
 - **C1. Frames.** Frames are 0-based integers at 24 fps; seconds = frame / 24. An animation written "a–b" starts on frame a (progress 0) and is complete on frame b (progress 1). This is `ramp(frame, a, b − a, easing)`. Frames after b are identical to b.
