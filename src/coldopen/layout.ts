@@ -8,8 +8,14 @@ export const LIVE = {left: 128, right: 1792} as const;
 export const BAND = {
   /** The citation and the design tag. */
   citation: [48, 148],
-  /** Figures, the table and the title. Camera layers are clipped to it. */
+  /** Figures, the table and the title. */
   content: [168, 852],
+  /**
+   * What a camera layer is clipped to. A push about the centre moves the top
+   * of a figure up by a few pixels and its foot down, so the clip sits 8 px
+   * clear of the citation band above and of the caption band below.
+   */
+  camera: [156, 860],
   /** Narration captions in the review build. Empty in the clean build. */
   caption: [868, 964],
   /** "Not medical advice" at the right. The review overlay at the left. */

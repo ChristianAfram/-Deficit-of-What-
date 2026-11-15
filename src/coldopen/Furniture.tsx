@@ -12,18 +12,19 @@ import {NARRATION, type SentenceId} from './narration';
 import {SHOT, progress} from './shots';
 import {CITATION, DESIGN_TAG, NOT_MEDICAL_ADVICE} from './strings';
 
-const mix = (a: number, b: number, t: number): number => a + (b - a) * t;
-
 /**
  * "Always on screen. The citation of the study under discussion, its design
  * tag, and the words 'Not medical advice'." The band never moves with a
- * camera. Under the title it dims but stays legible.
+ * camera. It is on screen for as long as the trial's figure is, and leaves
+ * with it: the word DEFICIT, the evidence table and the title are the film's
+ * own and stand under no citation.
  */
 const CitationBand: React.FC = () => {
   const frame = useCurrentFrame();
-  const dim = progress(frame, SHOT.bandDims);
-  const citation = progress(frame, SHOT.citation) * mix(BONE.b100, BONE.b56, dim);
-  const tagStrength = mix(BONE.b72, BONE.b56, dim);
+  const present = 1 - progress(frame, SHOT.figureRecedes);
+  if (present <= 0) return null;
+  const citation = progress(frame, SHOT.citation) * present;
+  const tagStrength = BONE.b72 * present;
   // The tag arrives segment by segment, each on the words that name it. All
   // three segments are always laid out, so nothing shifts when one arrives.
   const segments = [
@@ -34,7 +35,7 @@ const CitationBand: React.FC = () => {
   const tag = TYPE.tag;
   return (
     <>
-      <Txt role="citation" x={LIVE.left} y={BASELINE.citation} opacity={citation / BONE.b100}>
+      <Txt role="citation" x={LIVE.left} y={BASELINE.citation} opacity={citation}>
         {CITATION}
       </Txt>
       <text

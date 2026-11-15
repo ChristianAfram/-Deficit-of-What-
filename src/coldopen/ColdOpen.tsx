@@ -39,12 +39,12 @@ export const ColdOpen: React.FC<ColdOpenProps> = ({standalone, review, voice}) =
       <Layer
         camera={cameraAt(frame, CAMERA.figure)}
         opacity={1 - progress(frame, SHOT.figureRecedes)}
-        clipRows={BAND.content}
+        clipRows={BAND.camera}
       >
         <CrossoverDiagram />
         <ResultRows standalone={standalone} />
       </Layer>
-      <Layer camera={cameraAt(frame, CAMERA.table)} clipRows={BAND.content}>
+      <Layer camera={cameraAt(frame, CAMERA.table)} clipRows={BAND.camera}>
         <DeficitTable />
       </Layer>
       <Layer>

@@ -22,12 +22,12 @@ const Stage: React.FC<{kind: Kind; children: React.ReactNode}> = ({kind, childre
         <Layer
           camera={cameraAt(frame, CAMERA.figure)}
           opacity={1 - progress(frame, SHOT.figureRecedes)}
-          clipRows={BAND.content}
+          clipRows={BAND.camera}
         >
           {children}
         </Layer>
       ) : kind === 'table' ? (
-        <Layer camera={cameraAt(frame, CAMERA.table)} clipRows={BAND.content}>
+        <Layer camera={cameraAt(frame, CAMERA.table)} clipRows={BAND.camera}>
           {children}
         </Layer>
       ) : (

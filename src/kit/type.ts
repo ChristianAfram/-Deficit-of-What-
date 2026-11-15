@@ -61,6 +61,8 @@ export const TYPE = {
   sequence: condensed(600, 22, 0.06),
   /** Y06. The letter in the randomisation node. */
   node: condensed(600, 24, 0),
+  /** Y06. The same letter in the legend. */
+  nodeLegend: condensed(600, 20, 0),
   /** Y07. Condition labels in the unmasked blocks. */
   condition: condensed(600, 22, 0.06),
   /** Y08. The duration label in each block. */

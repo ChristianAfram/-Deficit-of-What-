@@ -81,7 +81,7 @@ export const SHOT = {
   row1Value: cutAt(F.plus37.f0),
   row1Note: ending(atWord('s03', 'seatwork'), 20),
   row2Label: starting(atWord('s03', 'seatwork'), 12),
-  row2Bar: ending(F.minus53.f0, 24),
+  row2Bar: ending(F.minus53.f0 - 2, 24),
   row2Value: cutAt(F.minus53.f0),
   row2Note: starting(F.minus53.f1, 18),
   /** Closes the plotted region. The third row sits below it and is not plotted. */
@@ -91,7 +91,13 @@ export const SHOT = {
   row3Note: starting(atWord('s04', 'between') - 2, 18),
   /** After the written pause, so the silence stays a pure hold. Complete before "Learning did not follow." */
   limits: starting(PAUSE.end + 11, 24),
-  /** "Then the diagram recedes": the whole figure layer dissolves out. */
+  /**
+   * "Then the diagram recedes": the whole figure layer dissolves out. The
+   * citation and its design tag leave with it. They name "the study under
+   * discussion", and from here on no study is under discussion: the word
+   * DEFICIT and the table are the film's own, and must not stand under the
+   * trial's citation as if the trial had said them.
+   */
   figureRecedes: {from: atWord('s07', 'in the name') + 3, to: atWord('s07', 'deficit') - 11},
 
   // Shot 4: the word DEFICIT and the empty evidence table.
@@ -110,7 +116,6 @@ export const SHOT = {
   // Shot 5: the title. "The table dims. The title alone, in capitals."
   deficitOut: starting(TITLE_START, 20),
   tableDims: starting(TITLE_START, 36),
-  bandDims: starting(TITLE_START, 36),
   title: starting(TITLE_START + 20, 24),
   subtitle: starting(TITLE_START + 44, 18),
 } as const satisfies Record<string, Anim>;
@@ -124,14 +129,23 @@ export const TITLE_DIM = {table: 0.2} as const;
  * "A slow push-in on a figure while it draws. A hold on every result."
  * Each figure layer has its own camera, so no hidden reset is ever needed.
  * A push is linear and has stopped six frames before a result is spoken.
+ *
+ * A push ends at scale 1, not above it. So during every hold the figure sits
+ * exactly on the layout grid, at the size it was drawn for, with its edges on
+ * the same verticals as the citation above it. It starts slightly small
+ * instead.
+ *
+ * The trial figure is pushed about the top left corner of the content field,
+ * so its left edge never leaves the left edge of the citation. The table is
+ * centred on the canvas and is pushed about its own centre.
  */
 export const CAMERA = {
-  figure: {move: {from: F.weeks2.f1, to: F.plus37.f0 - SETTLE} as Anim, scale: 1.03, fixed: [960, 510]},
-  table: {move: {from: F.three.f1, to: SPEECH.s12.end} as Anim, scale: 1.02, fixed: [960, 500]},
+  figure: {move: {from: F.weeks2.f1, to: F.plus37.f0 - SETTLE} as Anim, startScale: 1 / 1.03, fixed: [128, 168]},
+  table: {move: {from: F.three.f1, to: SPEECH.s12.end} as Anim, startScale: 1 / 1.02, fixed: [960, 500]},
 } as const;
 
 export const cameraAt = (frame: number, camera: (typeof CAMERA)[keyof typeof CAMERA]) => ({
-  scale: 1 + (camera.scale - 1) * progress(frame, camera.move, EASE.linear),
+  scale: camera.startScale + (1 - camera.startScale) * progress(frame, camera.move, EASE.linear),
   fixed: camera.fixed,
 });
 

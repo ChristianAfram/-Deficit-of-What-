@@ -46,6 +46,9 @@ export const RESULT_ROWS: readonly ResultRowText[] = [
   },
 ];
 
+/** The head of the plot: what the bars compare. It reuses the words of the design tag. */
+export const PLOT_HEAD = 'OROS-MPH RELATIVE TO PLACEBO';
+
 /** The percent changes the two bars are drawn from. Row 3 has no bar. */
 export const RESULT_PERCENT: readonly (number | null)[] = [37, -53, null];
 
@@ -73,4 +76,4 @@ export const TABLE_COLUMNS = ['PREDICTION', 'RESULT', 'STATUS'] as const;
 export const TITLE = 'DEFICIT OF WHAT?';
 export const SUBTITLE = 'Three hypotheses about ADHD, tested against their own predictions.';
 
-export const FIGURE_MARK = {data: 'DATA', schematic: 'SCHEMATIC'} as const;
+// The words DATA and SCHEMATIC belong to the kit: src/kit/FigureMark.tsx.
