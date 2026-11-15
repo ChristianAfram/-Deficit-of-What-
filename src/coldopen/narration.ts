@@ -1,7 +1,8 @@
 // The narration of the cold open: script version 3, word for word, with the
-// one amendment the writer agreed to after the fact-check (s03). One entry per
-// sentence. Do not edit a sentence here without recording it in
-// docs/brief-cold-open.md: tests/narration.test.ts compares the two.
+// two amended sentences (s03 after the fact-check, s04 after the specialist
+// review). One entry per sentence. Do not edit a sentence here without
+// recording it in docs/brief-cold-open.md: tests/narration.test.ts compares
+// the two.
 
 export type SentenceId =
   | 's01'
@@ -45,7 +46,8 @@ export const NARRATION: readonly Sentence[] = [
   {
     id: 's04',
     paragraph: 3,
-    text: 'The amount of content the children learned did not differ between conditions.',
+    // Amended after the specialist review (brief, amendment A6).
+    text: 'The amount of content the children learned showed no detectable difference between conditions.',
   },
   // (pause, 2 seconds)
   {id: 's05', paragraph: 4, text: 'The drug did what it is known to do.'},

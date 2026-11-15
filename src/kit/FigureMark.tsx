@@ -16,6 +16,9 @@ const MARK = {
 } as const;
 
 const HEIGHT = 28;
+const STROKE = 2;
+/** The dash of the SCHEMATIC box, and the gap it aims for between dashes. */
+const DASH = {length: 6, gap: 4} as const;
 
 type Props = {
   kind: FigureKind;
@@ -27,6 +30,17 @@ type Props = {
 };
 
 /**
+ * One side of the dashed box. The dashes are fitted to the side, so it starts
+ * and ends on a whole dash and all four corners of the box are closed alike.
+ */
+const DashedSide: React.FC<{x1: number; y1: number; x2: number; y2: number}> = ({x1, y1, x2, y2}) => {
+  const length = Math.abs(x2 - x1) + Math.abs(y2 - y1);
+  const dashes = Math.max(2, Math.round((length + DASH.gap) / (DASH.length + DASH.gap)));
+  const gap = (length - dashes * DASH.length) / (dashes - 1);
+  return <line x1={x1} y1={y1} x2={x2} y2={y2} strokeDasharray={`${DASH.length} ${gap}`} />;
+};
+
+/**
  * The boxed mark at the top left of every figure. DATA has a solid box. The
  * box of SCHEMATIC is dashed, so the two differ in form as well as in word.
  * A mark arrives before its figure draws and leaves with it.
@@ -34,21 +48,31 @@ type Props = {
 export const FigureMark: React.FC<Props> = ({kind, x, y, opacity = 1}) => {
   if (opacity <= 0) return null;
   const {text, width} = MARK[kind];
-  const solid = kind === 'data';
+  const half = STROKE / 2;
   return (
     <g opacity={opacity}>
-      <rect
-        x={x + 0.75}
-        y={y + 0.75}
-        width={width - 1.5}
-        height={HEIGHT - 1.5}
-        fill="none"
-        stroke={PALETTE.bone}
-        strokeOpacity={solid ? BONE.b100 : BONE.b72}
-        strokeWidth={1.5}
-        strokeDasharray={solid ? undefined : '4 3'}
-      />
-      <Txt role="mark" x={x + 10} y={y + 21}>
+      {kind === 'data' ? (
+        <rect
+          x={x + half}
+          y={y + half}
+          width={width - STROKE}
+          height={HEIGHT - STROKE}
+          fill="none"
+          stroke={PALETTE.bone}
+          strokeWidth={STROKE}
+        />
+      ) : (
+        // Each side runs the full length of the box, so the sides overlap in
+        // the corners and no corner is left notched.
+        <g stroke={PALETTE.bone} strokeOpacity={BONE.b72} strokeWidth={STROKE}>
+          <DashedSide x1={x} y1={y + half} x2={x + width} y2={y + half} />
+          <DashedSide x1={x} y1={y + HEIGHT - half} x2={x + width} y2={y + HEIGHT - half} />
+          <DashedSide x1={x + half} y1={y} x2={x + half} y2={y + HEIGHT} />
+          <DashedSide x1={x + width - half} y1={y} x2={x + width - half} y2={y + HEIGHT} />
+        </g>
+      )}
+      {/* The word stands in the middle of its box, with equal space on both sides. */}
+      <Txt role="mark" x={x + width / 2} y={y + 21} anchor="middle">
         {text}
       </Txt>
     </g>

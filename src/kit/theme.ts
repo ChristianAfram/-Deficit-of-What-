@@ -23,8 +23,6 @@ export const PALETTE = {
   conjectureGround: '#0F2A4A',
 } as const;
 
-export type PaletteColour = keyof typeof PALETTE;
-
 /** Typographic characters the script requires: "Minus signs are real minus signs". */
 export const GLYPH = {
   minus: '−',

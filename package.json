@@ -9,7 +9,7 @@
     "audio": "node scripts/make-audio.mjs",
     "render": "npm run audio && remotion render src/index.ts ColdOpen out/cold-open.mp4",
     "render:review": "npm run audio && remotion render src/index.ts ColdOpenReview out/cold-open-review.mp4",
-    "stills": "npm run audio && node scripts/render-stills.mjs",
+    "stills": "node scripts/render-stills.mjs",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
   },
@@ -19,7 +19,6 @@
     "@remotion/cli": "4.0.543",
     "@remotion/fonts": "4.0.543",
     "@remotion/media": "4.0.543",
-    "@remotion/paths": "4.0.543",
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "remotion": "4.0.543"
@@ -27,9 +26,11 @@
   "devDependencies": {
     "@remotion/bundler": "4.0.543",
     "@remotion/renderer": "4.0.543",
+    "@types/fontkit": "2.0.9",
     "@types/node": "22.20.5",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
+    "fontkit": "3.0.0",
     "typescript": "5.9.3",
     "vitest": "5.1.0"
   }

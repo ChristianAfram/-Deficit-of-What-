@@ -49,12 +49,20 @@ export const RESULT_ROWS: readonly ResultRowText[] = [
 /** The head of the plot: what the bars compare. It reuses the words of the design tag. */
 export const PLOT_HEAD = 'OROS-MPH RELATIVE TO PLACEBO';
 
+/**
+ * The two directions of the plot, at its two ends. Both results favour
+ * methylphenidate, on opposite sides of zero: without these words, a bar to
+ * the left of zero reads, by the convention of a forest plot, as "favours
+ * placebo". They are the narration's own words: "more", "fewer".
+ */
+export const PLOT_DIRECTION = {left: 'FEWER', right: 'MORE'} as const;
+
 /** The percent changes the two bars are drawn from. Row 3 has no bar. */
 export const RESULT_PERCENT: readonly (number | null)[] = [37, -53, null];
 
 /** A3: shown when the cold open ships as a film of its own. */
 export const LIMITS = [
-  'Limits: one summer programme, 3-week units, small groups with behaviour management, 80% of children on 18 mg.',
+  'Limits: a summer programme, 3-week units, small groups with behaviour management, 80% of children on 18 mg, the lowest of three doses.',
   'The authors call for replication in ordinary classrooms over a school year.',
 ] as const;
 

@@ -1,9 +1,10 @@
 import React from 'react';
 import {Audio} from '@remotion/media';
 import {staticFile, useCurrentFrame} from 'remotion';
+import {progress} from '../kit/anim';
 import {EASE} from '../kit/time';
 import {DURATION} from './cues';
-import {SOUND, progress} from './shots';
+import {SOUND} from './shots';
 
 type Props = {
   /** Fades the sound out under the held title, for the cold open as a film of its own. */

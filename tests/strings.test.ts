@@ -59,9 +59,20 @@ describe('on-screen strings', () => {
   });
 
   it('states the limits of the trial when the cold open ships alone (A3)', () => {
-    expect(brief).toContain(strings.LIMITS.join(' '));
-    expect(strings.LIMITS.join(' ')).toContain('80% of children on 18 mg');
-    expect(strings.LIMITS.join(' ')).not.toMatch(/plan/i);
+    const limits = strings.LIMITS.join(' ');
+    expect(brief).toContain(limits);
+    expect(limits).toContain('80% of children on 18 mg, the lowest of three doses');
+    // The paper calls for a replication. It does not announce one.
+    expect(limits).toContain('call for replication');
+    expect(limits).not.toMatch(/plan/i);
+    // Three summers of one programme: "one summer programme" could be read as one summer.
+    expect(limits).not.toMatch(/one summer/i);
+  });
+
+  it('names the comparison and the two directions of the plot (A7)', () => {
+    expect(strings.PLOT_HEAD).toBe('OROS-MPH RELATIVE TO PLACEBO');
+    expect(strings.PLOT_DIRECTION).toEqual({left: 'FEWER', right: 'MORE'});
+    expect(brief).toContain(strings.PLOT_HEAD);
   });
 
   it('never says the medication does not work', () => {

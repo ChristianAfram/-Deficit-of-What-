@@ -1,5 +1,5 @@
 import {describe, expect, it} from 'vitest';
-import {DURATION, PAUSE, SPEECH, TITLE_START, atWord, sentenceAt} from '../src/coldopen/cues';
+import {DURATION, PAUSE, SPEECH, TITLE_START, WORD_ONSETS, atWord, sentenceAt} from '../src/coldopen/cues';
 import {NARRATION, TOTAL_WORDS} from '../src/coldopen/narration';
 import {FPS, at, sec} from '../src/kit/time';
 
@@ -65,10 +65,25 @@ describe('cue sheet', () => {
     expect(() => atWord('s01', 'classroom')).toThrow();
   });
 
-  it('knows which sentence is being spoken', () => {
+  it('uses a measured word start where the recorded voice gives one', () => {
+    const estimated = atWord('s03', 'thirty-seven');
+    WORD_ONSETS.s03 = {'thirty-seven': estimated + 9, 'three weeks#2': 1};
+    try {
+      expect(atWord('s03', 'thirty-seven')).toBe(estimated + 9);
+      // A word with no measured start is still estimated.
+      expect(atWord('s03', 'fifty-three')).toBeGreaterThan(estimated);
+    } finally {
+      delete WORD_ONSETS.s03;
+    }
+    expect(atWord('s03', 'thirty-seven')).toBe(estimated);
+  });
+
+  it('knows which sentence is being spoken, and that none is in a gap, in the pause or under the title', () => {
     expect(sentenceAt(0)).toBeNull();
     expect(sentenceAt(SPEECH.s01.start)).toBe('s01');
     expect(sentenceAt(SPEECH.s06.start + 3)).toBe('s06');
-    expect(sentenceAt(DURATION - 1)).toBe('s13');
+    expect(sentenceAt(SPEECH.s01.end)).toBeNull();
+    expect(sentenceAt(PAUSE.start + 10)).toBeNull();
+    expect(sentenceAt(DURATION - 1)).toBeNull();
   });
 });

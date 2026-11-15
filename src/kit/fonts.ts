@@ -5,7 +5,7 @@
 // sans with tabular figures for numbers and citations."
 
 import {loadFont} from '@remotion/fonts';
-import {cancelRender, continueRender, delayRender} from 'remotion';
+import {cancelRender} from 'remotion';
 import barlow500 from '@fontsource/barlow-condensed/files/barlow-condensed-latin-500-normal.woff2';
 import barlow600 from '@fontsource/barlow-condensed/files/barlow-condensed-latin-600-normal.woff2';
 import inter400 from '@fontsource/inter/files/inter-latin-400-normal.woff2';
@@ -27,9 +27,7 @@ const faces: {family: string; url: string; weight: string}[] = [
   {family: FONT.text, url: inter600, weight: '600'},
 ];
 
-// No frame is rendered until every face is ready, so no frame can fall back
-// to a system font.
-const handle = delayRender('Loading Barlow Condensed and Inter');
-Promise.all(faces.map((face) => loadFont(face)))
-  .then(() => continueRender(handle))
-  .catch((error) => cancelRender(error));
+// loadFont holds the render until its face is ready, so no frame can fall
+// back to a system font. A face that fails to load stops the render: a frame
+// in the wrong typeface is worse than no frame.
+Promise.all(faces.map((face) => loadFont(face))).catch((error) => cancelRender(error));

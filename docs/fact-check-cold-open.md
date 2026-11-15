@@ -182,3 +182,46 @@ screen in this build.
   Tamm et al. (2017). The paper calls itself "the first study to evaluate
   stimulant effects on the learning of standard units of academic material in a
   controlled classroom setting", so "rarely been tested directly" is safe.
+
+## After the build: the second check
+
+When the picture was finished, the build itself was checked again against the
+sources by a reviewer who had not seen the first fact-check: every string in
+`src/coldopen/strings.ts` and every sentence in `src/coldopen/narration.ts`,
+character by character, against the paper's full text, its supplement, PubMed
+and Crossref. Everything matched. Five points came out of it and out of the
+specialist review.
+
+- **"Did not differ"**, in the fourth sentence of the narration, was the
+  sentence the reviewing methodologist would object to in a seminar. It is the
+  paper's own wording in its Results, and it rests on a non-significant
+  interaction with no estimate, no interval and no equivalence test. The
+  screen says NO DETECTABLE EFFECT at the same moment. **Settled (A6):** the
+  voice now says "showed no detectable difference between conditions".
+- **"Classroom."** in the note of row 2 was not covered by the first check. It
+  holds. Method: "The number of rule violations committed by each child on
+  each day was calculated as a measure of classroom behavior in both morning
+  and afternoon classrooms." The supplement's table calls the measure "Number
+  of classroom rule violations per hour".
+- **"The lowest of three doses"** in the limits holds. Method: "Children
+  received a randomized schedule of placebo (1 day), 18 mg (3 days), 27 mg
+  (3 days), and 36 mg (3 days) during the titration period", and the
+  clinicians "selected the largest tolerable dose for each child that
+  exhibited clear improvement beyond the immediately lower dose".
+- **OROS-MPH, strictly.** The paper labels all active treatment OROS-MPH. Its
+  supplement says about 11 of the 173 children stayed on another
+  methylphenidate product they were already taking, with doses converted. The
+  strings follow the paper's own label. A specialist who reads the supplement
+  will find this.
+- **For the description of any release that ships alone.** Children scored
+  higher on tests taken while medicated (vocabulary +3.0 points of 100,
+  p = .007), although the gain across the unit was the same. A clinician
+  needs that beside "Learning did not follow." It is not in the cold open,
+  and anything added on screen has to pass decision 6 first.
+
+Still open for the writer:
+
+- **"In 2022".** The trial ran in the summers of 2014 to 2016. 2022 is the year
+  of publication. The script dates every study this way, in every part.
+- **Upload title 2,** "Methylphenidate Raised Output by 37%".
+- **The typeset article** has still not been seen by anyone.
