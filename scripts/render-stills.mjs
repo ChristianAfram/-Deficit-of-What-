@@ -8,6 +8,8 @@
 //
 // A third argument sets the output folder (default: out/stills/<composition>).
 // PROPS='{"standalone":false}' passes input props to the composition.
+// ENTRY=src/preview/entry-rows.tsx renders from another entry point, for
+// checking one figure on its own (its composition is called Preview).
 
 import {mkdirSync} from 'node:fs';
 import {dirname, join, resolve} from 'node:path';
@@ -20,7 +22,7 @@ const [compositionId = 'ColdOpen', frameSpec = 'every=48', outArg] = process.arg
 const inputProps = process.env.PROPS ? JSON.parse(process.env.PROPS) : {};
 
 const serveUrl = await bundle({
-  entryPoint: join(root, 'src', 'index.ts'),
+  entryPoint: resolve(root, process.env.ENTRY ?? join('src', 'index.ts')),
   publicDir: join(root, 'public'),
 });
 const composition = await selectComposition({serveUrl, id: compositionId, inputProps});

@@ -19,25 +19,26 @@ export const TITLE_START = at(1, 12);
 export type Span = {start: number; end: number};
 
 /**
- * Start and end frame of each narration sentence. Paced at 138 words a minute
- * overall (script: "2,147 spoken words at a calm 138 words a minute"), with
- * each sentence's share set by its syllable count.
+ * Start and end frame of each narration sentence (build spec, section 1.2).
+ * Paced at 137 words a minute overall (script: "a calm 138 words a minute").
+ * Each sentence's share is half by its words and half by its syllables, so
+ * that short sentences are not rushed.
  */
 export const SPEECH: Record<SentenceId, Span> = {
-  s01: {start: 24, end: 207},
-  s02: {start: 215, end: 546},
-  s03: {start: 558, end: 854},
-  s04: {start: 866, end: 978},
+  s01: {start: 36, end: 205},
+  s02: {start: 219, end: 533},
+  s03: {start: 547, end: 813},
+  s04: {start: 833, end: 951},
   // (pause, 2 seconds)
-  s05: {start: 1026, end: 1079},
-  s06: {start: 1085, end: 1128},
-  s07: {start: 1146, end: 1323},
-  s08: {start: 1332, end: 1450},
-  s09: {start: 1459, end: 1506},
-  s10: {start: 1512, end: 1559},
-  s11: {start: 1565, end: 1612},
-  s12: {start: 1619, end: 1672},
-  s13: {start: 1680, end: 1716},
+  s05: {start: 999, end: 1072},
+  s06: {start: 1086, end: 1124},
+  s07: {start: 1138, end: 1324},
+  s08: {start: 1334, end: 1444},
+  s09: {start: 1454, end: 1498},
+  s10: {start: 1504, end: 1548},
+  s11: {start: 1554, end: 1598},
+  s12: {start: 1606, end: 1669},
+  s13: {start: 1675, end: 1715},
 };
 
 /** The written pause: "(pause, 2 seconds)", the first of the film's five silences. */
