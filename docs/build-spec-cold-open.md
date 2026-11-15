@@ -1,25 +1,64 @@
 # Deficit of What? Build spec: cold open and title (frames 0–1847)
 
-Merged spec. Binding sources: `docs/brief-cold-open.md` ("From the script" and amendments A1 to A5) and the fact-check. The base is Proposal 1 (printed-figure lens): fixed bands, a closed axis for the null row, the verification gate and the layer model. Grafted onto it:
-- from Proposal 2 (sync lens): the still rule and its build lint, cut-on values on the number's first frame, and a camera that stops before a result is spoken;
-- from Proposal 3 (skeptic lens): reuse of the existing kit and fonts, a mark that arrives before its figure, condition fills of equal luminance, a separate camera layer per figure, and the reading of the fact-check.
+Merged design spec, as written before the build. It took Proposal 1 (printed-figure lens) as its base: fixed bands, a closed axis for the null row and a layer model. Onto it were grafted, from Proposal 2 (sync lens), the still rule and its test and values that cut on with the number's first frame, and from Proposal 3 (skeptic lens), a mark that arrives before its figure and condition fills of equal luminance. Parts of that design were later dropped. The next two sections say which.
 
-Every timing has been re-derived for amendment A1.
+## How to read this document
 
-The repository already holds the kit that this spec uses unchanged: `src/kit/theme.ts` (palette, glyphs), `src/kit/time.ts` (`EASE`, `ramp`, `timecode`), `src/coldopen/strings.ts` (every on-screen string, A1–A4 applied), `src/coldopen/narration.ts` (narration with A1) and `src/coldopen/cues.ts` (`SPEECH`, `atWord`). The only data change this spec asks for in `cues.ts` is the `SPEECH` table in §1.2.
+This is the design spec as it was merged from three proposals, before anything was built. It explains why the picture is laid out as it is. It is no longer the reference for what is on screen. Three things supersede it wherever they differ:
 
-## Changes made at integration
+1. **The changes listed below** (B1 to B24), made after the figures were built and after two rounds of review of the rendered film.
+2. **`docs/cue-sheet.md`** for every frame number. It is generated from the code and checked by a test. The frame numbers in sections 1, 5, 6 and 7 below are the design's, from before the narration was amended a second time, and are out of date.
+3. **The code**: `src/coldopen/shots.ts` for timing and sound, the figure files for geometry, `src/coldopen/strings.ts` for every string.
 
-These were decided after the figures were built and looked at as rendered frames. **Each one overrides the sections below wherever they differ.** The code is the reference: `src/coldopen/shots.ts` for timing and camera, the figure files for geometry.
+## Changes made after the build and the review
 
-- **I1. A camera push ends at scale 1.** Sections 2.1 and 6 have the pushes run from 1.000 up to 1.030 (figure) and 1.020 (table) and then hold there. In the build they run from 1/1.03 and 1/1.02 **up to 1.000** and hold at rest. During every hold the figure therefore sits exactly on the coordinates of section 2.2, at the size it was drawn for, and its hairlines are one pixel wide. The trial figure is pushed about the top left corner of the content field, (128, 168), so its left edge never leaves the left edge of the citation. The table is pushed about (960, 500). Frames and easing are unchanged.
-- **I2. The citation and its design tag leave with the trial figure.** They dissolve out over frames 1254–1298 with layer D and do not return. Sections 4 (K13), 5 (5.3) and 9 (R3) keep the band on screen, dimmed, under DEFICIT, the table and the title. That put the film's own word and the film's own table under the trial's citation, as if the trial had said them. The script's rule is "the citation of the study under discussion", and from the word DEFICIT on, no study is under discussion. No number is on screen after the band leaves. "Not medical advice" stays on every frame.
-- **I3. The title is raised.** H01 baseline 350 (spec 368), so its capitals sit on y 260, the cap line of the word DEFICIT it replaces. H02 baseline 406 (spec 424), which leaves 43 px between the subtitle and the top rule of the dimmed table.
-- **I4. The second bar lands two frames earlier.** Row 2's bar is complete on frame 736 (spec 738), so it has fully landed before "fifty-three" is spoken on 738.
-- **I5. The percent values are aligned by ink.** "+37%" and "−53%" are set 3 px to the right of x 944, because the percent sign carries 3 px of empty space on its right. Their ink then ends where NO DETECTABLE EFFECT ends.
-- **I6. Camera layers are clipped at y 156–860,** not at the content field (168–852), so no edge of a mark or descender of a note can be cut during a push.
-- **I7. The sound fades over the last 30 frames** when the cold open ships alone (spec: 11).
-- **I8. No verification gate** (see section 8.4).
+**The camera**
+
+- **B1. No camera move in this part.** Sections 2.1 and 6 give each figure layer a slow push. It was built and measured, and then taken out. A push changes the scale, so a figure can sit on the layout grid before the push or after it, never both: the crossover diagram drew at 97 % for seven seconds, with its right edge 48 px short of the right vertical and its smallest type under 20 px. And while a layer scales slowly, the renderer moves type in whole-pixel steps while the rules beside it glide: the word DEFICIT twitched twice. The figures draw, and the frame holds. Every element sits on the coordinates of section 2.2 on every frame. The script's rule, "a slow push-in on a figure while it draws", is not applied in the cold open. A later part that shows one figure on its own can apply it if it renders at twice the size and scales down.
+
+**What is on screen, and when**
+
+- **B2. The citation and its design tag leave with the trial's figure** and do not return. Sections 4 (K13), 5 (5.3) and 9 (R3, R4) keep the band on screen, dimmed, under DEFICIT, the table and the title. That put the film's own word and the film's own table under the trial's citation, as if the trial had said them. The script's rule is "the citation of the study under discussion", and from the word DEFICIT on, no study is under discussion. No number is on screen after the band leaves. "Not medical advice" stays on every frame. The end card shows the title, the subtitle, the dimmed table and "Not medical advice".
+- **B3. A value arrives with its interval.** Section 5 brings each row's note in two to three seconds after its value. For that time a percentage stood on screen without the interval amendment A2 exists to show. The note now cuts on with its value, on the same frame and the same tick.
+- **B4. The hatch clears first, then the conditions show.** Section 5 (2.10) changes all of a block at once, so hatch lines ran through METHYLPHENIDATE and PLACEBO for half a second. The hatch and the chips now clear, and then colour, fill and name arrive.
+- **B5. The MASKED key leaves with the hatch,** and the RANDOMISED key takes its place on the left edge. Section 10.6 kept MASKED in the legend after the unmask. A key to a mark that is no longer in the figure is an error by the conventions of a figure, and it could be read as something still being masked. The design tag still says TRIPLE-MASKED.
+- **B6. The plot names its two directions** (amendment A7): FEWER at the left end of the plot head, MORE at the right.
+- **B7. The trial's figure dissolves right up to the word DEFICIT.** Its dissolve ends on the frame the word cuts on. The tail of a dissolve is faint, so for about a quarter of a second before the word the screen is black to the eye: a breath before the word, and a clean cut into it. Section 5 left eleven fully empty frames.
+- **B8. The low note starts in the breath before the last sentence.** Section 7 started it under the sentence before. The script has "under the last sentence".
+- **B9. The sound fades over the last 30 frames** when the cold open ships alone (section 7: 11).
+
+**Geometry and type**
+
+- **B10. Every rule lands on whole pixels.** A 1 px rule centred on a pixel boundary renders as two rows at half strength, a grey that is not in the palette. Rules are 1 px (hairlines, the table's grid and its header rule) or 2 px (the zero line, the table's top and bottom, block outlines, the marks). Section 3 and 2.2 have 1.5 px in four places.
+- **B11. Block outlines keep one weight,** 2 px, graphite while masked and the condition's colour after. Section 2.2 has 1.5 px masked and 2 px unmasked.
+- **B12. The "3 WEEKS" chip runs down to the block's bottom outline,** and the two lines of a block stand centred in it (baselines 31 and 61 from the block top; section 2.2: 34 and 64).
+- **B13. The key stands closer to the blocks** (baseline 422; section 2.2: 428), which leaves clear space before the DATA figure. The MASKED swatch is 56 px wide and shows three whole hatch lines.
+- **B14. The marks.** The word stands in the middle of its box. The SCHEMATIC box is 126 by 28, so that 6 px dashes fit each side with whole-pixel gaps and all four corners are closed alike.
+- **B15. Label and value share a baseline** in every row (529, 617, 721), and every note sits 37 px under its label. The percent values are set 3 px to the right of x 944, because the percent sign carries 3 px of empty space on its right: their ink then ends where NO DETECTABLE EFFECT ends.
+- **B16. The table.** The grid is drawn under the frame rules and stops inside them, so the bone rules cross it unbroken. Under the title the table dims to 40 % (section 4: 20 %), where its grid still reads as a table.
+- **B17. The title is raised.** H01 baseline 350 (section 2.2: 368), so its capitals sit on the cap line of the word DEFICIT it replaces. H02 baseline 406 (424), which leaves 43 px above the dimmed table.
+- **B18. Tabular figures are set where numbers stand as values:** the citation, the values, the row notes. They are off in running sentences (the limits, the subtitle, the footer, the captions), because the feature also widens the hyphen in this typeface, which would set "3-week" as "3 - week". Section 3 has them on everywhere.
+- **B19. "3 WEEKS" stays in the condensed face.** The script gives numbers to the text sans. A block label is a tag, and the numerals in the design tag are condensed for the same reason.
+
+- **B20. The two circles and the standing note stand on the grid by their ink.** The outer edge of the randomisation node and of its key is on x 128. The ink of "Not medical advice" ends on the right vertical.
+- **B21. The limits rule has equal air above and below** (rule at y 778, baselines 812 and 842; section 2.2: 776, 808, 840).
+
+**The narration**
+
+- **B22. The fourth and the first sentence are amended** (A6, A8), and the cue sheet is re-timed for them. Speech starts on frame 29. The design tag's first part now arrives on "triple-masked", at the start of the sentence, and the freeze on "2022" comes later in it.
+
+- **B24. Four strings follow the later amendments.** The tables below show earlier text for the first and fourth sentences (section 1.2; now A8 and A6), the note of row 2 (R23; now "Classroom behaviour. …") and the first limits sentence (L02; now "Limits: a summer programme, … 80% of children on 18 mg, the lowest dose titrated."). `src/coldopen/narration.ts` and `src/coldopen/strings.ts` hold the text on screen, and `docs/brief-cold-open.md` holds the reasons.
+
+**Dropped**
+
+- **B23. No verification gate** (section 8.4).
+
+## Kept on purpose, against a reviewer
+
+- **Amber for methylphenidate, blue-grey for placebo.** The script gives amber to "the result, and the ADHD estimate" and blue-grey to "the comparison group". A reviewer called the first a misuse: the drug is a condition of the design, not a result. Placebo is the comparison here, and amber marks the condition the results are reported for. It is kept, and it is a question for the writer if later parts need amber to mean one thing only.
+- **One zero line for both bars.** A reviewer would break it into one tick per row, because the two outcomes have different bases. The script has "two result rows grow from a zero line", each row carries its own unit, and both values are printed.
+- **"3-week units" among the limits.** The paper presents the three-week unit as a strength. The script lists it as a limit of the trial, which it is for a claim about a school year.
+- **The trial's figure stays through the first words of "The expectation that it would follow…".** A reviewer would clear the figure and its citation before that sentence, so that the film's own argument is not spoken under the paper's citation. The figure stays until "in the name" for two reasons. The limits need nine seconds at full strength, and they may not arrive before the written silence has ended. And the sentence opens by referring to the result on screen: "it" is the learning that did not follow. The citation has left before the word DEFICIT appears.
 
 ## 0. Conventions
 
@@ -582,5 +621,6 @@ Each item is on screen without being in the script's "On screen" text.
 | Legend MASKED (with swatch); R node and RANDOMISED | Script picture: "hatched, because the allocation is masked"; narration "in randomised order" |
 | Plot head `OROS-MPH RELATIVE TO PLACEBO` | Rule "Never: a figure that looks like data and is not". It reuses the tag's own words. |
 | Middle-dot separators between tag segments (the script uses full stops) | Typography only; `DESIGN_TAG` strings unchanged |
-| Citation band and tag at B56 during the title; table at 20 % | Script title: "The table dims. The title alone", reconciled with "Always on screen" (R3) |
+| FEWER and MORE at the two ends of the plot head | A7 |
+| The table at 40 % under the title; no citation band after the trial's figure has left | Script title: "The table dims. The title alone". Changes B2 and B16 |
 | Captions and review overlay | Review build only; production step 6 (voice recorded after the review) |

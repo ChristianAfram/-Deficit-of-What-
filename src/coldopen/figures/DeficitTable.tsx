@@ -1,19 +1,20 @@
-// The word DEFICIT and the empty evidence table, in layer T. Build spec,
-// section 2.2 (T01 to T10), section 4 (K12, K13) and section 5, shots 4 and 5.
+// The word DEFICIT and the empty evidence table. Ids such as T01 name an
+// element in the design, docs/build-spec-cold-open.md, section 2.2.
 //
 // Script, picture: "Then the diagram recedes, the word DEFICIT is set large,
 // and an empty table draws under it: three rows, three columns. It stays
 // empty." Then, at the title: "The table dims."
 //
 // DEFICIT and the table carry no DATA or SCHEMATIC mark: they are neither data
-// nor a schematic (spec, section 8.1).
+// nor a schematic. They also stand under no citation: they are the film's own.
 
 import React from 'react';
 import {useCurrentFrame} from 'remotion';
 import {EvidenceTable, type EvidenceTableGeometry, type EvidenceTableRowLabel} from '../../kit/EvidenceTable';
+import {progress} from '../../kit/anim';
 import {EASE, mix} from '../../kit/time';
 import {Txt} from '../../kit/Txt';
-import {SHOT, TITLE_DIM, progress} from '../shots';
+import {SHOT, TITLE_DIM} from '../shots';
 import {DEFICIT_WORD, TABLE_COLUMNS, TABLE_ROWS} from '../strings';
 
 // ------------------------------------------------------------------ geometry
@@ -75,7 +76,7 @@ const DeficitWord: React.FC<{frame: number}> = ({frame}) => {
   );
 };
 
-/** The word DEFICIT and the empty evidence table. Build spec, T01 to T10. */
+/** The word DEFICIT and the empty evidence table. */
 export const DeficitTable: React.FC = () => {
   const frame = useCurrentFrame();
   // The rules draw in the order of the shot list, and the empty three-by-three
@@ -97,8 +98,8 @@ export const DeficitTable: React.FC = () => {
   // "predictions"; RESULT and STATUS land together on "checked".
   const prediction = progress(frame, SHOT.headPrediction, EASE.dissolve);
   const resultAndStatus = progress(frame, SHOT.headResultStatus, EASE.dissolve);
-  // "The table dims." Rules and labels go to 20 % together and stay there
-  // under the title, to the last frame.
+  // "The table dims." Rules and labels dim together and stay, under the
+  // title, to the last frame: the table is the film's spine and does not leave.
   const strength = mix(1, TITLE_DIM.table, progress(frame, SHOT.tableDims, EASE.dissolve));
   return (
     <g>

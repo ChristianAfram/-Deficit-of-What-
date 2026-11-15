@@ -1,14 +1,15 @@
-import React from 'react';
+import React, {useId} from 'react';
 import {interpolateColors, useCurrentFrame} from 'remotion';
+import {progress, type Anim} from '../../kit/anim';
 import {FigureMark} from '../../kit/FigureMark';
 import {PALETTE} from '../../kit/theme';
-import {EASE, mix} from '../../kit/time';
+import {EASE} from '../../kit/time';
 import {Txt} from '../../kit/Txt';
-import {SHOT, progress, type Anim} from '../shots';
+import {SHOT} from '../shots';
 import {DIAGRAM} from '../strings';
 
-// The trial design as a crossover diagram (SCHEMATIC). Build spec, section
-// 2.2, D01 to D14, and shot 2 of section 5.
+// The trial design as a crossover diagram (SCHEMATIC). Ids such as D02 name an
+// element in the design, docs/build-spec-cold-open.md, section 2.2.
 //
 // Script, "Picture": "Then the trial design draws itself as a crossover
 // diagram (SCHEMATIC): two parallel tracks, sequence AB and sequence BA, each
@@ -31,54 +32,75 @@ const PERIOD_X = [432, 1136] as const;
 /** D02 to D05. Top edges of track AB and track BA. */
 const TRACK_Y = [220, 316] as const;
 
-/** D07. Baseline of "3 WEEKS", from the block top. */
-const WEEKS_BASELINE = 64;
+/**
+ * D07, D09. Baselines of the condition name and of "3 WEEKS", from the block
+ * top. Together the two lines stand centred in the block.
+ */
+const CONDITION_BASELINE = 31;
+const WEEKS_BASELINE = 61;
 
-/** D08. The ground chip behind "3 WEEKS": 96 x 26, from the block top + 44 to + 70. */
-const CHIP = {width: 96, top: 44, height: 26} as const;
-
-/** D09. Baseline of the condition label, from the block top. */
-const CONDITION_BASELINE = 34;
+/**
+ * D08. The ground chip behind "3 WEEKS" while the block is hatched. It runs
+ * from above the words down to the block's bottom outline, so it reads as a
+ * tab on the block's edge and no sliver of hatch is left under the words.
+ */
+const CHIP = {width: 96, top: 41} as const;
 
 /** D10. Left edge and baselines of SEQUENCE AB and SEQUENCE BA. */
 const SEQUENCE_X = 232;
 const SEQUENCE_BASELINE = [266, 362] as const;
 
-/** D11. The randomisation node and the baseline of its letter. */
-const NODE = {x: 150, y: 306, radius: 22, stroke: 2, baseline: 314} as const;
-
-/** D12. The branches: a stem from the node to x 196, then one arm to each track, ending at x 220. */
-const BRANCH = {stemFrom: 172, elbow: 196, end: 220, tops: [258, 354], stroke: 2} as const;
-
-/** D13. The MASKED legend: the hatch swatch and its word. */
-const LEGEND_MASKED = {x: 128, y: 412, width: 32, height: 16, textX: 172} as const;
-
-/** D14. The RANDOMISED legend: a small node, its letter and its word. */
-const LEGEND_RANDOMISED = {x: 313, y: 421, radius: 13, stroke: 1.5, textX: 336} as const;
-
-/** D13, D14. Baseline of both legend words and of the legend's letter. */
-const LEGEND_BASELINE = 428;
-
-/** D02 to D05 masked: graphite 1.5 px. K06, K07 unmasked: 2 px in the condition's colour. */
-const OUTLINE_MASKED = 1.5;
-const OUTLINE_UNMASKED = 2;
-
-/** Hatching (2.2): 2 px graphite lines at 45 degrees, 14 px apart measured perpendicular to the lines. */
-const HATCH = {pitch: 14, line: 2, angle: 45} as const;
+/**
+ * D11. The randomisation node and the baseline of its letter. Its centre is
+ * 23 px in from the left vertical, so the outer edge of its 2 px stroke
+ * stands on x 128 with every other left edge.
+ */
+const NODE = {x: 151, y: 306, radius: 22, stroke: 2, baseline: 314} as const;
 
 /**
- * One pattern in user space, so its phase runs on unbroken across all four
- * blocks and the legend swatch. A fixed id: the figure is drawn once per frame.
+ * D12. The branches: a stem from the outer edge of the node's ring to x 196,
+ * then one arm to each track, ending at x 220.
  */
-const HATCH_ID = 'crossover-diagram-hatch';
+const BRANCH = {
+  stemFrom: NODE.x + NODE.radius + NODE.stroke / 2,
+  elbow: 196,
+  end: 220,
+  tops: [258, 354],
+  stroke: 2,
+} as const;
+
+/**
+ * D13, D14. The key stands close under the blocks it explains, on one
+ * baseline, with clear space below it before the next figure starts. It has
+ * one place, on the left edge: MASKED while the blocks are hatched, then
+ * RANDOMISED.
+ */
+const LEGEND_BASELINE = 422;
+
+/** D13. The MASKED key: a swatch wide enough to show three whole hatch lines, and its word. */
+const LEGEND_MASKED = {x: 128, width: 56, height: 16, textX: 196} as const;
+
+/** D14. The RANDOMISED key: a small node, its letter and its word. */
+const LEGEND_RANDOMISED = {x: 141, y: 415, radius: 12, stroke: 2, textX: 165} as const;
+
+/**
+ * D02 to D05. The outline is 2 px, graphite while masked and the condition's
+ * colour after. It keeps one weight, so the unmasking changes colour and nothing
+ * else, and it matches the weight of the hatch it encloses.
+ */
+const OUTLINE = 2;
+
+/** Hatching: 2 px graphite lines at 45 degrees, 14 px apart measured perpendicular to the lines. */
+const HATCH = {pitch: 14, line: 2, angle: 45} as const;
 
 // ---------------------------------------------------------------- conditions
 
 type Condition = 'methylphenidate' | 'placebo';
 
 /**
- * K06 and K07. 16 % amber and 20 % blue-grey give equal relative luminance
- * (0.0217 each), so the drug block does not look brighter, that is "better".
+ * The two fills, 16 % amber and 20 % blue-grey, have equal
+ * relative luminance (0.0217 each), so neither block is the brighter field.
+ * The outlines and the names carry the palette's own amber and blue-grey.
  */
 const CONDITION = {
   methylphenidate: {colour: PALETTE.amber, fill: 0.16, label: DIAGRAM.methylphenidate},
@@ -86,9 +108,10 @@ const CONDITION = {
 } as const satisfies Record<Condition, {colour: string; fill: number; label: string}>;
 
 /**
- * Shot 2, "Unmask mapping". Sequence AB: methylphenidate, then placebo.
- * Sequence BA: the reverse. The letters are the schematic's own convention
- * (8.4), so no letter is ever shown inside a block.
+ * Sequence AB: methylphenidate, then placebo. Sequence BA: the reverse. The
+ * letters are the schematic's own convention: the paper names the design
+ * "AB/BA crossover" and never assigns a letter to a condition. So no letter
+ * is ever shown inside a block.
  */
 const ALLOCATION: readonly (readonly [Condition, Condition])[] = [
   ['methylphenidate', 'placebo'],
@@ -106,11 +129,14 @@ const NODE_LETTER = DIAGRAM.randomised[0];
 
 // ------------------------------------------------------------------- drawing
 
-/** The single hatch pattern of the figure (K08: identical in every block). */
-const HatchPattern: React.FC = () => (
+/**
+ * The single hatch pattern of the figure, identical in every block. It is in
+ * user space, so its phase runs on unbroken across all four blocks.
+ */
+const HatchPattern: React.FC<{id: string}> = ({id}) => (
   <defs>
     <pattern
-      id={HATCH_ID}
+      id={id}
       patternUnits="userSpaceOnUse"
       width={HATCH.pitch}
       height={HATCH.pitch}
@@ -163,25 +189,27 @@ type BlockProps = {
   drawn: number;
   /** Progress of "3 WEEKS" and its chip, 0 to 1. */
   weeks: number;
-  /** Progress of the unmask, 0 to 1: the same value in all four blocks. */
-  unmasked: number;
-  /** Progress of the condition label, 0 to 1. */
-  labelled: number;
+  /** How far the hatch has cleared, 0 to 1: the same value in all four blocks. */
+  cleared: number;
+  /** How far the condition shows (colour, fill, name), 0 to 1: the same value in all four blocks. */
+  shown: number;
+  hatchId: string;
 };
 
 /**
  * One three-week block. While masked it says nothing about its condition:
  * the outline, hatch, chip and words are the same in all four blocks, and
- * `condition` is read only through `unmasked`.
+ * `condition` is read only through `shown`. The hatch clears first, and the
+ * condition shows after it, so no hatch line ever runs through a name.
  */
-const Block: React.FC<BlockProps> = ({x, y, condition, drawn, weeks, unmasked, labelled}) => {
+const Block: React.FC<BlockProps> = ({x, y, condition, drawn, weeks, cleared, shown, hatchId}) => {
   if (drawn <= 0) return null;
   const {colour, fill, label} = CONDITION[condition];
   const centreX = x + BLOCK_WIDTH / 2;
 
-  // The stroke sits inside the block, so its outer edge lands on the spec's
-  // edges (432, 1088, 1136, 1792) at both widths.
-  const strokeWidth = mix(OUTLINE_MASKED, OUTLINE_UNMASKED, unmasked);
+  // The stroke sits inside the block, so its outer edge lands on the block's
+  // edges (432, 1088, 1136, 1792) and on whole pixels.
+  const strokeWidth = OUTLINE;
   const inset = strokeWidth / 2;
   const left = x + inset;
   const right = x + BLOCK_WIDTH - inset;
@@ -195,31 +223,32 @@ const Block: React.FC<BlockProps> = ({x, y, condition, drawn, weeks, unmasked, l
   const halfLength = (middle - top) + (right - left) + (middle - top);
   const travelled = drawn * halfLength;
   const front = Math.min(right, Math.max(left, left + travelled - (middle - top)));
-  const outline = interpolateColors(unmasked, [0, 1], [PALETTE.graphite, colour]);
+  const outline = interpolateColors(shown, [0, 1], [PALETTE.graphite, colour]);
 
   // The hatch wipes in behind the stroke: its right edge is the stroke's
   // front. In user space the pattern does not move as the rect grows.
   const hatchWidth = drawn >= 1 ? BLOCK_WIDTH : front > left ? front - x : 0;
-  const hatch = 1 - unmasked;
+  const hatch = 1 - cleared;
 
   // "3 WEEKS" sits on a ground chip while the block is hatched, so the hatch
-  // never runs through the words. The chip leaves with the hatch.
-  const chip = weeks * (1 - unmasked);
+  // never runs through the words. The chip leaves with the hatch, before the
+  // fill arrives, so it is never seen as a dark plate on a tinted block.
+  const chip = weeks * (1 - cleared);
 
   return (
     <g>
-      {unmasked > 0 ? (
-        <rect x={x} y={y} width={BLOCK_WIDTH} height={BLOCK_HEIGHT} fill={colour} fillOpacity={fill * unmasked} />
+      {shown > 0 ? (
+        <rect x={x} y={y} width={BLOCK_WIDTH} height={BLOCK_HEIGHT} fill={colour} fillOpacity={fill * shown} />
       ) : null}
       {hatch > 0 && hatchWidth > 0 ? (
-        <rect x={x} y={y} width={hatchWidth} height={BLOCK_HEIGHT} fill={`url(#${HATCH_ID})`} opacity={hatch} />
+        <rect x={x} y={y} width={hatchWidth} height={BLOCK_HEIGHT} fill={`url(#${hatchId})`} opacity={hatch} />
       ) : null}
       {chip > 0 ? (
         <rect
           x={centreX - CHIP.width / 2}
           y={y + CHIP.top}
           width={CHIP.width}
-          height={CHIP.height}
+          height={BLOCK_HEIGHT - CHIP.top - OUTLINE}
           fill={PALETTE.ground}
           opacity={chip}
         />
@@ -252,7 +281,7 @@ const Block: React.FC<BlockProps> = ({x, y, condition, drawn, weeks, unmasked, l
           />
         </>
       )}
-      <Txt role="condition" x={centreX} y={y + CONDITION_BASELINE} anchor="middle" fill={colour} opacity={labelled}>
+      <Txt role="condition" x={centreX} y={y + CONDITION_BASELINE} anchor="middle" fill={colour} opacity={shown}>
         {label}
       </Txt>
       <Txt role="blockNote" x={centreX} y={y + WEEKS_BASELINE} anchor="middle" opacity={weeks}>
@@ -319,25 +348,39 @@ const Branches: React.FC<{drawn: number}> = ({drawn}) => {
 };
 
 /**
- * D13. The swatch is drawn as a masked block is: the same hatch, in phase
- * with the blocks, inside the same 1.5 px graphite outline. It stays after
- * the unmask, because the trial was masked throughout.
+ * D13. The key to the hatch: a small masked block with three whole hatch
+ * lines in it. It leaves when the hatch clears, so the figure never shows a
+ * key to a mark that is no longer in it. The design tag still says
+ * TRIPLE-MASKED.
  */
 const LegendMasked: React.FC<{shown: number}> = ({shown}) => {
+  const clipId = `masked-key${useId()}`;
   if (shown <= 0) return null;
-  const {x, y, width, height, textX} = LEGEND_MASKED;
-  const inset = OUTLINE_MASKED / 2;
+  const {x, width, height, textX} = LEGEND_MASKED;
+  const y = LEGEND_BASELINE - height;
+  // At 45 degrees a line crosses the swatch over `height` px of width, and
+  // whole lines stand one horizontal pitch apart.
+  const pitchAcross = HATCH.pitch * Math.SQRT2;
+  const centre = x + width / 2;
   return (
     <g opacity={shown}>
-      <rect x={x} y={y} width={width} height={height} fill={`url(#${HATCH_ID})`} />
+      <clipPath id={clipId}>
+        <rect x={x} y={y} width={width} height={height} />
+      </clipPath>
+      <g clipPath={`url(#${clipId})`} stroke={PALETTE.graphite} strokeWidth={HATCH.line}>
+        {[-1, 0, 1].map((k) => {
+          const middle = centre + k * pitchAcross;
+          return <line key={k} x1={middle - height / 2} y1={y + height} x2={middle + height / 2} y2={y} />;
+        })}
+      </g>
       <rect
-        x={x + inset}
-        y={y + inset}
-        width={width - OUTLINE_MASKED}
-        height={height - OUTLINE_MASKED}
+        x={x + OUTLINE / 2}
+        y={y + OUTLINE / 2}
+        width={width - OUTLINE}
+        height={height - OUTLINE}
         fill="none"
         stroke={PALETTE.graphite}
-        strokeWidth={OUTLINE_MASKED}
+        strokeWidth={OUTLINE}
       />
       <Txt role="legend" x={textX} y={LEGEND_BASELINE}>
         {DIAGRAM.masked}
@@ -347,8 +390,8 @@ const LegendMasked: React.FC<{shown: number}> = ({shown}) => {
 };
 
 /**
- * D14. The legend's node. Y06 sets its letter in Barlow Condensed 600 at
- * 20 px, B100.
+ * D14. The key to the node. It takes the place of the MASKED key once the
+ * hatch has cleared.
  */
 const LegendRandomised: React.FC<{shown: number}> = ({shown}) => {
   if (shown <= 0) return null;
@@ -368,20 +411,21 @@ const LegendRandomised: React.FC<{shown: number}> = ({shown}) => {
 
 // -------------------------------------------------------------------- figure
 
-/** The trial design as a crossover diagram (SCHEMATIC). Build spec, D01 to D14. */
+/** The trial design as a crossover diagram (SCHEMATIC). */
 export const CrossoverDiagram: React.FC = () => {
   const frame = useCurrentFrame();
+  const hatchId = `hatch${useId()}`;
   const mark = progress(frame, SHOT.schematicMark, EASE.dissolve);
   // The mark arrives first, so nothing of the figure is drawn before it.
   if (mark <= 0) return null;
 
   const sequences = progress(frame, SHOT.sequenceLabels, EASE.dissolve);
-  const unmasked = progress(frame, SHOT.unmask, EASE.dissolve);
-  const labelled = progress(frame, SHOT.conditionLabels, EASE.dissolve);
+  const cleared = progress(frame, SHOT.hatchClears, EASE.dissolve);
+  const shown = progress(frame, SHOT.conditionsShown, EASE.dissolve);
 
   return (
     <g>
-      <HatchPattern />
+      <HatchPattern id={hatchId} />
       <FigureMark kind="schematic" x={MARK_ORIGIN.x} y={MARK_ORIGIN.y} opacity={mark} />
       {DIAGRAM.sequences.map((text, track) => (
         <Txt key={text} role="sequence" x={SEQUENCE_X} y={SEQUENCE_BASELINE[track]} opacity={sequences}>
@@ -404,13 +448,14 @@ export const CrossoverDiagram: React.FC = () => {
             condition={ALLOCATION[track][period]}
             drawn={progress(frame, PERIOD_SHOTS[period].blocks, EASE.draw)}
             weeks={progress(frame, PERIOD_SHOTS[period].weeks, EASE.dissolve)}
-            unmasked={unmasked}
-            labelled={labelled}
+            cleared={cleared}
+            shown={shown}
+            hatchId={hatchId}
           />
         )),
       )}
-      <LegendMasked shown={progress(frame, SHOT.legendMasked, EASE.dissolve)} />
-      <LegendRandomised shown={progress(frame, SHOT.legendRandomised, EASE.dissolve)} />
+      <LegendMasked shown={progress(frame, SHOT.legendMasked, EASE.dissolve) * (1 - cleared)} />
+      <LegendRandomised shown={shown} />
     </g>
   );
 };

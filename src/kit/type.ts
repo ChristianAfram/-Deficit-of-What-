@@ -1,5 +1,6 @@
 // Every text role of the film: family, weight, size, tracking and case.
-// Build spec, section 3. No role is below 20 px, and every note is 24 px.
+// No role is below 20 px, and every note is 24 px. Ids such as Y01 name the
+// role in the design, docs/build-spec-cold-open.md, section 3.
 
 import {FONT} from './fonts';
 import {PALETTE} from './theme';

@@ -1,5 +1,5 @@
-// The title and its subtitle, in layer H, which has no camera. Build spec,
-// section 2.2 (H01, H02) and section 5, shot 5.
+// The title and its subtitle. Ids such as H01 name an element in the design,
+// docs/build-spec-cold-open.md, section 2.2.
 //
 // Script, title: "The table dims. The title alone, in capitals: DEFICIT OF
 // WHAT? Under it, small: Three hypotheses about ADHD, tested against their own
@@ -7,9 +7,10 @@
 
 import React from 'react';
 import {useCurrentFrame} from 'remotion';
+import {progress} from '../../kit/anim';
 import {EASE} from '../../kit/time';
 import {Txt} from '../../kit/Txt';
-import {SHOT, progress} from '../shots';
+import {SHOT} from '../shots';
 import {SUBTITLE, TITLE} from '../strings';
 
 // ------------------------------------------------------------------ geometry

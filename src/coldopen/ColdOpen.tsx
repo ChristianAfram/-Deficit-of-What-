@@ -1,5 +1,6 @@
 import React from 'react';
 import {AbsoluteFill, useCurrentFrame} from 'remotion';
+import {progress} from '../kit/anim';
 import '../kit/fonts';
 import {Layer} from '../kit/Layer';
 import {PALETTE} from '../kit/theme';
@@ -9,8 +10,7 @@ import {CrossoverDiagram} from './figures/CrossoverDiagram';
 import {DeficitTable} from './figures/DeficitTable';
 import {ResultRows} from './figures/ResultRows';
 import {Title} from './figures/Title';
-import {BAND} from './layout';
-import {CAMERA, SHOT, cameraAt, progress} from './shots';
+import {SHOT} from './shots';
 
 export type ColdOpenProps = {
   /**
@@ -26,32 +26,34 @@ export type ColdOpenProps = {
 };
 
 /**
+ * The layer of the trial's figure: the crossover diagram and the result
+ * rows. "Then the diagram recedes": the whole layer dissolves out.
+ */
+export const TrialFigureLayer: React.FC<{children: React.ReactNode}> = ({children}) => {
+  const frame = useCurrentFrame();
+  return <Layer opacity={1 - progress(frame, SHOT.figureRecedes)}>{children}</Layer>;
+};
+
+/**
  * The cold open and the title, 0:00 to 1:17.
  *
- * Layers, bottom to top: the trial figure (diagram and result rows) with its
- * own camera, the word DEFICIT and the evidence table with theirs, the title,
- * and the furniture (citation band, footer, captions), which never moves.
+ * Layers, bottom to top: the trial's figure, the word DEFICIT with the
+ * evidence table, the title, and the furniture (citation band, footer,
+ * captions).
  */
-export const ColdOpen: React.FC<ColdOpenProps> = ({standalone, review, voice}) => {
-  const frame = useCurrentFrame();
-  return (
-    <AbsoluteFill style={{backgroundColor: PALETTE.ground}}>
-      <Layer
-        camera={cameraAt(frame, CAMERA.figure)}
-        opacity={1 - progress(frame, SHOT.figureRecedes)}
-        clipRows={BAND.camera}
-      >
-        <CrossoverDiagram />
-        <ResultRows standalone={standalone} />
-      </Layer>
-      <Layer camera={cameraAt(frame, CAMERA.table)} clipRows={BAND.camera}>
-        <DeficitTable />
-      </Layer>
-      <Layer>
-        <Title />
-      </Layer>
-      <Furniture review={review} />
-      <SoundTrack standalone={standalone} voice={voice} />
-    </AbsoluteFill>
-  );
-};
+export const ColdOpen: React.FC<ColdOpenProps> = ({standalone, review, voice}) => (
+  <AbsoluteFill style={{backgroundColor: PALETTE.ground}}>
+    <TrialFigureLayer>
+      <CrossoverDiagram />
+      <ResultRows standalone={standalone} />
+    </TrialFigureLayer>
+    <Layer>
+      <DeficitTable />
+    </Layer>
+    <Layer>
+      <Title />
+    </Layer>
+    <Furniture review={review} />
+    <SoundTrack standalone={standalone} voice={voice} />
+  </AbsoluteFill>
+);

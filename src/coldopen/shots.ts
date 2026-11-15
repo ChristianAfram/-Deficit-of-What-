@@ -1,24 +1,14 @@
-// The shot list of the cold open and title as data: when every mark appears,
-// when the camera moves, and when each sound plays. Build spec, sections 5 to 7.
+// The shot list of the cold open and title as data: when every mark appears
+// and when each sound plays.
 //
 // Nothing here is an absolute frame chosen by hand. Every cue is placed on a
 // spoken word (through `atWord`) or on a freeze window, so when the voice is
-// recorded and SPEECH changes, the picture and the sound follow it.
-// tests/still-rule.test.ts checks this table against the still rule.
+// recorded and the cue sheet changes, the picture and the sound follow it.
+// tests/still-rule.test.ts checks this table against the still rule and
+// against the order of the shots.
 
-import {EASE, ramp} from '../kit/time';
+import {cutAt, ending, starting, type Anim} from '../kit/anim';
 import {DURATION, PAUSE, SPEECH, TITLE_START, atWord} from './cues';
-
-/** An animation from frame `from` (progress 0) to frame `to` (progress 1). A cut has from === to. */
-export type Anim = {from: number; to: number};
-
-const starting = (from: number, frames: number): Anim => ({from, to: from + frames});
-const ending = (to: number, frames: number): Anim => ({from: to - frames, to});
-const cutAt = (frame: number): Anim => ({from: frame, to: frame});
-
-/** Progress of an animation at a frame, 0 to 1. A cut is 0 before its frame and 1 from it on. */
-export const progress = (frame: number, anim: Anim, easing: (t: number) => number = EASE.dissolve): number =>
-  anim.from === anim.to ? (frame >= anim.to ? 1 : 0) : ramp(frame, anim.from, anim.to - anim.from, easing);
 
 // ------------------------------------------------------------ the still rule
 
@@ -32,7 +22,7 @@ export type Freeze = {phrase: string; f0: number; f1: number};
 const SETTLE = 6;
 
 export const FREEZE = {
-  year: {phrase: '2022', f0: atWord('s01', '2022'), f1: atWord('s01', 'a triple') + SETTLE},
+  year: {phrase: '2022', f0: atWord('s01', '2022'), f1: atWord('s01', 'tested') + SETTLE},
   sample: {
     phrase: 'One hundred and seventy-three',
     f0: atWord('s02', 'One hundred'),
@@ -52,7 +42,7 @@ const F = FREEZE;
 export const SHOT = {
   // Shot 1: the citation, alone, then its design tag on the words that name it.
   citation: ending(SPEECH.s01.start - 6, 18),
-  tagDesign: starting(F.year.f1, 18),
+  tagDesign: starting(atWord('s01', 'triple-masked'), 18),
   tagSample: starting(SPEECH.s01.end, 12),
   tagDrug: starting(atWord('s02', 'methylphenidate'), 18),
 
@@ -67,10 +57,18 @@ export const SHOT = {
   randomNode: starting(F.weeks2.f1, 18),
   randomLetter: starting(F.weeks2.f1 + 6, 12),
   randomBranches: starting(F.weeks2.f1 + 12, 18),
-  legendRandomised: starting(F.weeks2.f1 + 18, 12),
-  /** The hatching clears in all four blocks at once, after the whole design has been named. */
-  unmask: starting(F.weeks2.f1 + 24, 36),
-  conditionLabels: starting(F.weeks2.f1 + 36, 24),
+  /**
+   * "The hatching clears": in all four blocks at once, after the whole design
+   * has been named. The MASKED key leaves with the hatch it keys, so the
+   * figure never shows a key to a mark that is no longer in it.
+   */
+  hatchClears: starting(F.weeks2.f1 + 30, 18),
+  /**
+   * "To show which block is methylphenidate and which is placebo": colour,
+   * fill and name arrive once the hatch has gone, so no hatch line ever runs
+   * through a name. The RANDOMISED key takes the place of the MASKED key.
+   */
+  conditionsShown: starting(F.weeks2.f1 + 48, 18),
 
   // Shot 3: the three result rows (DATA).
   dataMark: ending(SPEECH.s03.start, 12),
@@ -78,27 +76,29 @@ export const SHOT = {
   row1Label: starting(SPEECH.s03.start + 26, 12),
   /** The bar has landed before its number is spoken. */
   row1Bar: ending(F.plus37.f0 - SETTLE, 24),
+  /**
+   * The value cuts on with its word, and its note cuts on with it: a
+   * percentage is never on screen without the interval the paper reports.
+   */
   row1Value: cutAt(F.plus37.f0),
-  row1Note: ending(atWord('s03', 'seatwork'), 20),
   row2Label: starting(atWord('s03', 'seatwork'), 12),
   row2Bar: ending(F.minus53.f0 - 2, 24),
   row2Value: cutAt(F.minus53.f0),
-  row2Note: starting(F.minus53.f1, 18),
   /** Closes the plotted region. The third row sits below it and is not plotted. */
   separator: starting(SPEECH.s04.start, 18),
   row3Label: starting(atWord('s04', 'content'), 12),
-  row3Value: cutAt(atWord('s04', 'did not differ')),
-  row3Note: starting(atWord('s04', 'between') - 2, 18),
+  row3Value: cutAt(atWord('s04', 'no detectable')),
   /** After the written pause, so the silence stays a pure hold. Complete before "Learning did not follow." */
   limits: starting(PAUSE.end + 11, 24),
   /**
-   * "Then the diagram recedes": the whole figure layer dissolves out. The
+   * "Then the diagram recedes": the whole trial figure dissolves out, and the
    * citation and its design tag leave with it. They name "the study under
    * discussion", and from here on no study is under discussion: the word
    * DEFICIT and the table are the film's own, and must not stand under the
-   * trial's citation as if the trial had said them.
+   * trial's citation as if the trial had said them. The last trace of the
+   * figure is gone on the frame the word DEFICIT cuts on.
    */
-  figureRecedes: {from: atWord('s07', 'in the name') + 3, to: atWord('s07', 'deficit') - 11},
+  figureRecedes: {from: atWord('s07', 'in the name') + 3, to: atWord('s07', 'deficit')},
 
   // Shot 4: the word DEFICIT and the empty evidence table.
   deficit: cutAt(atWord('s07', 'deficit')),
@@ -120,34 +120,8 @@ export const SHOT = {
   subtitle: starting(TITLE_START + 44, 18),
 } as const satisfies Record<string, Anim>;
 
-/** How far the table and the citation band dim under the title. */
-export const TITLE_DIM = {table: 0.2} as const;
-
-// ------------------------------------------------------------------- camera
-
-/**
- * "A slow push-in on a figure while it draws. A hold on every result."
- * Each figure layer has its own camera, so no hidden reset is ever needed.
- * A push is linear and has stopped six frames before a result is spoken.
- *
- * A push ends at scale 1, not above it. So during every hold the figure sits
- * exactly on the layout grid, at the size it was drawn for, with its edges on
- * the same verticals as the citation above it. It starts slightly small
- * instead.
- *
- * The trial figure is pushed about the top left corner of the content field,
- * so its left edge never leaves the left edge of the citation. The table is
- * centred on the canvas and is pushed about its own centre.
- */
-export const CAMERA = {
-  figure: {move: {from: F.weeks2.f1, to: F.plus37.f0 - SETTLE} as Anim, startScale: 1 / 1.03, fixed: [128, 168]},
-  table: {move: {from: F.three.f1, to: SPEECH.s12.end} as Anim, startScale: 1 / 1.02, fixed: [960, 500]},
-} as const;
-
-export const cameraAt = (frame: number, camera: (typeof CAMERA)[keyof typeof CAMERA]) => ({
-  scale: camera.startScale + (1 - camera.startScale) * progress(frame, camera.move, EASE.linear),
-  fixed: camera.fixed,
-});
+/** How far the table dims under the title. Its grid still reads as a table. */
+export const TITLE_DIM = {table: 0.4} as const;
 
 // -------------------------------------------------------------------- sound
 
@@ -164,8 +138,8 @@ export const SOUND = {
   /** One tick per row of data, all three at the same level: the null gets equal weight. */
   ticks: [SHOT.row1Value.from, SHOT.row2Value.from, SHOT.row3Value.from],
   tickGain: dB(-4),
-  /** Starts early enough to be at level under "This film checks them." */
-  lowNote: {from: SPEECH.s13.start - 35, gain: dB(-8), fadeOut: starting(TITLE_START, 48)},
+  /** It starts in the breath before "This film checks them." and is at level under it. */
+  lowNote: {from: SPEECH.s12.end, gain: dB(-8), fadeOut: starting(TITLE_START, 48)},
   /** 48 beats a minute. The low note resolves onto the same pitch: the pedal becomes the pulse. */
   pulse: {at: [0, 30, 60, 90].map((offset) => TITLE_START + offset), gain: dB(-9)},
   /** The string line, at its first step. It does not move in this cut. */

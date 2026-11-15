@@ -12,16 +12,14 @@
 // placed by each part, inside the rectangles `evidenceTableCells` returns.
 
 import React from 'react';
+import {Rule} from './Rule';
 import {PALETTE} from './theme';
 import {BONE} from './type';
 import {Txt} from './Txt';
 
 // -------------------------------------------------------------------- types
 
-/**
- * Where the table sits on the canvas. All values are canvas px.
- * Build spec, T02 to T10 (the cold open's values are given there).
- */
+/** Where the table sits on the canvas. All values are whole canvas px. */
 export type EvidenceTableGeometry = {
   /**
    * The vertical edges, left to right: the stub's left edge, then the right
@@ -34,13 +32,13 @@ export type EvidenceTableGeometry = {
    * the bottom of each body row. The last one is the bottom rule.
    */
   rowEdges: readonly number[];
-  /** Distance from a cell's left edge to the left edge of its text (T07, T08). */
+  /** Distance from a cell's left edge to the left edge of its text. */
   textInset: number;
-  /** Distance from the row id's left edge to the row name's left edge (T08 to T09). */
+  /** Distance from the row id's left edge to the row name's left edge. */
   nameOffset: number;
-  /** Distance from the top rule to the baseline of the column heads (T07). */
+  /** Distance from the top rule to the baseline of the column heads. */
   headBaselineOffset: number;
-  /** Distance from the top of a body row to the baseline of its id and name (T08, T09). */
+  /** Distance from the top of a body row to the baseline of its id and name. */
   rowBaselineOffset: number;
 };
 
@@ -85,29 +83,21 @@ type Props = {
 // ---------------------------------------------------------------- the frame
 
 /**
- * Stroke weights and colours of the rules (K04, K05). The frame of the table
- * (top, header and bottom rules) is an axis and is bone. The grid between the
- * cells (row and column rules) is a secondary line and is graphite.
+ * Weights and colours of the rules, as in a printed table: a heavy rule at
+ * the top and the bottom, a light one under the heads. Those three are the
+ * frame of the table and are bone. The grid between the cells is a secondary
+ * line and is graphite. Every weight is a whole number of pixels, so every
+ * rule is crisp.
  */
 const RULE = {
-  /** T02. */
-  top: {weight: 2, colour: PALETTE.bone},
-  /** T03. */
-  header: {weight: 1.5, colour: PALETTE.bone},
-  /** T04. */
-  row: {weight: 1, colour: PALETTE.graphite},
-  /** T05. */
-  bottom: {weight: 2, colour: PALETTE.bone},
-  /** T06. */
-  column: {weight: 1, colour: PALETTE.graphite},
+  frame: {weight: 2, colour: PALETTE.bone},
+  header: {weight: 1, colour: PALETTE.bone},
+  grid: {weight: 1, colour: PALETTE.graphite},
 } as const;
 
-type RuleStyle = (typeof RULE)[keyof typeof RULE];
-
 /**
- * The nine body cells, row by row (three rows of three cells). They exclude
- * the stub and the header row. In the cold open every one of them is empty
- * ground: "It stays empty."
+ * The body cells, row by row. They exclude the stub and the header row. A
+ * later part places its text inside these rectangles.
  */
 export const evidenceTableCells = (geometry: EvidenceTableGeometry): EvidenceTableCell[][] => {
   const {columnEdges, rowEdges} = geometry;
@@ -121,40 +111,6 @@ export const evidenceTableCells = (geometry: EvidenceTableGeometry): EvidenceTab
       width: columnEdges[column + 2] - left,
       height: rowEdges[row + 2] - top,
     })),
-  );
-};
-
-/** A horizontal rule across the table, drawn left to right. Nothing is drawn before it starts. */
-const HorizontalRule: React.FC<{y: number; left: number; right: number; drawn: number; style: RuleStyle}> = ({
-  y,
-  left,
-  right,
-  drawn,
-  style,
-}) => {
-  if (drawn <= 0) return null;
-  return (
-    <rect
-      x={left}
-      y={y - style.weight / 2}
-      width={(right - left) * drawn}
-      height={style.weight}
-      fill={style.colour}
-    />
-  );
-};
-
-/** A column rule from the top rule to the bottom rule, drawn top to bottom. */
-const ColumnRule: React.FC<{x: number; top: number; bottom: number; drawn: number}> = ({x, top, bottom, drawn}) => {
-  if (drawn <= 0) return null;
-  return (
-    <rect
-      x={x - RULE.column.weight / 2}
-      y={top}
-      width={RULE.column.weight}
-      height={(bottom - top) * drawn}
-      fill={RULE.column.colour}
-    />
   );
 };
 
@@ -185,17 +141,35 @@ export const EvidenceTable: React.FC<Props> = ({
   // The rules between cells: every column edge except the outer two. The
   // table is open at its sides, as a printed table is.
   const columnRules = columnEdges.slice(1, -1);
+  const width = right - left;
+  // A frame rule is centred on its edge. A hairline fills the pixel row or
+  // column of its edge.
+  const frameTop = top - RULE.frame.weight / 2;
+  const frameBottom = bottom - RULE.frame.weight / 2;
   return (
     <g opacity={opacity}>
-      <HorizontalRule y={top} left={left} right={right} drawn={draw.top} style={RULE.top} />
-      <HorizontalRule y={headerRule} left={left} right={right} drawn={draw.header} style={RULE.header} />
-      {rowRules.map((y) => (
-        <HorizontalRule key={y} y={y} left={left} right={right} drawn={draw.rows} style={RULE.row} />
-      ))}
-      <HorizontalRule y={bottom} left={left} right={right} drawn={draw.bottom} style={RULE.bottom} />
+      {/*
+        The column rules are drawn first and stop inside the frame, so the
+        bone rules cross them unbroken.
+      */}
       {columnRules.map((x) => (
-        <ColumnRule key={x} x={x} top={top} bottom={bottom} drawn={draw.columns} />
+        <Rule
+          key={x}
+          x={x}
+          y={frameTop + RULE.frame.weight}
+          length={frameBottom - frameTop - RULE.frame.weight}
+          direction="down"
+          weight={RULE.grid.weight}
+          colour={RULE.grid.colour}
+          drawn={draw.columns}
+        />
       ))}
+      {rowRules.map((y) => (
+        <Rule key={y} x={left} y={y} length={width} weight={RULE.grid.weight} colour={RULE.grid.colour} drawn={draw.rows} />
+      ))}
+      <Rule x={left} y={headerRule} length={width} weight={RULE.header.weight} colour={RULE.header.colour} drawn={draw.header} />
+      <Rule x={left} y={frameTop} length={width} weight={RULE.frame.weight} colour={RULE.frame.colour} drawn={draw.top} />
+      <Rule x={left} y={frameBottom} length={width} weight={RULE.frame.weight} colour={RULE.frame.colour} drawn={draw.bottom} />
       {columns.map((head, column) => (
         <Txt
           key={head}

@@ -1,10 +1,13 @@
 # Brief: cold open and title (0:00 to 1:17)
 
 Source: *Deficit of What?*, script version 3, 15 November 2026. Everything under
-"From the script" is copied word for word. "Amendments after the fact-check"
-lists every place where the build departs from that text, and why. The writer
-agreed to these amendments on 15 November 2026, after the fact-check in
-`fact-check-cold-open.md`.
+"From the script" is copied word for word. "Amendments" lists every place
+where the build departs from that text, and why. On 15 November 2026, after the
+fact-check in `fact-check-cold-open.md`, the writer agreed that the open
+decisions be settled in favour of the frame a specialist cannot fault. A1 to A5
+followed from the fact-check. A6, A7 and A8, and the later wordings of A2 and
+A3, followed from the specialist review of the finished picture, under the same
+agreement. Each can be reverted on its own.
 
 ## From the script
 
@@ -166,11 +169,10 @@ footage, pictures of pills.
 - "Rarely been tested directly." The paper names two earlier studies with a
   causal design.
 
-## Amendments after the fact-check
+## Amendments
 
-The build is script version 3 with these five amendments and nothing else.
-Each one answers a finding in `fact-check-cold-open.md`. They belong in the
-next version of the script.
+The build is script version 3 with these eight amendments and nothing else.
+They belong in the next version of the script.
 
 ### A1. Narration, third sentence
 
@@ -197,7 +199,7 @@ fewer rule violations per hour".
 | Row | Label | Value | Note under the row |
 | --- | --- | --- | --- |
 | 1 | ARITHMETIC PROBLEMS CORRECT PER MINUTE | +37% | Academic seatwork. Difference +1.79 per minute, 95% CI [1.68, 1.90] |
-| 2 | RULE VIOLATIONS PER HOUR | −53% | Classroom. Difference −2.02 per hour, 95% CI [−2.18, −1.86] |
+| 2 | RULE VIOLATIONS PER HOUR | −53% | Classroom behaviour. Difference −2.02 per hour, 95% CI [−2.18, −1.86] |
 | 3 | CURRICULUM CONTENT LEARNED | NO DETECTABLE EFFECT | Unit tests, before and after. Test × medication: p = .73 (subject area), p = .75 (vocabulary) |
 
 Why. The script's own rule is "A number has a unit, and on screen an
@@ -209,17 +211,31 @@ gives 34%, an inconsistency that is the paper's and that the film cannot
 resolve. The label of row 1 gains the word CORRECT, because the measure is
 problems correctly completed. Row 3 still has no bar.
 
+The two notes open with the paper's names for its two measures: "academic
+seatwork productivity" and "classroom behavior". The second first read
+"Classroom." alone, which is a place, and the seatwork was done in the
+classroom too.
+
 ### A3. The limits line, shown because the cold open ships alone
 
-> Limits: one summer programme, 3-week units, small groups with behaviour
-> management, 80% of children on 18 mg. The authors call for replication in
-> ordinary classrooms over a school year.
+> Limits: a summer programme, 3-week units, small groups with behaviour
+> management, 80% of children on 18 mg, the lowest dose titrated. The authors
+> call for replication in ordinary classrooms over a school year.
 
 Why. The script lists a summer programme, three-week units and small-group
 teaching, and says the authors "plan" a replication. The paper's first listed
 limitation is dose, which the script omits. Its second is small-group teaching
 "with behavior management procedures in place". The paper calls for a
 replication. It does not announce one.
+
+Two changes after the specialist review. "One summer programme" became "a
+summer programme": the data come from three summers of one programme, and
+"one" could be read as one summer. And the dose gained "the lowest dose
+titrated": a viewer who does not prescribe cannot tell that 18 mg is low, and
+this is the limit that speaks most in the medication's favour. The paper
+titrated each child among 18, 27 and 36 mg and gave the largest tolerable dose
+that clearly improved on the one below it. The word "titrated" is there so that the
+line cannot be read as the investigators having fixed a low dose.
 
 ### A4. The crossover diagram leaves a gap between the two blocks
 
@@ -237,3 +253,51 @@ the abstract's wording for a phase of 12 teaching days.
   other.
 
 Neither note reaches the screen.
+
+### A6. Narration, fourth sentence
+
+Was:
+
+> The amount of content the children learned did not differ between conditions.
+
+Now:
+
+> The amount of content the children learned showed no detectable difference
+> between conditions.
+
+Why. This was the sentence the reviewing methodologist would object to in a
+seminar. "Did not differ" is the paper's own wording, and it rests on a
+non-significant interaction, with no estimate, no interval and no equivalence
+test. The words on screen at the same moment are NO DETECTABLE EFFECT, which is
+the abstract's phrase and the right strength. The voice now says what the
+screen says.
+
+### A7. The plot names its two directions
+
+The head of the plot, OROS-MPH RELATIVE TO PLACEBO, has FEWER at its left end
+and MORE at its right end.
+
+Why. Both results favour methylphenidate, on opposite sides of the zero line.
+By the convention of a forest plot, a bar to the left of zero reads as
+"favours placebo". The two words are the narration's own: "thirty-seven
+percent more", "fifty-three percent fewer".
+
+### A8. Narration, first sentence
+
+Was:
+
+> In 2022, a triple-masked crossover trial tested an assumption that had rarely
+> been tested directly.
+
+Now:
+
+> A triple-masked crossover trial, published in 2022, tested an assumption that
+> had rarely been tested directly.
+
+Why. The trial ran in the summers of 2014, 2015 and 2016. 2022 is the year it
+was published. "In 2022, a trial tested" says the testing happened in 2022.
+Two reviewers raised it independently, and it is the first sentence of the
+film. The script dates other studies the same way in later parts ("In 1978,
+Rapoport and colleagues gave dextroamphetamine to fourteen boys"). Those lines
+need the same look when their parts are built.
+

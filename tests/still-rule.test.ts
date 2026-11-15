@@ -1,13 +1,14 @@
 import {describe, expect, it} from 'vitest';
+import {CAPTIONS} from '../src/coldopen/captions';
 import {DURATION, PAUSE, SPEECH, TITLE_START} from '../src/coldopen/cues';
-import {CAMERA, FREEZE, SHOT, SOUND, type Anim} from '../src/coldopen/shots';
+import {FREEZE, SHOT, SOUND} from '../src/coldopen/shots';
+import type {Anim} from '../src/kit/anim';
 import {sec} from '../src/kit/time';
 
-const anims: [string, Anim][] = [
-  ...(Object.entries(SHOT) as [string, Anim][]),
-  ['camera.figure', CAMERA.figure.move],
-  ['camera.table', CAMERA.table.move],
-];
+const anims = Object.entries(SHOT) as [string, Anim][];
+
+/** Every frame on which the picture changes for a reason other than an animation in SHOT. */
+const captionChanges = CAPTIONS.flatMap(({start, end}) => [start, end]);
 
 describe('the still rule', () => {
   it('lets nothing change on screen while a number is being spoken', () => {
@@ -21,7 +22,16 @@ describe('the still rule', () => {
     }
   });
 
+  it('holds for the captions of the review build too', () => {
+    for (const {f0, f1, phrase} of Object.values(FREEZE)) {
+      for (const frame of captionChanges) {
+        expect(frame <= f0 || frame >= f1, `a caption changes on ${frame}, during "${phrase}" (${f0} to ${f1})`).toBe(true);
+      }
+    }
+  });
+
   it('has every spoken numeral on screen by the frame it is spoken', () => {
+    expect(SHOT.citation.to).toBeLessThanOrEqual(FREEZE.year.f0); // (2022)
     expect(SHOT.tagSample.to).toBeLessThanOrEqual(FREEZE.sample.f0); // N = 173
     expect(SHOT.weeksPeriod1.to).toBeLessThanOrEqual(FREEZE.weeks1.f0); // 3 WEEKS
     expect(SHOT.weeksPeriod2.to).toBeLessThanOrEqual(FREEZE.weeks2.f0);
@@ -29,24 +39,18 @@ describe('the still rule', () => {
     expect(SHOT.row2Value.to).toBe(FREEZE.minus53.f0);
   });
 
-  it('lands each bar before its number, and stops the camera before a result', () => {
-    expect(SHOT.row1Bar.to).toBeLessThanOrEqual(SHOT.row1Value.from);
-    expect(SHOT.row2Bar.to).toBeLessThanOrEqual(SHOT.row2Value.from);
-    expect(CAMERA.figure.move.to).toBeLessThanOrEqual(FREEZE.plus37.f0 - 6);
-    for (const cut of [SHOT.row1Value, SHOT.row2Value, SHOT.row3Value]) {
-      const moving = cut.from > CAMERA.figure.move.from && cut.from < CAMERA.figure.move.to;
-      expect(moving).toBe(false);
-    }
-  });
-
-  it('shows each note only after its number has been spoken', () => {
-    expect(SHOT.row1Note.from).toBeGreaterThanOrEqual(FREEZE.plus37.f1);
-    expect(SHOT.row2Note.from).toBeGreaterThanOrEqual(FREEZE.minus53.f1);
-    expect(SHOT.row3Note.from).toBeGreaterThan(SHOT.row3Value.from);
+  it('lands each bar before its number is spoken', () => {
+    expect(SHOT.row1Bar.to).toBeLessThan(SHOT.row1Value.from);
+    expect(SHOT.row2Bar.to).toBeLessThan(SHOT.row2Value.from);
   });
 });
 
-describe('the shot list', () => {
+describe('the order of the shots', () => {
+  /** `first` is complete before `then` starts. */
+  const before = (first: keyof typeof SHOT, then: keyof typeof SHOT): void => {
+    expect(SHOT[first].to, `${first} must be complete before ${then} starts`).toBeLessThanOrEqual(SHOT[then].from);
+  };
+
   it('keeps every animation inside the film, running forwards', () => {
     for (const [name, {from, to}] of anims) {
       expect(from, name).toBeGreaterThanOrEqual(0);
@@ -55,52 +59,82 @@ describe('the shot list', () => {
     }
   });
 
-  it('shows the citation alone before the first word, and marks each figure before it draws', () => {
+  it('shows the citation alone before the first word, then its tag part by part', () => {
     expect(SHOT.citation.to).toBeLessThanOrEqual(SPEECH.s01.start);
-    expect(SHOT.tagDesign.from).toBeGreaterThan(SHOT.citation.to);
+    before('citation', 'tagDesign');
+    before('tagDesign', 'tagSample');
+    before('tagSample', 'tagDrug');
+  });
+
+  it('marks each figure before it draws', () => {
     expect(SHOT.schematicMark.to).toBeLessThanOrEqual(SHOT.blocksPeriod1.from - 6);
     expect(SHOT.dataMark.to).toBeLessThanOrEqual(SHOT.zeroLine.from - 6);
   });
 
+  it('builds the diagram in the order the design is named', () => {
+    before('sequenceLabels', 'blocksPeriod1');
+    before('blocksPeriod1', 'blocksPeriod2');
+    before('blocksPeriod2', 'randomNode');
+    // The hatch clears only after the whole design has been named, and the
+    // conditions show only once the hatch has gone.
+    before('randomBranches', 'hatchClears');
+    before('hatchClears', 'conditionsShown');
+    before('conditionsShown', 'dataMark');
+  });
+
+  it('builds each row as label, bar, then value', () => {
+    before('zeroLine', 'row1Bar');
+    before('row1Label', 'row1Bar');
+    before('row1Bar', 'row1Value');
+    before('row1Value', 'row2Label');
+    expect(SHOT.row2Label.from).toBeLessThan(SHOT.row2Bar.from);
+    before('row2Bar', 'row2Value');
+    before('row2Value', 'separator');
+    before('separator', 'row3Label');
+    before('row3Label', 'row3Value');
+  });
+
   it('holds the three rows in silence through the written pause', () => {
-    expect(SHOT.row3Note.to).toBeLessThanOrEqual(PAUSE.start);
+    expect(SHOT.row3Value.to).toBeLessThan(PAUSE.start);
     for (const [name, {from, to}] of anims) {
       const insidePause = from < PAUSE.end && to > PAUSE.start;
       expect(insidePause, `${name} moves during the written pause`).toBe(false);
     }
     for (const tick of SOUND.ticks) expect(tick < PAUSE.start || tick >= PAUSE.end).toBe(true);
+    for (const frame of captionChanges) expect(frame <= PAUSE.start || frame >= PAUSE.end).toBe(true);
   });
 
   it('has the limits on screen before "Learning did not follow." and long enough to read', () => {
     expect(SHOT.limits.from).toBeGreaterThanOrEqual(PAUSE.end);
     expect(SHOT.limits.to).toBeLessThanOrEqual(SPEECH.s06.start);
-    // 29 words: at least nine seconds at full strength.
+    // 34 words: at least nine seconds at full strength.
     expect(SHOT.figureRecedes.from - SHOT.limits.to).toBeGreaterThanOrEqual(sec(9));
   });
 
-  it('clears the trial figure before the word DEFICIT, and the word before the title', () => {
-    expect(SHOT.figureRecedes.to).toBeLessThanOrEqual(SHOT.deficit.from);
+  it('clears the trial figure by the frame DEFICIT cuts on, with no empty frame between', () => {
+    expect(SHOT.figureRecedes.to).toBe(SHOT.deficit.from);
+  });
+
+  it('draws the whole empty table before any label, and labels it as the words are spoken', () => {
+    before('deficit', 'tableTopRule');
+    before('tableColumnRules', 'rowMemory');
+    before('rowMemory', 'rowAttention');
+    before('rowAttention', 'rowDopamine');
+    before('rowDopamine', 'headPrediction');
+    before('headPrediction', 'headResultStatus');
     expect(SHOT.headResultStatus.to).toBeLessThanOrEqual(SPEECH.s12.end);
+  });
+
+  it('sets the title only after DEFICIT has gone, then the subtitle', () => {
     expect(SHOT.deficitOut.from).toBe(TITLE_START);
-    expect(SHOT.title.from).toBeGreaterThanOrEqual(SHOT.deficitOut.to);
+    before('deficitOut', 'title');
+    before('title', 'subtitle');
   });
 
-  it('plays three ticks, one per row, and nothing tonal before the last sentence', () => {
-    expect(SOUND.ticks).toHaveLength(3);
-    expect(SOUND.lowNote.from).toBeGreaterThan(SPEECH.s12.start);
-    expect(SOUND.lowNote.from).toBeLessThan(SPEECH.s13.start);
+  it('plays three ticks, one per row, and the low note under the last sentence only', () => {
+    expect(SOUND.ticks).toEqual([SHOT.row1Value.from, SHOT.row2Value.from, SHOT.row3Value.from]);
+    expect(SOUND.lowNote.from).toBeGreaterThanOrEqual(SPEECH.s12.end);
+    expect(SOUND.lowNote.from).toBeLessThanOrEqual(SPEECH.s13.start);
     expect(SOUND.pulse.at[0]).toBe(TITLE_START);
-  });
-
-  it('matches the frames of the build spec for the current pacing', () => {
-    expect(SHOT.row1Value.from).toBe(615);
-    expect(SHOT.row2Value.from).toBe(738);
-    expect(SHOT.row3Value.from).toBe(899);
-    expect(SHOT.limits).toEqual({from: 1010, to: 1034});
-    expect(SHOT.figureRecedes).toEqual({from: 1254, to: 1298});
-    expect(SHOT.deficit.from).toBe(1309);
-    expect(CAMERA.figure.move).toEqual({from: 429, to: 609});
-    expect(CAMERA.table.move).toEqual({from: 1350, to: 1669});
-    expect(SHOT.title).toEqual({from: 1748, to: 1772});
   });
 });

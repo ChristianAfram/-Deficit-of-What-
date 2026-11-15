@@ -1,6 +1,6 @@
 // Synthesises the film's sound stems into public/audio/ as 48 kHz 16-bit WAV.
-// Deterministic: the same script always writes the same bytes, so the stems are
-// build products (gitignored) and never need to be committed.
+// Deterministic: on a given version of Node, the same script writes the same
+// bytes, so the stems are build products (gitignored) and are not committed.
 //
 // The script's sound rule: "A slow pulse and one sustained string line. The
 // line moves one step at each status line and completes only in Part 5. A soft
@@ -217,13 +217,13 @@ const lowNote = () => {
     const swell = 1 + 0.05 * Math.sin(2 * Math.PI * 0.11 * t);
     let v = 0;
     for (const [n, a] of partials) {
-      // The upper partials arrive later than the fundamental, as on a bowed string.
-      const bloom = Math.min(1, t / (1.2 + n * 0.5));
+      // The upper partials arrive just after the fundamental, as on a bowed string.
+      const bloom = Math.min(1, t / (0.3 + n * 0.2));
       v += a * bloom * Math.sin(2 * Math.PI * D2 * n * t + n * 0.7);
     }
     x[i] = v * swell;
   }
-  return fade(toPeak(x, -17), 2.4, 2.5);
+  return fade(toPeak(x, -17), 1.0, 2.5);
 };
 
 /** One beat of the slow pulse: a soft, round thump on the pedal note. */
@@ -301,10 +301,9 @@ mkdirSync(OUT_DIR, {recursive: true});
 console.log(`Writing stems to ${OUT_DIR}`);
 
 writeWav('room-tone.wav', roomTone(0x0e0f12), roomTone(0xe9e4d8));
-// The knock of each tick sits a third of the way down from its pitch, so these
-// two land on A4 and D4 and agree with the pedal.
+// The knock of the tick sits an octave and a fifth below its pitch (a third of
+// its frequency), so it lands on A4 and agrees with the pedal.
 writeWav('tick.wav', tick({pitchHz: 1320, level: -20}));
-writeWav('tick-low.wav', tick({pitchHz: 881, level: -20}));
 writeWav('low-note.wav', lowNote());
 writeWav('pulse.wav', pulseHit());
 // Only the notes a finished part uses are written. Add a step here when the

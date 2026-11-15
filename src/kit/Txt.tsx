@@ -1,8 +1,9 @@
 import React from 'react';
-import {TYPE, type TypeRoleName} from './type';
+import {TYPE, type TypeRole, type TypeRoleName} from './type';
 
 type Props = {
-  role: TypeRoleName;
+  /** A role of the kit by name, or a role a part defines for itself. */
+  role: TypeRoleName | TypeRole;
   /** Anchor x in canvas px. */
   x: number;
   /** Baseline y in canvas px. */
@@ -22,7 +23,7 @@ type Props = {
  * build spec gives every text box.
  */
 export const Txt: React.FC<Props> = ({role, x, y, anchor = 'start', fill, opacity = 1, strength, children}) => {
-  const r = TYPE[role];
+  const r = typeof role === 'string' ? TYPE[role] : role;
   // Letter spacing is added after every glyph, the last one included. Without
   // this correction, centred and right-aligned tracked text sits off its mark.
   const trailing = r.tracking * r.size;
