@@ -1,6 +1,7 @@
-// The narration of the cold open, word for word from script version 3.
-// One entry per sentence. Do not edit a sentence here without editing the
-// script: tests/narration.test.ts compares this file against the brief.
+// The narration of the cold open: script version 3, word for word, with the
+// one amendment the writer agreed to after the fact-check (s03). One entry per
+// sentence. Do not edit a sentence here without recording it in
+// docs/brief-cold-open.md: tests/narration.test.ts compares the two.
 
 export type SentenceId =
   | 's01'
@@ -38,7 +39,8 @@ export const NARRATION: readonly Sentence[] = [
   {
     id: 's03',
     paragraph: 2,
-    text: 'Under methylphenidate, arithmetic output rose by thirty-seven percent per minute, and rule violations fell by fifty-three percent per hour.',
+    // Amended after the fact-check (brief, amendment A1).
+    text: 'Under methylphenidate, the children completed thirty-seven percent more arithmetic problems per minute of seatwork, and committed fifty-three percent fewer rule violations per hour.',
   },
   {
     id: 's04',

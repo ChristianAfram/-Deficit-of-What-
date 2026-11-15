@@ -37,10 +37,12 @@ paper, word for word, and not only in the university summary. They are in the
 running text of the Results. No table contains them, so "confirm them in the
 paper's tables" cannot be met literally.
 
-## Decisions for the writer
+## Decisions, and how each was settled
 
-These are the writer's calls. The build keeps the script's strings until they
-are made.
+The writer agreed on 15 November 2026 to settle these in favour of the frame a
+specialist cannot fault. Each decision below ends with what was done. The
+resulting amendments to the script are listed in `brief-cold-open.md` (A1 to
+A5).
 
 ### 1. The two percentages do not recompute from the numbers printed beside them
 
@@ -60,18 +62,15 @@ paper gives an interval only for the raw difference (supplement, Table S1):
 - Rule violations: 1.9 against 3.9 per hour. Difference −2.02, 95% CI
   [−2.18, −1.86].
 
-Options:
+**Settled (A2).** The percentages stay, spoken and on screen, because they are
+the authors' stated figures. Each row gains a note with the raw difference and
+its interval, which meets the interval rule with the only interval the paper
+gives. The two means are not shown: beside "+37%" they would invite the
+division that gives 34%, and the film cannot resolve an inconsistency that is
+the paper's. I confirmed both intervals myself in Table S1 of the supplement.
 
-1. Keep +37% and −53% as the authors' reported figures. This is what the build
-   does now.
-2. Keep them and add the means and the interval in small type under each row.
-   The build has this as a switch (`rowDetail`), off by default.
-3. Replace the percentages with the means and the difference. The narration
-   says "thirty-seven percent" and "fifty-three percent", so this needs a
-   script change.
-
-Upload title 2, "Methylphenidate Raised Output by 37%", carries the same
-exposure.
+Still open: upload title 2, "Methylphenidate Raised Output by 37%", carries the
+same exposure. Title 1 does not.
 
 ### 2. Two narration lines attach the time unit to the percentage
 
@@ -80,6 +79,10 @@ violations fell by fifty-three percent per hour" can be heard as rates of
 change. The paper says "37% more arithmetic problems per minute" and "53% fewer
 rule violations per hour".
 
+**Settled (A1).** The sentence now uses the paper's own verbs: "the children
+completed thirty-seven percent more arithmetic problems per minute of seatwork,
+and committed fifty-three percent fewer rule violations per hour."
+
 ### 3. Arithmetic was not what was being taught
 
 The narration runs "while being taught academic content in small groups"
@@ -87,6 +90,11 @@ straight into "arithmetic output rose". Arithmetic was a separate ten-minute
 seatwork session each morning, which the paper uses as a manipulation check.
 The taught content, in the afternoon, was science or social studies, plus
 vocabulary. The measure is problems *correctly* completed per minute.
+
+**Settled (A1, A2).** The narration now says "of seatwork". The row label reads
+ARITHMETIC PROBLEMS CORRECT PER MINUTE, and its note begins "Academic
+seatwork". The paper's term for the measure is "academic seatwork
+productivity".
 
 ### 4. The limits line for the cold open as a film of its own
 
@@ -106,14 +114,19 @@ paper:
   replication in ordinary classrooms over a school year "would be particularly
   valuable". It calls for one. It does not announce one.
 
-The build shows the script's three limits. Adding the dose is a writer's call.
+**Settled (A3).** The limits line names the summer programme, the three-week
+units, small groups with behaviour management, and the dose (80% of children on
+18 mg). It says the authors call for a replication, not that they plan one.
 
 ### 5. "Three weeks" is the abstract's shorthand
 
 Each phase was 12 teaching weekdays, 13 measured days, with a five-day break
 between the two phases. "Three weeks" is the paper's own wording and is
-defensible. The crossover diagram is a schematic and has no scale, so the
-break is drawn as a plain gap between the blocks, without a label.
+defensible.
+
+**Settled (A4).** The narration keeps "three weeks". The crossover diagram is a
+schematic and has no scale, so the break is drawn as a plain gap between the
+blocks, without a label.
 
 ### 6. Beat 3.6, outside this build: 1.7 points is the non-significant estimate
 
@@ -125,6 +138,10 @@ p = .007, d = 0.19 [0.05, 0.32]. Test-day dosing was also not manipulated on
 its own. The figure is the main effect of the medicated phase, averaged over
 pre-test and post-test. "Performance moved" rests on the 1.7 as written.
 
+**To settle when Part 3 is built.** The defensible form shows both: vocabulary
++3.0 points (p = .007) and subject area +1.7 points (p = .15, not
+significant). It is outside this build, so nothing was changed.
+
 ### 7. Two notes in "Claims and sources" are wrong against the paper
 
 - "in groups of 10 to 14": that is the class size. The teaching groups were 1
@@ -135,7 +152,8 @@ pre-test and post-test. "Performance moved" rests on the 1.7 as written.
   vocabulary. Each child had social studies in one phase and science in the
   other.
 
-Neither reaches the screen in this build.
+**Settled (A5).** Both notes are corrected in the brief. Neither reaches the
+screen in this build.
 
 ## What the paper reports, for reference
 

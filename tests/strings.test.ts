@@ -3,7 +3,10 @@ import {describe, expect, it} from 'vitest';
 import * as strings from '../src/coldopen/strings';
 import {PALETTE} from '../src/kit/theme';
 
-const brief = readFileSync(new URL('../docs/brief-cold-open.md', import.meta.url), 'utf8').replace(/\s+/g, ' ');
+// The brief as running text: quote marks of blockquotes and line breaks removed.
+const brief = readFileSync(new URL('../docs/brief-cold-open.md', import.meta.url), 'utf8')
+  .replace(/^>\s?/gm, '')
+  .replace(/\s+/g, ' ');
 
 const flatten = (value: unknown): string[] => {
   if (typeof value === 'string') return [value];
@@ -39,6 +42,26 @@ describe('on-screen strings', () => {
     expect(brief).toContain(strings.TITLE);
     expect(brief).toContain(strings.SUBTITLE);
     for (const row of strings.TABLE_ROWS) expect(brief).toContain(row);
+  });
+
+  it('shows the three result rows as amended after the fact-check (A2)', () => {
+    expect(strings.RESULT_ROWS.map((r) => r.value)).toEqual(['+37%', '\u221253%', 'NO DETECTABLE EFFECT']);
+    expect(strings.RESULT_PERCENT).toEqual([37, -53, null]);
+    for (const row of strings.RESULT_ROWS) {
+      expect(brief, row.label).toContain(row.label);
+      expect(brief, row.note).toContain(row.note);
+    }
+    // Intervals stand in square brackets, as the look requires.
+    expect(strings.RESULT_ROWS[0].note).toContain('[1.68, 1.90]');
+    expect(strings.RESULT_ROWS[1].note).toContain('[\u22122.18, \u22121.86]');
+    // The two means are deliberately not shown beside the percentages.
+    for (const s of all) expect(s, s).not.toMatch(/6\.7|5\.0\b|3\.9/);
+  });
+
+  it('states the limits of the trial when the cold open ships alone (A3)', () => {
+    expect(brief).toContain(strings.LIMITS.join(' '));
+    expect(strings.LIMITS.join(' ')).toContain('80% of children on 18 mg');
+    expect(strings.LIMITS.join(' ')).not.toMatch(/plan/i);
   });
 
   it('never says the medication does not work', () => {

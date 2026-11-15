@@ -59,6 +59,7 @@ describe('cue sheet', () => {
   it('places a cue on a spoken word', () => {
     expect(atWord('s03', 'thirty-seven')).toBeGreaterThan(SPEECH.s03.start);
     expect(atWord('s03', 'fifty-three')).toBeGreaterThan(atWord('s03', 'thirty-seven'));
+    expect(atWord('s03', 'seatwork')).toBeLessThan(atWord('s03', 'fifty-three'));
     expect(atWord('s03', 'fifty-three')).toBeLessThan(SPEECH.s03.end);
     expect(atWord('s02', 'three weeks', 2)).toBeGreaterThan(atWord('s02', 'three weeks', 1));
     expect(() => atWord('s01', 'classroom')).toThrow();

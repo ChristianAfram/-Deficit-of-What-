@@ -21,10 +21,27 @@ const scriptNarration = (): string => {
     .trim();
 };
 
+/** Amendment A1 of the brief: the one sentence the writer changed after the fact-check. */
+const amendment = (): {was: string; now: string} => {
+  const from = brief.indexOf('### A1. Narration, third sentence');
+  const to = brief.indexOf('### A2.');
+  expect(from).toBeGreaterThan(-1);
+  const quotes = brief
+    .slice(from, to)
+    .split(/\n\n/)
+    .filter((block) => block.startsWith('>'))
+    .map((block) => block.replace(/^>\s?/gm, '').replace(/\s+/g, ' ').trim());
+  expect(quotes).toHaveLength(2);
+  return {was: quotes[0], now: quotes[1]};
+};
+
 describe('narration', () => {
-  it('is the script, word for word', () => {
+  it('is the script, word for word, with the one agreed amendment', () => {
+    const {was, now} = amendment();
+    const script = scriptNarration();
+    expect(script).toContain(was);
     const built = NARRATION.map((s) => s.text).join(' ');
-    expect(built).toBe(scriptNarration());
+    expect(built).toBe(script.replace(was, now));
   });
 
   it('has the thirteen sentences of the six script paragraphs, in order', () => {
@@ -34,8 +51,8 @@ describe('narration', () => {
     expect(NARRATION.map((s) => s.paragraph)).toEqual([1, 1, 2, 3, 4, 4, 5, 5, 5, 5, 5, 5, 6]);
   });
 
-  it('counts 140 words', () => {
-    expect(TOTAL_WORDS).toBe(140);
+  it('counts 144 words: 140 in the script, plus 4 from the amended sentence', () => {
+    expect(TOTAL_WORDS).toBe(144);
     expect(wordCount('Learning did not follow.')).toBe(4);
   });
 

@@ -25,19 +25,19 @@ export type Span = {start: number; end: number};
  */
 export const SPEECH: Record<SentenceId, Span> = {
   s01: {start: 24, end: 207},
-  s02: {start: 219, end: 550},
-  s03: {start: 570, end: 800},
-  s04: {start: 822, end: 934},
+  s02: {start: 215, end: 546},
+  s03: {start: 558, end: 854},
+  s04: {start: 866, end: 978},
   // (pause, 2 seconds)
-  s05: {start: 982, end: 1035},
-  s06: {start: 1046, end: 1089},
-  s07: {start: 1112, end: 1289},
-  s08: {start: 1301, end: 1419},
-  s09: {start: 1431, end: 1478},
-  s10: {start: 1487, end: 1534},
-  s11: {start: 1543, end: 1590},
-  s12: {start: 1602, end: 1655},
-  s13: {start: 1671, end: 1707},
+  s05: {start: 1026, end: 1079},
+  s06: {start: 1085, end: 1128},
+  s07: {start: 1146, end: 1323},
+  s08: {start: 1332, end: 1450},
+  s09: {start: 1459, end: 1506},
+  s10: {start: 1512, end: 1559},
+  s11: {start: 1565, end: 1612},
+  s12: {start: 1619, end: 1672},
+  s13: {start: 1680, end: 1716},
 };
 
 /** The written pause: "(pause, 2 seconds)", the first of the film's five silences. */

@@ -1,8 +1,10 @@
 # Brief: cold open and title (0:00 to 1:17)
 
 Source: *Deficit of What?*, script version 3, 15 November 2026. Everything under
-"From the script" is copied word for word. Everything under "Build decisions" is
-derived and may be changed.
+"From the script" is copied word for word. "Amendments after the fact-check"
+lists every place where the build departs from that text, and why. The writer
+agreed to these amendments on 15 November 2026, after the fact-check in
+`fact-check-cold-open.md`.
 
 ## From the script
 
@@ -163,3 +165,75 @@ footage, pictures of pills.
   - Summary: <https://news.fiu.edu/2022/long-thought-to-be-the-key-to-academic-success,-medication-doesnt-help-kids-with-adhd-learn,-study-finds>
 - "Rarely been tested directly." The paper names two earlier studies with a
   causal design.
+
+## Amendments after the fact-check
+
+The build is script version 3 with these five amendments and nothing else.
+Each one answers a finding in `fact-check-cold-open.md`. They belong in the
+next version of the script.
+
+### A1. Narration, third sentence
+
+Was:
+
+> Under methylphenidate, arithmetic output rose by thirty-seven percent per
+> minute, and rule violations fell by fifty-three percent per hour.
+
+Now:
+
+> Under methylphenidate, the children completed thirty-seven percent more
+> arithmetic problems per minute of seatwork, and committed fifty-three percent
+> fewer rule violations per hour.
+
+Why. The old line attached the time unit to the percentage, so it could be
+heard as a rate of change. It also ran "being taught academic content" straight
+into "arithmetic output", as if arithmetic had been the taught content. It was
+a separate seatwork session. The new line uses the paper's own verbs: "Children
+completed 37% more arithmetic problems per minute", "Children committed 53%
+fewer rule violations per hour".
+
+### A2. The three result rows carry their measure and their statistic
+
+| Row | Label | Value | Note under the row |
+| --- | --- | --- | --- |
+| 1 | ARITHMETIC PROBLEMS CORRECT PER MINUTE | +37% | Academic seatwork. Difference +1.79 per minute, 95% CI [1.68, 1.90] |
+| 2 | RULE VIOLATIONS PER HOUR | −53% | Classroom. Difference −2.02 per hour, 95% CI [−2.18, −1.86] |
+| 3 | CURRICULUM CONTENT LEARNED | NO DETECTABLE EFFECT | Unit tests, before and after. Test × medication: p = .73 (subject area), p = .75 (vocabulary) |
+
+Why. The script's own rule is "A number has a unit, and on screen an
+interval." The paper gives an interval only for the raw difference, so that is
+the interval shown. The percentages stay, because they are the authors' stated
+figures and the narration speaks them. The two means (6.7 against 5.0, and 1.9
+against 3.9) are not shown: beside "+37%" they would invite a division that
+gives 34%, an inconsistency that is the paper's and that the film cannot
+resolve. The label of row 1 gains the word CORRECT, because the measure is
+problems correctly completed. Row 3 still has no bar.
+
+### A3. The limits line, shown because the cold open ships alone
+
+> Limits: one summer programme, 3-week units, small groups with behaviour
+> management, 80% of children on 18 mg. The authors call for replication in
+> ordinary classrooms over a school year.
+
+Why. The script lists a summer programme, three-week units and small-group
+teaching, and says the authors "plan" a replication. The paper's first listed
+limitation is dose, which the script omits. Its second is small-group teaching
+"with behavior management procedures in place". The paper calls for a
+replication. It does not announce one.
+
+### A4. The crossover diagram leaves a gap between the two blocks
+
+Why. Five days separated the two phases. The diagram is a schematic and has no
+scale, so the gap carries no label. Each block is labelled "3 WEEKS", which is
+the abstract's wording for a phase of 12 teaching days.
+
+### A5. Two source notes corrected
+
+- "in groups of 10 to 14" was the class size. The teaching groups were 1 to 11
+  children.
+- "daily 25-minute lessons in science, social studies and vocabulary": each
+  afternoon had two 25-minute lessons, one on subject-area content and one on
+  vocabulary. Each child had social studies in one phase and science in the
+  other.
+
+Neither note reaches the screen.
