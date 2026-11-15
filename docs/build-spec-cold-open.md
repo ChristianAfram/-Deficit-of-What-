@@ -149,8 +149,7 @@ Each element is listed as x / baseline or top / w × h. Text widths are estimate
 | E05 | Tag segment 3 `OROS-MPH VS PLACEBO` | x = after seg2 + sep, baseline 132, w ≈ 223 × 28; full tag ends x ≈ 990 (max 1792) | as E02 |
 | E06 | `Not medical advice` | right x 1792, baseline 1024, w ≈ 211 × 30 | B72 on frames 0–1847; never dimmed |
 | E07 | Caption text (review) | centred x 960, max w 1440 (240–1680). Last line on baseline 952; a second line above it on baseline 912. h 40 per line | B100 |
-| E08 | Review overlay (review) | left x 128, baseline 1024, w ≈ 420 × 25. Text: `s03 · w06 · f0615 · 0:25.15` | B56 |
-| E09 | Review verification flag (review, only while a gate in §8.4 is false) | right x 1792, baseline 1000, w ≈ 520 × 25 | B72 |
+| E08 | Review overlay (review) | left x 128, baseline 1024, w ≈ 420 × 25. Text: `REVIEW BUILD · s03 · f0615 · 0:25.15` | B56 |
 
 All segment x values are measured once at layout with the segments at opacity 0, so nothing reflows when a segment arrives.
 
@@ -326,7 +325,7 @@ The narration column gives the word spoken at the start frame. Every row is keye
 | 2.10 | **Unmask**, all four blocks at once. Hatch and chips go 1 → 0. Outlines go graphite → amber or blue-grey. Fills go 0 → 16 % / 20 %. D09 condition labels dissolve 465–489. | 453–489 | dis | "order, while being" |
 | 2.11 | Camera D push (§6), from rest | 429–609 | lin | "in randomised order …" through "completed" |
 
-**Unmask mapping.** Sequence AB: block 1 = METHYLPHENIDATE, block 2 = PLACEBO. Sequence BA: the reverse. This rests on `sequenceA = 'OROS-MPH'`, which is gated in §8.4.
+**Unmask mapping.** Sequence AB: block 1 = METHYLPHENIDATE, block 2 = PLACEBO. Sequence BA: the reverse. The letters are the schematic's own convention (A is the active condition). The paper names the design "AB/BA crossover" and never assigns the letters to a condition, so there is nothing here to verify (§8.4).
 
 **Shot 3: result rows (layer D, DATA), frames 535–1298**
 
@@ -422,7 +421,7 @@ The stems are fixed (see `scripts/make-audio.mjs`): 48 kHz stereo WAV in `public
 | A6 | `low-note.wav` (sustained D2, 2.4 s attack built in, −17 pk) | Starts 1640 (3,280,000), so it is at level by about 1698, under s13 (1675–1715). Volume holds 1 to 1728, then ramps 1 → 0 over 1728–1776. | −8 dB → −25 pk | "A single sustained low note under the last sentence" |
 | A7 | `pulse.wav` (one beat on D2, −15 pk) | 1728, 1758, 1788, 1818 (48 bpm, 30 f). Samples 3,456,000 / 3,516,000 / 3,576,000 / 3,636,000. | −9 dB → −24 pk | The low note resolves onto the same pitch: the pedal becomes the pulse |
 | A8 | `string-step0.wav` (A3, slow attack, −19 pk) | Enters 1740 (3,480,000) and sustains to the end | −8 dB → −27 pk | The film's one string line, at step 0. It does not move in this cut. |
-| A9 | Master fade, standalone only (`standalone` prop true) | 1836–1847 | all stems → −∞, linear | The picture holds. The film assembly gets no fade. |
+| A9 | Master fade, standalone only (`standalone` prop true) | 1818–1847 | all stems → −∞, linear | The picture holds. The film assembly gets no fade. Lengthened from 11 to 29 frames in the build, so the string line does not stop short. |
 
 **Unused.** `tick-low.wav` is not used: tags, the diagram and the table rows get no tick. There are exactly three ticks.
 
@@ -454,23 +453,9 @@ The stems are fixed (see `scripts/make-audio.mjs`): 48 kHz stereo WAV in `public
 4. Row 3 sits below a closed separator. It has no mark, because nothing was estimated, and its note states what was tested.
 5. The citation is on screen throughout.
 
-**8.4 Verification gate.** `src/coldopen/verification.ts`:
+**8.4 No verification gate.** The merged spec first proposed a gate that blocked the clean build until someone confirmed that sequence A is methylphenidate. It was dropped after the paper's full text was searched: the paper uses "AB/BA crossover" as the name of the design four times and never assigns A or B to methylphenidate or placebo (it uses "Curriculum A" and "Curriculum B" for the two curricula). The lettering of the diagram is therefore a convention of the schematic, which is marked SCHEMATIC. The diagram shows no letter inside a block: it shows the two sequence labels and, after the unmask, the two condition names.
 
-```ts
-export const VERIFIED = {
-  rows: [
-    {id: 'arith', source: 'Results text (37%); Suppl. Table S1 (1.79 [1.68, 1.90])', verified: true},
-    {id: 'viol', source: 'Results text (53%); Suppl. Table S1 (−2.02 [−2.18, −1.86])', verified: true},
-    {id: 'learn', source: 'Abstract; Results; Table 3 (p = .73, .75)', verified: true},
-    {id: 'limits', source: 'Strengths and Limitations; Future Directions', verified: true},
-  ],
-  sequenceAIsOrosMph: {value: true, verified: false}, // open question Q1
-  typesetSeen: false, // open question Q2
-};
-```
-
-- **Review build.** While any `verified` flag is false, E09 reads `UNCONFIRMED: SEQUENCE A = OROS-MPH`. While `typesetSeen` is false, it reads `TYPESET VERSION NOT SEEN`.
-- **Clean build.** `calculateMetadata` throws while any `verified` is false. `typesetSeen` does not block, because the writer decides that (Q2).
+The four data sources are recorded in `docs/fact-check-cold-open.md`. Whether the publisher's typeset article should be looked at before the picture is locked is a production decision, recorded there too. It does not appear on screen.
 
 ## 9. Standalone rules
 
@@ -564,7 +549,7 @@ export const VERIFIED = {
 
 ## 13. Open questions for the writer
 
-- **Q1.** Is sequence A methylphenidate? Neither the fact-check nor any proposal confirmed it. The clean build is blocked until it is confirmed (§8.4). If A is placebo, only the four condition labels and fills swap.
+- **Q1. Settled.** "Is sequence A methylphenidate?" has no answer in the paper, which never assigns the letters. The lettering is the schematic's convention, and no gate is built (§8.4).
 - **Q2.** The typeset APA article (and its figures) has not been seen by anyone. Should someone with access check it before the picture is locked? This is not blocking at present.
 - **Q3.** The limits recede with the figure at 1254–1298, so the end card and thumbnail carry no limits. Should the trailer's end card repeat A3's second sentence? It would be a new placement, not a new string.
 - **Q4.** Outside this build but exposed by the trailer: upload title 2, "Methylphenidate Raised Output by 37%", has the same recompute problem as the row values.
@@ -585,4 +570,4 @@ Each item is on screen without being in the script's "On screen" text.
 | Plot head `OROS-MPH RELATIVE TO PLACEBO` | Rule "Never: a figure that looks like data and is not". It reuses the tag's own words. |
 | Middle-dot separators between tag segments (the script uses full stops) | Typography only; `DESIGN_TAG` strings unchanged |
 | Citation band and tag at B56 during the title; table at 20 % | Script title: "The table dims. The title alone", reconciled with "Always on screen" (R3) |
-| Captions, review overlay, verification flag | Review build only; production step 6 (voice recorded after the review) |
+| Captions and review overlay | Review build only; production step 6 (voice recorded after the review) |
