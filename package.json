@@ -9,6 +9,8 @@
     "audio": "node scripts/make-audio.mjs",
     "render": "npm run audio && remotion render src/index.ts ColdOpen out/cold-open.mp4",
     "render:review": "npm run audio && remotion render src/index.ts ColdOpenReview out/cold-open-review.mp4",
+    "render:part1": "npm run audio && remotion render src/index.ts Part1 out/part-1.mp4",
+    "render:part1:review": "npm run audio && remotion render src/index.ts Part1Review out/part-1-review.mp4",
     "stills": "node scripts/render-stills.mjs",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
