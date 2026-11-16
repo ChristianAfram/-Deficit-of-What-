@@ -96,6 +96,18 @@ export const TYPE = {
   caption: text(400, 32),
   /** Y22. The review overlay. */
   review: text(400, 20, BONE.b56, true),
+  /** A statement that stands alone on the screen, with its number in it. */
+  statement: condensed(600, 48, 0.04),
+  /** The text of a filled cell of the evidence table. */
+  tableCell: condensed(600, 24, 0.05),
+  /** A stage of a schematic sequence. */
+  stage: condensed(600, 24, 0.06),
+  /** The point estimate of a forest row. Amber by default, as "the result". */
+  estimate: {...text(600, 28, BONE.b100, true), fill: PALETTE.amber},
+  /** The interval beside a point estimate, in square brackets. */
+  interval: text(400, 24, BONE.b72, true),
+  /** The tick labels of a printed axis. */
+  axisTick: text(400, 20, BONE.b56, true),
 } as const satisfies Record<string, TypeRole>;
 
 export type TypeRoleName = keyof typeof TYPE;
