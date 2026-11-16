@@ -80,7 +80,7 @@ export const FINDINGS = {
   ],
   /** Baselines of the rows of each block. A note sits 32 px under its row. */
   rowBaseline: [
-    [496, 552, 608],
+    [496, 584, 672],
     [496, 584],
   ],
   noteBelow: 32,

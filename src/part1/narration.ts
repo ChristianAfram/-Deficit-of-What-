@@ -59,7 +59,13 @@ export const NARRATION: readonly Sentence[] = [
     paragraph: 4,
     text: 'Verbal long-term memory came out weaker, by about half a standard deviation.',
   },
-  {id: 'p08', beat: '1.2', paragraph: 4, text: 'Visual memory did not.'},
+  {
+    id: 'p08',
+    beat: '1.2',
+    paragraph: 4,
+    // Amended (brief, amendment P14): the voice says what the screen says.
+    text: 'Visual memory showed no significant difference.',
+  },
   {
     id: 'p09',
     beat: '1.2',

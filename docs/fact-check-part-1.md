@@ -15,17 +15,18 @@ before the voice is recorded.
 | Faraone and Larsson 2019, full text (PMC6477889) | Yes, in full | The 74 percent, and what it is a mean of |
 | Pawley et al. 2024, full text (PMC12244022) | Yes, in full | Method, Tables 1 to 4, Discussion |
 | Cortese et al. 2015, full text (PMC4382075) | Yes, in full | Method, Results, Tables 1 and 2, Discussion. Not the online supplement |
-| Skodzik, Holling and Pedersen 2017 | **Abstract only** | The publisher's full text is behind a paywall, and no open copy was found |
-| Martinussen et al. 2005 | **Abstract only** | As above. The abstract gives all four estimates and their intervals |
-| Alderson et al. 2013 | **Abstract only** | As above. The abstract gives no number |
-| Willcutt et al. 2005 | **Abstract only** | As above. The abstract gives the range, the counts and the quoted words |
+| Skodzik, Holling and Pedersen 2017 | **Abstract, tables and figures. Not the text** | The publisher's full text is behind a paywall, and no open copy was found. Its two tables and seven figures were read as images, from Semantic Scholar's extraction of the published article. The captions are cut off in those images. **See decision 7** |
+| Martinussen et al. 2005 | **Abstract only** | As above, and no table could be read. The abstract gives all four estimates and their intervals. **See decision 10** |
+| Alderson et al. 2013 | **Abstract only** | As above. Three of its tables were read as images, and none holds the pooled estimates. The abstract gives no number |
+| Willcutt et al. 2005 | **Abstract only** | As above, and no table could be read. The abstract gives the range, the counts and the quoted words. **See decision 9** |
 | PubMed and Europe PMC records of all seven papers | Yes | Journal, volume, issue, pages, dates of publication. No erratum or retraction is attached to six of them |
 | Erratum to Cortese et al. 2015 (J Am Acad Child Adolesc Psychiatry 54(5), 433; PMC4718926) | Yes, in full | It corrects two intervals of Table 2 and reprints the table. Neither is on screen: the active-control estimate for the most proximal rater, and arithmetic. The five numbers the film takes from Table 2 are the same in the corrected table |
 
 "Abstract only" means the authors' own abstract, as the journal published it
 and PubMed carries it. It is part of the paper, and every number taken from one
 is quoted below. It is not the full text: a table can differ from an abstract,
-as it does in Cortese et al. (decision 1).
+as it does in Cortese et al. (decision 1), and as it may in Willcutt et al. and
+Martinussen et al. (decisions 9 and 10).
 
 ## Verdict on every on-screen string
 
@@ -60,7 +61,9 @@ as it does in Cortese et al. (decision 1).
 | On screen | Verdict | Where |
 | --- | --- | --- |
 | VERBAL LONG-TERM MEMORY · WEAKER | Confirmed | Skodzik, abstract: "Adults with ADHD performed significantly worse than controls on verbal but not on visual long-term memory and memory acquisition subtests." |
-| VISUAL · NO SIGNIFICANT DIFFERENCE | Confirmed, **against the script's NO DIFFERENCE** | The same sentence. **See decision 4** |
+| d = −0.49, 99% CI [−0.71, −0.27] | Confirmed in the paper's Figure 1. Added by the build (P8). **See decision 7** | Bottom row of the forest plot: d −0.49, SE 0.09, limits −0.71 and −0.27, p 0.00, under the head "Std. diff. in means and 99% CI" |
+| VISUAL · NO SIGNIFICANT DIFFERENCE | Confirmed, **against the script's NO DIFFERENCE** | The same sentence of the abstract. **See decision 4** |
+| d = −0.36, 99% CI [−0.94, 0.22] | Confirmed in the paper's Figure 5. Added by the build (P8). **See decision 7** | Bottom row of the forest plot: d −0.36, SE 0.22, limits −0.94 and 0.22, p 0.11, under the same head |
 | RETRIEVAL · NO DEFICIT OBSERVED | Confirmed | Skodzik, abstract: "In contrast, no retrieval problems were observable." |
 | INITIAL LEARNING · PRESERVED | Confirmed as the authors' word. **See decision 5** | Pawley, abstract: "despite preserved initial learning". Table 3, RAVLT trial 5: −0.22 (−0.55, 0.10), p = 0.175 |
 | DELAYED RECALL · REDUCED | Confirmed | Pawley, Table 3, RAVLT trial 7: −0.38 (−0.70, −0.06), p = 0.021. It held in the sensitivity analysis |
@@ -72,7 +75,7 @@ as it does in Cortese et al. (decision 1).
 | On screen | Verdict | Where |
 | --- | --- | --- |
 | SPATIAL STORAGE 0.85 [0.62, 1.08] | Confirmed in the abstract | Martinussen, abstract: "spatial storage (effect size = 0.85, CI = 0.62 - 1.08)" |
-| SPATIAL CENTRAL EXECUTIVE 1.06 [0.72, 1.39] | Confirmed in the abstract | "spatial central executive WM (effect size = 1.06, confidence interval = 0.72-1.39)" |
+| SPATIAL CENTRAL EXECUTIVE 1.06 [0.72, 1.39] | Confirmed in the abstract. **A later paper tabulates another figure: see decision 10** | "spatial central executive WM (effect size = 1.06, confidence interval = 0.72-1.39)" |
 | VERBAL STORAGE 0.47 [0.36, 0.59] | Confirmed in the abstract | "verbal storage (effect size = 0.47, confidence interval = 0.36-0.59)" |
 | VERBAL CENTRAL EXECUTIVE 0.43 [0.24, 0.62] | Confirmed in the abstract | "verbal central executive WM (effect size = 0.43, confidence interval = 0.24-0.62)" |
 | PHONOLOGICAL · MODERATE, VISUOSPATIAL · MODERATE | Confirmed in the abstract | Alderson, abstract: "moderate-magnitude between-group effect sizes (ESs) across both WM domains", for "phonological (PH) and visuospatial (VS) WM". **See decision 6** |
@@ -81,7 +84,7 @@ as it does in Cortese et al. (decision 1).
 
 | On screen | Verdict | Where |
 | --- | --- | --- |
-| ALL EXECUTIVE MEASURES 0.46–0.69 | Confirmed in the abstract | Willcutt, abstract: "Effect sizes for all measures fell in the medium range (.46-.69)". The table behind the range was not read |
+| ALL EXECUTIVE MEASURES 0.46–0.69 | Confirmed in the abstract. **The lower end is in doubt: see decision 9** | Willcutt, abstract: "Effect sizes for all measures fell in the medium range (.46-.69)". The table behind the range was not read |
 | VERBAL WORKING MEMORY 0.52 [0.24, 0.80] | Confirmed | Cortese, Table 2: working memory (verbal), all trials, objective, 8 trials, 0.52, 0.24 to 0.80 |
 | VISUAL WORKING MEMORY 0.47 [0.23, 0.70] | Confirmed | Table 2: working memory (visual), 5 trials, 0.47, 0.23 to 0.70 |
 | SYMPTOMS, MOST PROXIMAL RATER 0.37 [0.09, 0.66] | Confirmed, **against the script's UNBLINDED** | Table 2: ADHD total, all trials, most proximal rater, 14 trials, 0.37, 0.09 to 0.66. **See decision 2** |
@@ -126,9 +129,11 @@ PROBABLY BLINDED RATER, the paper's two terms.
 
 ### 3. Two studies are dated by a year their work was not done in
 
-"In 2017, Skodzik, Holling and Pedersen separated those stages": PubMed has
-carried the paper since 16 November 2013, when it went online ahead of print.
-The issue it was printed in is February 2017.
+"In 2017, Skodzik, Holling and Pedersen separated those stages": the paper's
+DOI was registered on 14 November 2013, and PubMed has carried the paper since
+16 November 2013. The publisher gives 28 July 2016 as its online date. The
+issue it was printed in is February 2017. On any of these dates, the work was
+done before 2017.
 
 "In 2024, a study … found": the paper went online on 28 January 2024. Its data
 are the baseline assessment of an earlier trial, whose protocol was approved in
@@ -145,14 +150,18 @@ Both citations keep the year of the issue.
 ### 4. "No difference" for visual memory is stronger than the paper
 
 The abstract says adults with ADHD performed "significantly worse … on verbal
-but not on visual" tests. That is a difference that was not significant. The
-2024 study that cites the meta-analysis adds that its authors "may not have had
-the power to detect differences in visual memory due to a smaller number of
-studies". The cold open settled the same case for its null result (A6).
+but not on visual" tests. The paper's Figure 5 gives the pooled estimate for
+visual long-term memory: d = −0.36, with a 99 percent interval from −0.94 to
+0.22, p = .11, from ten effect sizes. The verbal estimate rests on twenty-three.
+So visual memory came out a third of a standard deviation weaker, and the
+difference was not significant. The 2024 study that cites the meta-analysis
+adds that its authors "may not have had the power to detect differences in
+visual memory due to a smaller number of studies". The cold open settled the
+same case for its null result (A6).
 
-**Settled (P7).** The screen says NO SIGNIFICANT DIFFERENCE. The narration's
-"Visual memory did not." stands: its verb is "came out weaker", and visual
-memory did not come out weaker.
+**Settled (P7, P14).** The screen says NO SIGNIFICANT DIFFERENCE, with the
+estimate and its interval under it. The narration's "Visual memory did not."
+became "Visual memory showed no significant difference."
 
 ### 5. "Preserved" rests on a difference that was not significant
 
@@ -189,14 +198,28 @@ draw themselves.
 The script: "'About half a standard deviation' rests on a later paper that
 cites the estimate as 0.49. Confirm it in the original."
 
-It is not confirmed in the original, which was not read beyond its abstract.
-The later paper is Pawley et al. 2024: "Significant ADHD-control group
-differences emerged for verbal but not visual long-term memory, with an effect
-size of 0.49 in verbal memory."
+The text of the original could not be read. Its figures could, as images. The
+first forest plot pools twenty-three effect sizes to d = −0.49, with limits
+−0.71 and −0.27, and its axis is labelled "ADHD impaired" on the negative
+side. The paper's other pooled estimates, read the same way: −0.58 [−0.82,
+−0.33], −0.51 [−0.94, −0.08], −0.36 [−0.94, 0.22] and −0.12 [−0.64, 0.40].
 
-**Not settled.** The narration keeps "by about half a standard deviation". The
-number is spoken as a rounded size and is not on screen. It still rests on a
-citation.
+The captions are cut off in the images, so which plot is which measure is an
+identification, not a quotation. It rests on three things. Two later papers
+give the same five numbers by name: Pawley et al. 2024 ("an effect size of 0.49
+in verbal memory") and Laine et al. 2025, Journal of Neuropsychology 19(3),
+454–472 ("For verbal memory, Cohen's d values for delayed free recall,
+acquisition and recognition were .49, .58 and .51 … for visual memory measures
+… .36 (non-significant) and .12"). The significance of each plot matches the
+abstract. And the same outlying study stands out in each pair of plots.
+
+Every plot is headed "Std. diff. in means and 99% CI". The intervals are 99
+percent intervals, which is unusual, and the screen says so.
+
+**Settled (P8).** "By about half a standard deviation" is confirmed in the
+paper's own figure. The two estimates the narration turns on, verbal and
+visual long-term memory, stand on screen with their intervals. Someone with the
+article should still check the two captions.
 
 ### 8. The second box is marked as failed beside an interval that excludes zero
 
@@ -217,6 +240,42 @@ ADHD symptoms."
 **Settled (P11).** A note under the plot gives that estimate and its interval.
 It arrives before the box is marked. The four rows and the narration are
 unchanged.
+
+### 9. The lower end of Willcutt's range: .46 in the abstract, .43 in papers that cite it
+
+The script, the narration and the screen take the range from the abstract:
+"Effect sizes for all measures fell in the medium range (.46-.69)". The
+narration speaks only the upper end, "None exceeded 0.69".
+
+The full text was not read. Three papers that cite it give the range as .43 to
+.69, read here as excerpts, one of them with the weighted mean, .54, and the
+number of comparisons, 168. A doctoral thesis (Zhao 2013, Simon Fraser
+University) reprints eight measures from the paper's Table 2, from 0.46
+(Wisconsin Card Sorting) to 0.69 (Tower of Hanoi). The table's other measures
+were not seen. If one of them is at .43, the paper's table and its abstract
+differ, as in the trial of the cold open.
+
+**Not settled.** The screen keeps 0.46–0.69, the range the authors state in
+their abstract, and the band is drawn from it. The upper end holds either way.
+An author's copy of the paper is in the Internet Archive, which this build
+could not reach:
+<http://web.archive.org/web/20170809071304/http://psych.colorado.edu/~willcutt/pdfs/Willcutt_2005_bp.pdf>.
+Table 2 settles it in a minute. If the table says .43, `EF_BAND` in
+`src/part1/strings.ts` takes the new value, and the band follows.
+
+### 10. Spatial central executive: 1.06 in the abstract, 1.14 in a paper that tabulates it
+
+The abstract gives "spatial central executive WM (effect size = 1.06,
+confidence interval = 0.72-1.39)". The narration speaks 1.06.
+
+A later review, Mueller and Tomblin 2012 (Top Lang Disord 32(3), 207–227,
+PMC4264104), tabulates the four estimates of this meta-analysis in its Table 4. Three match the abstract to
+the digit. The fourth reads 1.14 (0.82–1.46). The full text was not read, so it
+is open whether the paper's table holds a second estimate for this category, or
+whether the later table is in error.
+
+**Not settled.** The screen and the narration keep 1.06 [0.72, 1.39], the
+authors' own figure in their abstract. The paper's results table settles it.
 
 ## What the papers report, for reference
 
@@ -268,14 +327,14 @@ Every sentence that states a fact, and what it rests on.
 | "twin studies put the heritability of ADHD near seventy-four percent" | Confirmed in the full text |
 | "every figure that follows is a difference between groups, most of them moderate in size" | Holds for this part: 0.43 to 0.69, with the two spatial estimates above |
 | "separated those stages in a meta-analysis of long-term memory in adults with ADHD" | Confirmed in the abstract |
-| "Verbal long-term memory came out weaker, by about half a standard deviation." | Weaker: confirmed. The size: **from a citation, not from the paper** (decision 7) |
-| "Visual memory did not." | Confirmed in the abstract (decision 4) |
+| "Verbal long-term memory came out weaker, by about half a standard deviation." | Confirmed: the abstract, and d = −0.49 in the paper's first forest plot (decision 7) |
+| "Visual memory showed no significant difference." | Confirmed, against the script's "Visual memory did not." (decision 4) |
 | "The weakness tracked how much had been acquired in the first place, and the analysis found no sign of a retrieval problem." | Confirmed in the abstract |
 | "The authors placed the deficit at encoding." | Confirmed in the abstract |
 | "A study of two hundred and five adolescents and adults with ADHD … found initial learning preserved and delayed recall reduced." | Confirmed in the full text (decision 5) |
-| "In children, the meta-analytic differences are large for spatial tasks, 0.85 for storage and 1.06 for manipulation, and moderate for verbal tasks." | Confirmed in the abstract. "Manipulation" is the paper's "central executive" |
+| "In children, the meta-analytic differences are large for spatial tasks, 0.85 for storage and 1.06 for manipulation, and moderate for verbal tasks." | Confirmed in the abstract. "Manipulation" is the paper's "central executive". The 1.06 has a rival figure in a later paper (decision 10) |
 | "In adults they are moderate for both." | Confirmed in the abstract |
-| "Willcutt and colleagues pooled eighty-three studies of executive function. Every measure showed a difference. None exceeded 0.69, and the deficits were not universal." | Confirmed in the abstract |
+| "Willcutt and colleagues pooled eighty-three studies of executive function. Every measure showed a difference. None exceeded 0.69, and the deficits were not universal." | Confirmed in the abstract. The 0.69 holds on every reading of the range (decision 9) |
 | "executive weaknesses are 'neither necessary nor sufficient' to cause the disorder" | The four words are the paper's. It goes on "to cause all cases of ADHD". The meaning is the same: what is not necessary is absent in some cases |
 | "fifteen randomised trials of cognitive training" | Confirmed in the full text, against the script's sixteen (decision 1) |
 | "Working memory improved, by about half a standard deviation." | Confirmed: 0.52 and 0.47 |
@@ -287,14 +346,15 @@ Every sentence that states a fact, and what it rests on.
 
 Not changed, because each is the writer's to decide:
 
-- **The four papers read as abstracts.** Someone with access should read the
-  full text of Skodzik, Martinussen, Alderson and Willcutt before the voice is
-  recorded. Four things to look for: the size of the verbal long-term memory
-  effect and its interval (decision 7). Whether Martinussen's table has the
-  abstract's four estimates and calls its intervals 95 percent. Alderson's two
-  estimates and intervals, so that the adult rows can be drawn (decision 6).
-  Whether every measure in Willcutt's table lies between .46 and .69, as the
-  abstract says.
+- **Four papers were not read in full.** Someone with access should read
+  Skodzik, Martinussen, Alderson and Willcutt before the voice is recorded.
+  Five things to look for. Willcutt's Table 2: is any measure below .46
+  (decision 9)? Martinussen's results table: is the spatial central executive
+  estimate 1.06 or 1.14, and are the intervals 95 percent (decision 10)? The
+  captions of Skodzik's Figures 1 and 5 (decision 7). Alderson's two pooled
+  estimates and their intervals, so that the adult rows can be drawn
+  (decision 6). And the sentence around "neither necessary nor sufficient" in
+  Willcutt's text.
 - **CASE-CONTROL for the 2024 study.** A strict reader keeps the term for
   designs that sample on the outcome and look back at exposure. Here two
   groups are compared at one time. CROSS-SECTIONAL, 205 VS 50 would be beyond

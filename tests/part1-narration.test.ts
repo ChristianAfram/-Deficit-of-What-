@@ -46,12 +46,13 @@ const amendments = (): {name: string; was: string; now: string}[] =>
     });
 
 describe('narration of Part 0 and Part 1', () => {
-  it('is the script, word for word, with exactly the three amended sentences', () => {
+  it('is the script, word for word, with exactly the four amended sentences', () => {
     const changes = amendments();
     expect(changes.map((c) => c.name)).toEqual([
       'P1. Narration, sentence p06',
       'P2. Narration, sentence p12',
       'P3. Narration, sentence p25',
+      'P14. Narration, sentence p08',
     ]);
     const script = scriptNarration();
     expect(Object.keys(script)).toEqual(['0.1', '1.1', '1.2', '1.3', '1.4', '1.5']);
@@ -85,9 +86,9 @@ describe('narration of Part 0 and Part 1', () => {
     expect(NARRATION[NARRATION.length - 1].paragraph).toBe(12);
   });
 
-  it('counts 389 words: 385 in the script, plus 2 and 2 from the two re-dated sentences', () => {
-    expect(TOTAL_WORDS).toBe(389);
-    expect(wordCount('Visual memory did not.')).toBe(4);
+  it('counts 391 words: 385 in the script, plus 2, 2 and 2 from three of the amended sentences', () => {
+    expect(TOTAL_WORDS).toBe(391);
+    expect(wordCount('Visual memory showed no significant difference.')).toBe(6);
   });
 
   it('addresses nobody: no second person and no "we" (register, rule 7)', () => {
@@ -100,6 +101,12 @@ describe('narration of Part 0 and Part 1', () => {
     for (const {text} of NARRATION) expect(text, text).not.toMatch(/^In (19|20)\d\d,/);
     expect(NARRATION.find((s) => s.id === 'p06')!.text).toContain('published in 2017');
     expect(NARRATION.find((s) => s.id === 'p12')!.text).toContain('published in 2024');
+  });
+
+  it('says of a null what the screen says of it', () => {
+    const p08 = NARRATION.find((s) => s.id === 'p08')!.text;
+    expect(p08).toContain('no significant difference');
+    expect(p08).not.toMatch(/did not/);
   });
 
   it('counts the trials of cognitive training as the paper counts them', () => {

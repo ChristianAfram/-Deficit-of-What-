@@ -302,9 +302,10 @@ Now:
 > long-term memory in adults with ADHD, published in 2017.
 
 Why. The same case as the first sentence of the cold open (A8), and a clearer
-one. The paper went online in November 2013 and reached a print issue in 2017.
-"In 2017, [they] separated" dates the work to a year in which it was more than
-three years old. The citation on screen keeps 2017, the year of the issue.
+one. PubMed has carried the paper since November 2013, and its print issue is
+February 2017. "In 2017, [they] separated" dates the work to a year in which it
+was more than three years old. The citation on screen keeps 2017, the year of
+the issue.
 
 ### P2. Narration, sentence p12
 
@@ -389,25 +390,31 @@ palette gives them. The marked case is named `A SINGLE CASE`.
 | --- | --- |
 | VISUAL: NO DIFFERENCE | `VISUAL` · `NO SIGNIFICANT DIFFERENCE` |
 
-Why. The same case as A6 in the cold open. The paper found a difference that
-was not significant, in fewer studies than for verbal memory. "No difference"
+Why. The same case as A6 in the cold open. The paper's pooled estimate for
+visual long-term memory is −0.36, a third of a standard deviation in the same
+direction as the verbal one, from ten effect sizes, and its interval runs from
+−0.94 to 0.22. That is a difference that was not significant. "No difference"
 is stronger than that. The other two findings stand as the script has them:
 `VERBAL LONG-TERM MEMORY` · `WEAKER` and `RETRIEVAL` · `NO DEFICIT OBSERVED`.
+The narration follows in P14.
 
-The narration's "Visual memory did not." stands: it says that visual memory did
-not come out weaker, which is what the paper reports.
+### P8. The findings of both studies carry their statistics
 
-### P8. The two findings of the 2024 study carry their statistics
+| Study | Finding | Value | Note under it |
+| --- | --- | --- | --- |
+| 2017 | `VERBAL LONG-TERM MEMORY` | `WEAKER` | d = −0.49, 99% CI [−0.71, −0.27] |
+| 2017 | `VISUAL` | `NO SIGNIFICANT DIFFERENCE` | d = −0.36, 99% CI [−0.94, 0.22] |
+| 2024 | `INITIAL LEARNING` | `PRESERVED` | Standardised difference −0.22, 95% CI [−0.55, 0.10], p = .175 |
+| 2024 | `DELAYED RECALL` | `REDUCED` | Standardised difference −0.38, 95% CI [−0.70, −0.06], p = .021 |
 
-| Finding | Value | Note under it |
-| --- | --- | --- |
-| `INITIAL LEARNING` | `PRESERVED` | Standardised difference −0.22, 95% CI [−0.55, 0.10], p = .175 |
-| `DELAYED RECALL` | `REDUCED` | Standardised difference −0.38, 95% CI [−0.70, −0.06], p = .021 |
+Why. "A number has a unit, and on screen an interval." With the estimates on
+screen, a viewer sees what each word rests on. WEAKER rests on an interval
+that excludes zero, and NO SIGNIFICANT DIFFERENCE on an estimate of −0.36 whose
+interval is wide. PRESERVED is the authors' word, and it rests on a difference
+that was not significant and whose interval reaches −0.55.
 
-Why. "A number has a unit, and on screen an interval." PRESERVED is the
-authors' word, and it rests on a difference that was not significant and whose
-interval reaches −0.55. With both intervals on screen, a viewer sees how far
-apart the two findings are, and how far they are not.
+The meta-analysis draws 99 percent intervals in its forest plots, and the
+screen says so. The 2024 study reports 95 percent intervals.
 
 ### P9. The four estimates for children carry their intervals
 
@@ -484,6 +491,21 @@ word, or the paper's:
 - The two boxes stand under `TWO FURTHER TESTS`.
 - The three stages are `ACQUISITION`, `RETENTION` and `RETRIEVAL`, and a
   predicted site carries the tag `PREDICTED SITE`.
+
+### P14. Narration, sentence p08
+
+Was:
+
+> Visual memory did not.
+
+Now:
+
+> Visual memory showed no significant difference.
+
+Why. The voice says what the screen says (P7), as in the cold open (A6). "Did
+not" answers "came out weaker" with a flat no. The paper's estimate for visual
+memory is −0.36, not significant, from fewer studies. A methodologist would
+object to the flat no in a seminar.
 
 ## Decisions of the build
 

@@ -102,7 +102,7 @@ export const SHOT = {
   verbalLabel: starting(S.p07.start, 10),
   verbalValue: cutAt(atWord('p07', 'weaker')),
   visualLabel: starting(S.p08.start, 10),
-  visualValue: cutAt(atWord('p08', 'did not')),
+  visualValue: cutAt(atWord('p08', 'no significant')),
   /** "A marker settles on the first stage, acquisition." */
   marker1: starting(atWord('p09', 'acquired'), 12),
   retrievalLabel: starting(atWord('p09', 'and the analysis'), 10),

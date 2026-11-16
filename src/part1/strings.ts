@@ -2,7 +2,7 @@
 //
 // The values are the "On screen" lines of script version 3 for beats 0.1 to
 // 1.5, with the amendments that came out of the fact-check. Each amendment is
-// recorded in docs/brief-part-1.md (P1 to P12) and marked here.
+// recorded in docs/brief-part-1.md (P1 to P14) and marked here.
 
 import {GLYPH} from '../kit/theme';
 
@@ -110,15 +110,24 @@ export type Finding = {
   note?: string;
 };
 
+// P8: a finding carries the statistic its paper reports for it. The intervals
+// of the meta-analysis are 99 percent intervals, as its forest plots draw them.
 export const SKODZIK_FINDINGS: readonly Finding[] = [
-  {label: 'VERBAL LONG-TERM MEMORY', value: 'WEAKER'},
+  {
+    label: 'VERBAL LONG-TERM MEMORY',
+    value: 'WEAKER',
+    note: `d = ${minus}0.49, 99% CI [${minus}0.71, ${minus}0.27]`,
+  },
   // P7: the script has NO DIFFERENCE. The paper found no significant difference.
-  {label: 'VISUAL', value: 'NO SIGNIFICANT DIFFERENCE'},
+  {
+    label: 'VISUAL',
+    value: 'NO SIGNIFICANT DIFFERENCE',
+    note: `d = ${minus}0.36, 99% CI [${minus}0.94, 0.22]`,
+  },
   {label: 'RETRIEVAL', value: 'NO DEFICIT OBSERVED'},
 ];
 
 export const PAWLEY_FINDINGS: readonly Finding[] = [
-  // P8: each finding carries the statistic the paper reports for it.
   {
     label: 'INITIAL LEARNING',
     value: 'PRESERVED',

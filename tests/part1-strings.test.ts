@@ -123,6 +123,13 @@ describe('on-screen strings of Part 0 and Part 1', () => {
 
   it('gives a null at the strength the paper gives it', () => {
     expect(strings.SKODZIK_FINDINGS.map((f) => f.value)).toEqual(['WEAKER', 'NO SIGNIFICANT DIFFERENCE', 'NO DEFICIT OBSERVED']);
+    // The estimate behind each word is on screen, with the kind of interval its paper reports.
+    expect(strings.SKODZIK_FINDINGS.map((f) => f.note)).toEqual([
+      'd = −0.49, 99% CI [−0.71, −0.27]',
+      'd = −0.36, 99% CI [−0.94, 0.22]',
+      undefined,
+    ]);
+    for (const {note} of strings.PAWLEY_FINDINGS) expect(note).toContain('95% CI');
     for (const s of all) expect(s, s).not.toMatch(/\bNO DIFFERENCE\b/);
     // The paper's rater is "typically unblinded", and not always.
     for (const s of all) expect(s, s).not.toMatch(/UNBLINDED/);
