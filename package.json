@@ -12,6 +12,7 @@
     "render:part1": "npm run audio && remotion render src/index.ts Part1 out/part-1.mp4",
     "render:part1:review": "npm run audio && remotion render src/index.ts Part1Review out/part-1-review.mp4",
     "stills": "node scripts/render-stills.mjs",
+    "check:freeze": "node scripts/check-freeze.mjs part1",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
   },
