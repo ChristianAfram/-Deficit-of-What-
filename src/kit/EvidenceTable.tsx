@@ -114,6 +114,47 @@ export const evidenceTableCells = (geometry: EvidenceTableGeometry): EvidenceTab
   );
 };
 
+/** The leading of cell text, and the height of its capitals, in px. */
+const CELL_TEXT = {leading: 30, capHeight: 17} as const;
+
+/** The baselines of the lines of a cell, with the block of lines centred in the cell. */
+export const evidenceCellBaselines = (cell: EvidenceTableCell, lines: number): number[] => {
+  const first = Math.round(cell.y + cell.height / 2 + CELL_TEXT.capHeight / 2 - ((lines - 1) * CELL_TEXT.leading) / 2);
+  return Array.from({length: lines}, (_, i) => first + i * CELL_TEXT.leading);
+};
+
+/**
+ * The text of one filled cell, in the lines it is set in. Each line can
+ * arrive on its own, so that a status of two sentences fills as it is spoken.
+ */
+export const EvidenceCellText: React.FC<{
+  cell: EvidenceTableCell;
+  lines: readonly string[];
+  /** How far each line has arrived, 0 to 1, in the order of `lines`. One number shows all lines alike. */
+  shown: number | readonly number[];
+  /** Distance from the cell's left edge to the left edge of its text. */
+  textInset: number;
+  fill?: string;
+}> = ({cell, lines, shown, textInset, fill}) => {
+  const baselines = evidenceCellBaselines(cell, lines.length);
+  return (
+    <>
+      {lines.map((line, i) => (
+        <Txt
+          key={line}
+          role="tableCell"
+          x={cell.x + textInset}
+          y={baselines[i]}
+          fill={fill}
+          opacity={typeof shown === 'number' ? shown : (shown[i] ?? 0)}
+        >
+          {line}
+        </Txt>
+      ))}
+    </>
+  );
+};
+
 /**
  * The evidence table: its rules, its column heads and its row ids and names.
  * The row id is set at B56 and the name at B100, so the hypothesis reads

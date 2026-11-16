@@ -304,11 +304,14 @@ writeWav('room-tone.wav', roomTone(0x0e0f12), roomTone(0xe9e4d8));
 // The knock of the tick sits an octave and a fifth below its pitch (a third of
 // its frequency), so it lands on A4 and agrees with the pedal.
 writeWav('tick.wav', tick({pitchHz: 1320, level: -20}));
+// The lower tick of a failed box: the same knock a fifth lower. Its body lands
+// on D4, the film's key note.
+writeWav('tick-low.wav', tick({pitchHz: 880, level: -20}));
 writeWav('low-note.wav', lowNote());
 writeWav('pulse.wav', pulseHit());
 // Only the notes a finished part uses are written. Add a step here when the
 // part that needs it is built.
-for (const step of ['step0']) {
+for (const step of ['step0', 'step1']) {
   const hz = STRING_LINE_HZ[step];
   const [left, right] = stringNote(hz, 0x5712 + Math.round(hz));
   writeWav(`string-${step}.wav`, left, right);
