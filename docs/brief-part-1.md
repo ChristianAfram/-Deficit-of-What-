@@ -521,6 +521,12 @@ object to the flat no in a seminar.
   three lines of a cell. The cold open's table is narrower and holds no text.
   When the parts are joined, the cold open's table should take this geometry.
 - **No camera move,** as in the cold open (B1).
+- **The pulse runs under the whole part, and the string line enters with beat
+  1.1,** on the step the title left it on, bowed again every nine seconds. On
+  the status line it moves one step and stays there. The script gives the
+  sound beat by beat ("The pulse alone", "No resolution in the music") and
+  does not say whether the music runs between the ticks. This is a reading of
+  it, and nobody has listened to the result yet.
 - **The beats start where the script starts them.** The narration is paced at
   137 written words a minute, the script's pace, which leaves between one third
   of a second and three seconds of hold at the end of each beat.
